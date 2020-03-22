@@ -1,0 +1,85 @@
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+body {
+  font-family: 'Noto Serif', serif;
+}
+.App{
+  min-height: 100vh;
+  background-color: black;
+  color:white;
+  padding-bottom: 50px;
+}
+
+.navbar{
+  background: transparent;
+}
+
+.landing{
+  min-height: 100vh;
+  min-width: 100%;
+  margin:0;
+  padding:0;
+  background: url('/landing.jpg') center center / cover no-repeat;
+  
+ 
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 350px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.card-body{
+  color:black;
+}
+
+.auth-container{
+  min-height: 100vh;
+  min-width: 100%;
+  margin:0;
+  padding:0;
+  background: url('/landing.jpg') center center / cover no-repeat;
+
+}
+
+
+#portfolio-nav .nav-link{
+  color:white;
+}
+
+
+#card-container{
+  max-height:350px;
+}
+
+
+.album img{
+  opacity: 1;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+.album:hover img {
+  opacity: .25;
+  cursor:pointer;
+}
+
+.iframe-container{
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; 
+  height: 0;
+}
+.iframe-container iframe{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
