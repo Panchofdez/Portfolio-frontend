@@ -30,11 +30,23 @@ export const fetchPortfolios = ()=>{
 }
 
 
-export const fetchPortfolio = (id)=>{
+export const getPortfolio = (id)=>{
 	return async dispatch =>{
 		try{
 			const response = await axios.get(`/portfolios/${id}`);
 			dispatch(showPortfolio(response.data))
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+export const createProfilePage = (formData)=>{
+	return async dispatch =>{
+		try{
+			 const response = await axios.post('/myportfolio/profile', formData);
+			 dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
 			throw Error(err);

@@ -1,6 +1,6 @@
-import React from 'react'; 
+import React, {Component} from 'react'; 
 
-const ProfilePage = ({user})=>{
+const ProfilePage = ({location,birthday, type, profileImage})=>{
 	return (
 		<div className="container mt-5">
 			<div className="row justify-content-center">
@@ -8,14 +8,17 @@ const ProfilePage = ({user})=>{
 					<div className="row">
 						<div className="col-md-6">
 							<h2 className="my-3">Profile</h2>
-							<p>Name: {user.name}</p>
-							<p>Birthday: {user.birthday}</p>
-							<p>Location: {user.location}</p>
-							<p>Field Of Work: {user.workField}</p>
-							<p>Job Title: {user.jobTitle}</p>
+							<p>Year of Birth: {birthday}</p>
+							<p>Location: {location}</p>
+							<p>Work: {type}</p>
 						</div>
 						<div className="col-md-6">
-							<img src={user.profileImage} alt="" className="img-fluid"/>
+							<img src={profileImage} alt="" className="img-fluid"/>
+						</div>
+						<div className="row">
+							<div className="col-md-12">
+								<h2>Followers</h2>
+							</div>
 						</div>
 					</div>
 				</div>

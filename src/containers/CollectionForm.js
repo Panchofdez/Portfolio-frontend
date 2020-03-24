@@ -45,7 +45,7 @@ class WorkForm extends Component{
 	render(){
 		const {title, description,collections}=this.state;
 		const collectionsAdded = collections.map((collection)=>(
-			<div className="alert alert-success">Successfully added {collection.title}</div>
+			<div key={collection.title} className="alert alert-success">Successfully added {collection.title}</div>
 		))
 		return (
 			<div>

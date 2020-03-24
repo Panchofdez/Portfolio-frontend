@@ -2,15 +2,14 @@ import React from 'react';
 import {useRouteMatch, Route, Switch} from 'react-router-dom';
 import AboutForm from '../containers/AboutForm';
 import TimelineForm from '../containers/TimelineForm';
-import ProfileForm from '../components/ProfileForm';
+import ProfileForm from '../containers/ProfileForm';
 import WorkForm from './WorkForm';
-import PortfolioNav from '../components/PortfolioNav';
+
 
 const PortfolioForm =(props)=>{
 	let {path} = useRouteMatch();
 	return(
 		<div className='container'>
-			<PortfolioNav/>
 			<Switch>				
 				<Route exact path={`${path}/about`}>
 					<AboutForm {...props}/>
@@ -25,7 +24,7 @@ const PortfolioForm =(props)=>{
 					<WorkForm {...props}/>
 				</Route>
 				<Route path={path}>
-					<AboutForm {...props}/>
+					<ProfileForm {...props}/>
 				</Route>
 
 			</Switch>	

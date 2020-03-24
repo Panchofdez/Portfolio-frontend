@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {createAboutPage} from '../store/actions/portfolios';
-import {clearErrorMessage} from '../store/actions/errors';
 
 class AboutForm extends Component{
 	constructor(props){
@@ -10,7 +9,6 @@ class AboutForm extends Component{
 			name:"Give your portfolio a name",
 			statement:"Make a statement",
 			about:'This is your chance to tell us something about who you are and what you do',
-			type:"What do you do?",
 			image:null
 		}
 		
@@ -36,8 +34,7 @@ class AboutForm extends Component{
 				name: '',
 				statement:'',
 				about:'',
-				type:'',
-				image:null,
+				image:null
 
 			});
 			this.props.history.push('/myportfolio/create/work');
@@ -47,33 +44,20 @@ class AboutForm extends Component{
   		
 	}
 	render(){
-		const {name, statement, about, image, type} = this.state;
-		const {error,history} =this.props;
-		history.listen(() => {
-	    	clearErrorMessage();
-	    });
+		const {name, statement, about, image} = this.state;
 		return(
 
 			<form encType='multipart/form-data' onSubmit={this.handleSubmit}>
 
 				<div className="row justify-content-center mt-5">
 					<div className="col-md-8">
-					{error && (<div className="alert alert-danger" role="alert">{error}</div>)}
-						<h1>Create Your Portfolio!</h1>
+						<h1>Create Your About Page!</h1>
 						<div className="form-group">
 						 	<label htmlFor="name">Name</label>
 						 	<input
 						 		value={name} 
 								onChange={this.handleChange}
 								name="name"
-								className="form-control mb-3"
-								type="text"
-							/>
-							<label htmlFor="name">Type</label>
-						 	<input
-						 		value={type} 
-								onChange={this.handleChange}
-								name="type"
 								className="form-control mb-3"
 								type="text"
 							/>
@@ -122,10 +106,5 @@ class AboutForm extends Component{
 	
 }
 
-function mapStateToProps(state){
-	return{
-		error:state.errors.error
-	}
-}
 
-export default connect(mapStateToProps, {createAboutPage})(AboutForm);
+export default connect(null, {createAboutPage})(AboutForm);

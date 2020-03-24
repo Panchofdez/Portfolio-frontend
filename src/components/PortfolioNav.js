@@ -34,16 +34,16 @@ const PortfolioNav = ({name, image})=>{
 				
 			</ul>
 			<ul className="nav mt-3">
-			{match.url==="/portfolios/show" && (
+			{match.url==="/myportfolio" ? (
+				<li>
+					<a className="btn btn-outline-light">Edit</a>
+				</li>
+			): (
 				<li>
 					<a className="btn btn-outline-light">Connect</a>
 				</li>
 			)}
-			{match.url==="/myportfolio" && (
-				<li>
-					<a className="btn btn-outline-light">Edit</a>
-				</li>
-			)}
+
 				
 			</ul>
 		</div>

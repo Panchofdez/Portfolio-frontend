@@ -7,12 +7,12 @@ import CommentsPage from './CommentsPage';
 import TimelinePage from './TimelinePage';
 import ProfilePage from '../components/ProfilePage';
 import WorkPage from '../components/WorkPage';
-import {getMyPortfolio, fetchPortfolio} from '../store/actions/portfolios';
+import {getMyPortfolio, getPortfolio} from '../store/actions/portfolios';
 import Loading from '../components/Loading';
 
 class PortfolioPage extends Component{
 	componentDidMount(){
-		if(this.props.history.location.pathname==='/myportfolio'){
+		if(this.props.history.location.pathname.split("/")[1]==='myportfolio'){
 			this.fetchMyPortfolio();
 		}else{
 			this.fetchPortfolio();
@@ -29,7 +29,7 @@ class PortfolioPage extends Component{
 	async fetchPortfolio(){
 		try{
 			const id = this.props.history.location.pathname.split('/')[2];
-			await this.props.fetchPortfolio(id);
+			await this.props.getPortfolio(id);
 		}catch(err){
 			return;
 		}
@@ -39,7 +39,6 @@ class PortfolioPage extends Component{
 		if(!portfolio){
 			return (<Loading/>);
 		}
-		const path = history.location.pathname;
 		const {url} = this.props.match;
 		return (
 			<div>
@@ -49,10 +48,15 @@ class PortfolioPage extends Component{
 						<AboutPage 
 							about={portfolio.about} 
 							statement={portfolio.statement} 
-							image={portfolio.image}/>
+							image={portfolio.headerImage}/>
 					</Route>
 					<Route exact path={`${url}/profile`}>
-						<ProfilePage/>
+						<ProfilePage 
+							location={portfolio.location}
+							type={portfolio.type}
+							birthday={portfolio.birthday}
+							profileImage={portfolio.profileImage}
+						/>
 					</Route>
 					<Route exact path={`${url}/timeline`}>
 						<TimelinePage timeline={portfolio.timeline}/>
@@ -67,7 +71,7 @@ class PortfolioPage extends Component{
 						<AboutPage 
 							about={portfolio.about} 
 							statement={portfolio.statement} 
-							image={portfolio.image}/>
+							image={portfolio.headerImage}/>
 					</Route>
 
 				</Switch>	
@@ -82,4 +86,4 @@ function mapStateToProps(state){
 	}
 }
 
-export default withRouter(connect(mapStateToProps, {getMyPortfolio, fetchPortfolio})(PortfolioPage));
+export default withRouter(connect(mapStateToProps, {getMyPortfolio, getPortfolio})(PortfolioPage));

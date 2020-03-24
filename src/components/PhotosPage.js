@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 const PhotosPage =(props)=>{
 	const {photos,title,description, goBack}= props;
 	const collectionPhotos = photos.map(photo=>(
-			<div className="my-3">
+			<div key={photo.imageId} className="my-3">
 				<img src={photo.image} alt="" className="img-fluid"/>
 			</div>
 		))

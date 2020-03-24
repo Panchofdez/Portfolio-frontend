@@ -95,7 +95,7 @@ class TimelineForm extends Component{
 						<h2>Preview</h2>
 						{timelinePosts}
 					</div>
-					<button className="btn btn-outline-success  form-control my-3" onClick={()=>{
+					<button className="btn btn-success  form-control my-3" onClick={()=>{
 						this.props.history.push('/myportfolio')
 					}}>Save Timeline</button>
 				</div>
