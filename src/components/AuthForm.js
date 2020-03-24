@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {authenticateUser} from '../store/actions/auth';
-import {clearErrorMessage} from '../store/actions/errors';
+
+
 
 class AuthForm extends Component{
 	constructor(props){
@@ -14,7 +15,6 @@ class AuthForm extends Component{
 		}
 
 	};
-
 	handleChange = e =>{
 		this.setState({[e.target.name]:e.target.value});
 	};
@@ -32,14 +32,11 @@ class AuthForm extends Component{
 	render(){
 
 		const {email, password,name} = this.state;
-		const {type, error, buttonText, history, clearErrorMessage} = this.props;
-		history.listen(() => {
-	    	clearErrorMessage();
-	    });
+		const {type, buttonText} = this.props;
+		
 		return(
 			<div className="row justify-content-center w-100 m-0 auth-container">
 				<div className="col-md-4 mt-5">
-					{error && (<div className="alert alert-danger" role="alert">{error}</div>)}
 					<form onSubmit={this.handleSubmit}>
 						{this.props.type==="signup" &&( 
 							<div className="form-group">
@@ -85,7 +82,7 @@ class AuthForm extends Component{
 							<input type="checkbox" className="form-check-input" id="exampleCheck1"/>
 							<label className="form-check-label" htmlFor="exampleCheck1">Remember Me</label>
 						</div>
-						<button type="button" type="submit" className="btn btn-outline-success btn-block my-3" >{buttonText}</button>
+						<button type="submit" className="btn btn-outline-success btn-block my-3" >{buttonText}</button>
 					</form>
 					{type==="signup" && (
 						<Link to="/signin" className="nav-link">Already have an account? Sign in instead</Link>
@@ -104,8 +101,8 @@ function mapStateToProps(state){
   return {
     	isAuthenticated: state.currentUser.isAuthenticated,
     	currentUser:state.currentUser.user,
-    	error:state.errors.error
+   
   	}
  }
 
-export default connect(mapStateToProps,{authenticateUser,clearErrorMessage})(AuthForm);
+export default connect(mapStateToProps,{authenticateUser})(AuthForm);

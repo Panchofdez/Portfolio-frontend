@@ -22,6 +22,7 @@ export const addErrorMessage = (error)=>{
 
 export const clearErrorMessage = ()=>{
 	return dispatch=>{
+		console.log('arrived')
 		dispatch(clearError());
 	}
 }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-
+import {connect} from 'react-redux';
+import {createTimelinePost, getMyPortfolio} from '../store/actions/portfolios';
 
 class TimelineForm extends Component{
 	constructor(props){
@@ -16,16 +17,23 @@ class TimelineForm extends Component{
 	handleChange=(e)=>{
 		this.setState({[e.target.name]:e.target.value});
 	};
-	handleSave=(e)=>{
+	handleSave=async(e)=>{
 		e.preventDefault();
+		try{
+			await this.props.createTimelinePost({
+				post:{
+					title:this.state.title,
+					date:this.state.date,
+					text:this.state.text
+				}
 
-		let joinedArr= this.state.timeline.concat({title:this.state.title,date:this.state.date,text:this.state.text});
-		this.setState({timeline:joinedArr, title:"", date:"", text:""});
-
+			})
+			let timelineArr= this.state.timeline.concat({title:this.state.title,date:this.state.date,text:this.state.text});
+			this.setState({timeline:timelineArr, title:"", date:"", text:""});
+		}catch(err){
+			return;
+		}		
 	};
-	handleSubmit=()=>{
-		console.log(this.state)
-	}
 
 	render(){
 		const timelinePosts = this.state.timeline.map(post=>{
@@ -77,7 +85,6 @@ class TimelineForm extends Component{
 								<button 
 									className="btn btn-outline-success my-3" 
 									type="submit" 
-									value="submit" 
 								>
 								Add Post To Timeline
 								</button>
@@ -88,7 +95,9 @@ class TimelineForm extends Component{
 						<h2>Preview</h2>
 						{timelinePosts}
 					</div>
-					<button className="btn btn-outline-success  form-control my-3" onClick={this.handleSubmit}>Save Timeline</button>
+					<button className="btn btn-outline-success  form-control my-3" onClick={()=>{
+						this.props.history.push('/myportfolio')
+					}}>Save Timeline</button>
 				</div>
 			</div>
 
@@ -97,4 +106,4 @@ class TimelineForm extends Component{
 }
 
 
-export default TimelineForm;
+export default connect(null,{createTimelinePost,getMyPortfolio})(TimelineForm);

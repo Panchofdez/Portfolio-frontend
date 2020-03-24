@@ -1,10 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {useRouteMatch, Route, Switch} from 'react-router-dom';
-import AboutForm from '../components/AboutForm';
-import TimelineForm from '../components/TimelineForm';
+import AboutForm from '../containers/AboutForm';
+import TimelineForm from '../containers/TimelineForm';
 import ProfileForm from '../components/ProfileForm';
-import WorkForm from '../components/WorkForm';
+import WorkForm from './WorkForm';
 import PortfolioNav from '../components/PortfolioNav';
 
 const PortfolioForm =(props)=>{
@@ -37,4 +36,4 @@ const PortfolioForm =(props)=>{
 
 
 
-export default connect()(PortfolioForm);
+export default PortfolioForm;

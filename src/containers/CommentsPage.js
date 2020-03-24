@@ -15,7 +15,7 @@ class CommentsPage extends Component{
 	handleSubmit(e){
 		e.preventDefault();
 		console.log(this.state);
-		this.setState({value:"Give your testimonial here..."})
+		this.setState({value:"Give your testimonial or referral here..."})
 	};
 	render(){
 		const comments = this.props.comments.map(comment=>{

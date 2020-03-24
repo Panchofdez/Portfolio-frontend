@@ -1,66 +1,29 @@
 import React, {Component} from 'react';
 import PortfolioCard from '../components/PortfolioCard';
 import {connect} from 'react-redux';
-import {fetchMessages} from '../store/actions/portfolios';
+import {fetchPortfolios} from '../store/actions/portfolios';
+import Loading from '../components/Loading';
 
-
-const portfolios = [
-	{
-		title:"Pancho Fernandez",
-		text:"Photographer",
-		img:"/profile-pic.jpg",
-		_id:1
-	},
-	{
-		title:"Pancho Fernandez",
-		text:"Photographer",
-		img:"/profile-pic2.jpg",
-		_id:2
-	},
-	{
-		title:"Pancho Fernandez",
-		text:"Photographer",
-		img:"/profile-pic4.jpg",
-		_id:3
-	},
-	{
-		title:"Pancho Fernandez",
-		text:"Photographer",
-		img:"/profile-pic2.jpg",
-		_id:4,
-	},
-	{
-		title:"Pancho Fernandez",
-		text:"Photographer",
-		img:"/profile-pic3.jpg",
-		_id:5
-	},
-	{	
-		title:"Pancho Fernandez",
-		text:"Photographer",
-		img:"/profile-pic2.jpg",
-		_id:6
-	},
-	{
-		title:"Pancho Fernandez",
-		text:"Photographer",
-		img:"/profile-pic4.jpg",
-		_id:7
-	},
-	{
-		title:"Pancho Fernandez",
-		text:"Photographer",
-		img:"/profile-pic2.jpg",
-		_id:8
-	}
-	
-
-]
 
 class PortfolioList extends Component{
+	componentDidMount(){
+		this.getPortfolios();
+	}
+	async getPortfolios(){
+		try{
+			await this.props.fetchPortfolios();
+		}catch(err){
+			console.log(err);
+			return;
+		}
+	}
 	render(){
+		const {portfolios} = this.props;
+		if(!portfolios){
+			return (<Loading/>);
+		}
 		const portfoliosList = portfolios.map(p=>(
-			<PortfolioCard {...p} key={p._id}/>
+			<PortfolioCard {...p} key={p._id} history={this.props.history}/>
 		));
 		return(
 			<div>
@@ -90,4 +53,10 @@ class PortfolioList extends Component{
 	}
 }
 
-export default PortfolioList;
+function mapStateToProps(state){
+	return {
+		portfolios:state.portfolios
+	}
+}
+
+export default connect(mapStateToProps,{fetchPortfolios})(PortfolioList);

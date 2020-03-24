@@ -47,7 +47,6 @@ class AboutForm extends Component{
   		
 	}
 	render(){
-		console.log(this.state);
 		const {name, statement, about, image, type} = this.state;
 		const {error,history} =this.props;
 		history.listen(() => {

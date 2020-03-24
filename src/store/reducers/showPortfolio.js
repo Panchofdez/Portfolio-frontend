@@ -96,7 +96,7 @@ const p = {
 const showPortfolio = (state={}, action)=>{
 	switch(action.type){
 		case "SHOW_PORTFOLIO":
-			return {...state, portfolio:action.portfolio, user: action.user};
+			return {...state, portfolio:action.portfolio};
 		default:
 			return state;
 	}

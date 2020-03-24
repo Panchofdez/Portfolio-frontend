@@ -20,9 +20,9 @@ class WorkPage extends Component{
 		this.setState({photos:[],title:"", description:""});
 	}
 	render(){
-		const collections = this.props.work.collections.map(collection =>{
+		const collections = this.props.collections.map(collection =>{
 			return (
-				<div  className="col-md-6 album">
+				<div key={collection._id} className="col-md-6 album">
 					<img 
 						className="img-fluid my-3" 
 						src={collection.photos[0].image} 
@@ -40,7 +40,7 @@ class WorkPage extends Component{
 					<div className="row">
 						{collections}
 					</div>
-					<VideosPage videos={this.props.work.videos}/>
+					<VideosPage videos={this.props.videos}/>
 				</div>
 			)
 		}else{

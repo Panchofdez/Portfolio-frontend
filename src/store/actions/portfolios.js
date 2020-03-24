@@ -24,18 +24,20 @@ export const fetchPortfolios = ()=>{
 			dispatch(loadPortfolios(response.data))
 		}catch(err){
 			dispatch(addError(err.response.data.error));
+			throw Error(err);
 		}
 	}		
 }
 
 
-export const getPortfolio = (id)=>{
+export const fetchPortfolio = (id)=>{
 	return async dispatch =>{
 		try{
 			const response = await axios.get(`/portfolios/${id}`);
 			dispatch(showPortfolio(response.data))
 		}catch(err){
 			dispatch(addError(err.response.data.error));
+			throw Error(err);
 		}
 	}
 }
@@ -45,24 +47,62 @@ export const createAboutPage = (formData) =>{
 	return async dispatch =>{
 		try{
 			const response = await axios.post('/myportfolio/about', formData);
-			console.log(response.data);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error))
 			throw Error(err);
 		}
-		
 	
+	}
+}
+
+
+export const createCollection = (collection)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.post('/myportfolio/collections', collection);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+
+export const createVideo = (video)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.post('/myportfolio/videos', video);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+
+		}
+	}
+}
+
+export const createTimelinePost = (post)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.post('/myportfolio/timeline', post);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
 	}
 }
 
 export const getMyPortfolio = () =>{
 	return async dispatch =>{
 		try{
-			const response = await axios.get('/myprofile');
+			const response = await axios.get('/myportfolio');
 			dispatch(showPortfolio(response.data))
 		}catch(err){
 			dispatch(addError(err.response.data.error));
+			throw Error(err);
 		}
 	}
 }
