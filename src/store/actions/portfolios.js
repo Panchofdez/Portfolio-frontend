@@ -54,6 +54,18 @@ export const createProfilePage = (formData)=>{
 	}
 }
 
+export const editProfilePage = (formData)=>{
+	return async dispatch =>{
+		try{
+			 const response = await axios.put('/myportfolio/profile', formData);
+			 dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
 
 export const createAboutPage = (formData) =>{
 	return async dispatch =>{
@@ -68,11 +80,59 @@ export const createAboutPage = (formData) =>{
 	}
 }
 
+export const editAboutPage = (formData)=>{
+	return async dispatch =>{
+		try{
+			const response = await axios.put('/myportfolio/about', formData);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error))
+			throw Error(err);
+		}
+	
+	}
+}
 
 export const createCollection = (collection)=>{
 	return async dispatch=>{
 		try{
 			const response = await axios.post('/myportfolio/collections', collection);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+export const editCollection = (collection, id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.put(`/myportfolio/collections/${id}`, collection);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+export const deleteCollection = (id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.delete(`/myportfolio/collections/${id}`);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+export const deleteCollectionPhoto =(id, photo_id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.delete(`/myportfolio/collections/${id}/photos/${photo_id}`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -95,10 +155,58 @@ export const createVideo = (video)=>{
 	}
 }
 
+export const editVideo = (video, id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.put(`/myportfolio/videos/${id}`, video);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+export const deleteVideo=(id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.delete(`/myportfolio/videos/${id}`);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
 export const createTimelinePost = (post)=>{
 	return async dispatch=>{
 		try{
 			const response = await axios.post('/myportfolio/timeline', post);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+export const editTimelinePost = (post, id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.put(`/myportfolio/timeline/${id}`, post);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+export const deleteTimelinePost = (id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.delete(`/myportfolio/timeline/${id}`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));

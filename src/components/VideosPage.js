@@ -1,7 +1,11 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import CollectionForm from '../containers/CollectionForm';
+import {deleteVideo} from '../store/actions/portfolios';
 
 
-const VideosPage = ({videos})=>{
+const VideosPage = ({videos, deleteVideo, history, match})=>{
 	const videosArr =videos.map(video=>{		
 		return (
 			<div key={video._id} className="row container-fluid justify-content-center my-4">
@@ -13,10 +17,28 @@ const VideosPage = ({videos})=>{
 				<div className="col-md-4 text-center align-self-center">
 					<h3>{video.title}</h3>
 					<p>{video.description}</p>
+					{match.url==='/myportfolio' && (
+						<React.Fragment>
+							<Link className="btn btn-outline-warning mr-3" to={`/myportfolio/edit/videos/${video._id}`}>Edit</Link>
+							<button 
+								className="btn btn-outline-danger" 
+								onClick={async()=>{
+									try{
+										await deleteVideo(video._id);
+										history.push('/myportfolio/work');
+									}catch(err){
+										return;
+									}
+									
+								}}
+							>
+								Delete
+							</button>
+						</React.Fragment>
+					)}
+					
 				</div>
 			</div>
-
-
 		)
 	})
 	return (
@@ -29,4 +51,4 @@ const VideosPage = ({videos})=>{
 
 
 
-export default VideosPage;
+export default connect(null,{deleteVideo})(VideosPage);

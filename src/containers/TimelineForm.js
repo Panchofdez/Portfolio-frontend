@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {createTimelinePost, getMyPortfolio} from '../store/actions/portfolios';
+import {createTimelinePost, editTimelinePost} from '../store/actions/portfolios';
 
 class TimelineForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
 			timeline:[],
-			title:"",
-			date:"",
-			text:""
-
-
+			title:this.props.post ? this.props.post.title : "",
+			date: this.props.post ? this.props.post.date : "",
+			text: this.props.post ? this.props.post.text : ""
 		}
 	}
 	handleChange=(e)=>{
@@ -20,16 +18,28 @@ class TimelineForm extends Component{
 	handleSave=async(e)=>{
 		e.preventDefault();
 		try{
-			await this.props.createTimelinePost({
-				post:{
-					title:this.state.title,
-					date:this.state.date,
-					text:this.state.text
-				}
+			if(this.props.post){
+				await this.props.editTimelinePost({
+					post:{
+						title:this.state.title,
+						date:this.state.date,
+						text:this.state.text
+					}
+				}, this.props.post._id);
+				this.props.history.push('/myportfolio/timeline');
+			}else{
+				await this.props.createTimelinePost({
+					post:{
+						title:this.state.title,
+						date:this.state.date,
+						text:this.state.text
+					}
 
-			})
-			let timelineArr= this.state.timeline.concat({title:this.state.title,date:this.state.date,text:this.state.text});
-			this.setState({timeline:timelineArr, title:"", date:"", text:""});
+				});
+				let timelineArr= this.state.timeline.concat({title:this.state.title,date:this.state.date,text:this.state.text});
+				this.setState({timeline:timelineArr, title:"", date:"", text:""});
+			}	
+			
 		}catch(err){
 			return;
 		}		
@@ -49,13 +59,14 @@ class TimelineForm extends Component{
 		})
 
 		const {title, date, text} = this.state;
+		const {url}= this.props.match;
 		return(
 			
 			<div className="row justify-content-center mt-5">
 				<div className="col-md-8">
+					{!this.props.portfolio && <p className="float-right">Step 4 of 4</p>}
 					<h1>Timeline</h1>
-					<p>Add achievements and events to your career timeline</p>
-					
+					<p>Add achievements, events and past jobs to your career timeline</p>					
 					<form onSubmit={this.handleSave}>
 							<div className="form-group">
 							 	<label htmlFor="title">Title</label> 
@@ -82,22 +93,39 @@ class TimelineForm extends Component{
 									onChange={this.handleChange}
 									name="text"
 								/>
-								<button 
+								{this.props.post? (
+									<button 
 									className="btn btn-outline-success my-3" 
-									type="submit" 
-								>
-								Add Post To Timeline
-								</button>
-								
+										type="submit" 
+									>
+									Save Post
+									</button>
+								):(
+									<button 
+										className="btn btn-outline-success my-3" 
+										type="submit" 
+									>
+									Add Post To Timeline
+									</button>
+								)}							
 							</div>
 					</form>
-					<div>
-						<h2>Preview</h2>
-						{timelinePosts}
-					</div>
-					<button className="btn btn-success  form-control my-3" onClick={()=>{
-						this.props.history.push('/myportfolio')
-					}}>Save Timeline</button>
+					{!this.props.post && (
+						<React.Fragment>
+							<div>
+								<h2>Successfully Added:</h2>
+								{timelinePosts}
+							</div>
+							<button className="btn btn-success  form-control my-3" onClick={()=>{
+								if(this.props.portfolio){
+									this.props.history.push('/myportfolio/timeline');
+								}else{
+									this.props.history.push('/myportfolio')
+								}
+								
+							}}>Finish</button>
+						</React.Fragment>
+					)}					
 				</div>
 			</div>
 
@@ -105,5 +133,9 @@ class TimelineForm extends Component{
 	}
 }
 
-
-export default connect(null,{createTimelinePost,getMyPortfolio})(TimelineForm);
+function mapStateToProps(state){
+	return{
+		portfolio:state.showPortfolio.portfolio
+	}
+}
+export default connect(mapStateToProps,{createTimelinePost, editTimelinePost})(TimelineForm);

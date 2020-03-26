@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
-import {createAboutPage} from '../store/actions/portfolios';
+import {createAboutPage, editAboutPage} from '../store/actions/portfolios';
 
 class AboutForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			name:"Give your portfolio a name",
-			statement:"Make a statement",
-			about:'This is your chance to tell us something about who you are and what you do',
+			name: this.props.portfolio ? this.props.portfolio.name : "Give your portfolio a name",
+			statement:  this.props.portfolio ? this.props.portfolio.statement : "Make a statement",
+			about: this.props.portfolio ? this.props.portfolio.about : 'This is your chance to tell us something about who you are and what you do',
 			image:null
 		}
 		
@@ -26,18 +26,19 @@ class AboutForm extends Component{
   		formData.append('statement', this.state.statement);
   		formData.append('about',this.state.about);
   		formData.append('type', this.state.type);
-  		formData.append('image', this.state.image);
+  		if(this.state.image){
+  			formData.append('image', this.state.image);
+  		}
+  		
   		try{
-  			await this.props.createAboutPage(formData);
-  
-			this.setState({
-				name: '',
-				statement:'',
-				about:'',
-				image:null
-
-			});
-			this.props.history.push('/myportfolio/create/work');
+  			if(this.props.portfolio){
+  				await this.props.editAboutPage(formData);
+  				this.props.history.push('/myportfolio/about');
+	  		}else{
+	  			await this.props.createAboutPage(formData);
+				this.props.history.push('/myportfolio/create/work');
+	  		}
+  			
   		}catch(err){
   			return;
   		}
@@ -51,7 +52,17 @@ class AboutForm extends Component{
 
 				<div className="row justify-content-center mt-5">
 					<div className="col-md-8">
-						<h1>Create Your About Page!</h1>
+						
+						{this.props.portfolio? (
+							<h1 className="my-3">Edit Your About Page</h1>
+						):(
+							<React.Fragment>
+								<p className="float-right">Step 2 of 4</p>
+								<h1 className="my-3">Your About Page</h1>
+								<h5 className="my-3">This is the first thing that people will see so let's make a good first impression!</h5>
+							</React.Fragment>
+						)}					
+						
 						<div className="form-group">
 						 	<label htmlFor="name">Name</label>
 						 	<input
@@ -73,7 +84,7 @@ class AboutForm extends Component{
 
 							/>
 							<label htmlFor="upload-image">Upload a Header Image</label>
-							<div className="input-group" id="upload-image">
+							<div className="input-group mb-3" id="upload-image">
 								<div className="custom-file">
 									<input 
 										type="file" 
@@ -86,7 +97,9 @@ class AboutForm extends Component{
 									<label className="custom-file-label" htmlFor="header-image">Choose file</label>)}
 								</div>
 							</div>
-							
+							{this.props.portfolio && ( 
+								<p>Current Header Image: {this.props.portfolio.headerImage}</p>
+							)}
 							<label htmlFor="about">About</label>
 							<textarea 
 								className="form-control mb-3" 
@@ -96,7 +109,7 @@ class AboutForm extends Component{
 								onChange={this.handleChange}
 								name="about"
 							/>
-							<button className="btn btn-outline-success form-control mt-3" type="submit" >Save</button>
+							<button className="btn btn-success form-control mt-3" type="submit" >Next</button>
 						</div>
 					</div>
 				</div>
@@ -106,5 +119,9 @@ class AboutForm extends Component{
 	
 }
 
-
-export default connect(null, {createAboutPage})(AboutForm);
+function mapStateToProps(state){
+	return {
+		portfolio:state.showPortfolio.portfolio
+	}
+}
+export default connect(mapStateToProps, {createAboutPage,editAboutPage})(AboutForm);

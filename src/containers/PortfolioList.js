@@ -42,7 +42,7 @@ class PortfolioList extends Component{
 					</div>
 				</div>
 				<div className="container mt-3">
-					<ul className="row m-0">
+					<ul className="row m-0 p-0">
 						{portfoliosList}
 					</ul>
 				</div>

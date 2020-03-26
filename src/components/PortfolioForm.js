@@ -8,6 +8,7 @@ import WorkForm from './WorkForm';
 
 const PortfolioForm =(props)=>{
 	let {path} = useRouteMatch();
+	console.log("Path " + path);
 	return(
 		<div className='container'>
 			<Switch>				

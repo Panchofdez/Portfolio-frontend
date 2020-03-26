@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {createCollection} from '../store/actions/portfolios';
+import {createCollection, editCollection} from '../store/actions/portfolios';
+import {addErrorMessage} from '../store/actions/errors';
 
 
 class WorkForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			title:"",
-			description:"",
+			title:this.props.collection? this.props.collection.title: "",
+			description:this.props.collection? this.props.collection.description:"",
 			photos:null,
 			collections:[]
-		}
+		}	
 	};
 	handleChange=(e)=>{
 		this.setState({[e.target.name]:e.target.value});
@@ -21,79 +22,116 @@ class WorkForm extends Component{
 	};
 	handleSubmit=async (e)=>{
 		e.preventDefault();
+		if(!this.state.photos && !this.props.collection){
+			this.props.addErrorMessage('You must add at least one image to your collection');
+			return;
+		}
 		let data = new FormData();
-   		for(var x = 0; x<this.state.photos.length; x++) {
-       		data.append('photos', this.state.photos[x])
-   		}
+		if(this.state.photos){
+			for(var x = 0; x<this.state.photos.length; x++) {
+	       		data.append('photos', this.state.photos[x])
+	   		}
+		}
    		data.append('title', this.state.title);
-   		data.append('description', this.state.description);
+	   	data.append('description', this.state.description);
    		try{
-   			await this.props.createCollection(data);
-   			const newArr = this.state.collections.concat({title:this.state.title});
-   			this.setState({
-   				title:"",
-   				description:"",
-   				photos:null,
-   				collections:newArr
-   			});
-   			
+   			if(this.props.collection){
+   				await this.props.editCollection(data, this.props.collection._id);
+   				this.props.history.push('/myportfolio/work');
+   			}else{
+   				await this.props.createCollection(data);
+	   			const newArr = this.state.collections.concat({title:this.state.title});
+	   			this.setState({
+	   				title:"",
+	   				description:"",
+	   				photos:null,
+	   				collections:newArr
+	   			});
+   			}  			
    		}catch(err){
    			return;
    		}
    		
 	}
 	render(){
-		const {title, description,collections}=this.state;
+		const {title, description,photos,collections}=this.state;
 		const collectionsAdded = collections.map((collection)=>(
 			<div key={collection.title} className="alert alert-success">Successfully added {collection.title}</div>
 		))
+		let photosArr =[];
+		if(photos){
+			for(let x =0;x<photos.length; x++){
+				console.log(photos[x]);
+				photosArr.push(photos[x].name)
+			};
+		}
+		const uploadedPhotos = photosArr.map((photo)=><li className="ml-3">{photo}</li>)
 		return (
-			<div>
-				<h1>Collections</h1>
-				<p>Showcase your work/project through collections of photos</p>
-				<form encType='multipart/form-data' onSubmit={this.handleSubmit} >
-					<div className="form-group">
-					 	<label htmlFor="name">Title</label>
-					 	<input
-					 		value={title} 
-							onChange={this.handleChange}
-							name="title"
-							className="form-control mb-3"
-						/>
-						<label htmlFor="statement">Description</label>
-						<textarea 
+			<div className="row justify-content-center mt-5">
+				<div className="col-md-8">
+					{this.props.collection ? (
+						<h2>Edit Your Collection</h2>
+					):(
+						<h2>Add Collections</h2>
+					)}
+					<form encType='multipart/form-data' onSubmit={this.handleSubmit} >
+						<div className="form-group">
+						 	<label htmlFor="name">Title</label>
+						 	<input
+						 		value={title} 
+								onChange={this.handleChange}
+								name="title"
+								className="form-control mb-3"
+							/>
+							<label htmlFor="statement">Description</label>
+							<textarea 
 
-							className="form-control mb-3" 
-							id="collection-description" 
-							rows="2" 
-							value={description} 
-							onChange={this.handleChange}
-							name="description"
-						/>
-						<label htmlFor="upload-image">Upload Photos</label>
-						<div className="input-group" id="upload-image">
-							<div className="custom-file">
-								<input 
-									type="file" 
-									name="photos"
-									className="custom-file-input" 
-									id="photos"
-									multiple
-									onChange={this.onFileChange}
-								/>
-								<label className="custom-file-label" htmlFor="header-image">Choose files</label>
+								className="form-control mb-3" 
+								id="collection-description" 
+								rows="4" 
+								value={description} 
+								onChange={this.handleChange}
+								name="description"
+							/>
+							{this.props.collection?(
+								<label htmlFor="upload-image">Add More Photos</label>
+							):(
+								<label htmlFor="upload-image">Upload Photos</label>
+							)}
+							
+							<div className="input-group" id="upload-image">
+								<div className="custom-file">
+									<input 
+										type="file" 
+										name="photos"
+										className="custom-file-input" 
+										id="photos"
+										multiple
+										onChange={this.onFileChange}
+									/>
+									<label className="custom-file-label" htmlFor="header-image">Choose files</label>
+								</div>
 							</div>
+							<ul className="p-0">
+								Photos Uploaded:
+								{uploadedPhotos}
+							</ul>
+							
 						</div>
-					</div>
-					<button className="btn btn-outline-success my-3" type="submit">Add Collection</button>
-				</form>
-				{collectionsAdded}
-			
-		</div>
+						{this.props.collection? (
+							<button className="btn btn-outline-success my-3" type="submit">Edit Collection</button>
+						):(
+							<button className="btn btn-outline-success my-3" type="submit">Add Collection</button>
+						)}
+						
+					</form>
+					{collectionsAdded}
+				</div>
+			</div>
 
 		)
 	}
 }
 
 
-export default connect(null,{createCollection})(WorkForm);
+export default connect(null,{createCollection, addErrorMessage, editCollection})(WorkForm);

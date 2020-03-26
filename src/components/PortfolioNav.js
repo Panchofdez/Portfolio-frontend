@@ -3,7 +3,7 @@ import {useRouteMatch, Link} from 'react-router-dom'
 
 
 
-const PortfolioNav = ({name, image})=>{
+const PortfolioNav = ({name, image, location})=>{
 	let match = useRouteMatch();
 	return (
 		<div className="nav justify-content-between container">
@@ -12,7 +12,7 @@ const PortfolioNav = ({name, image})=>{
 				{name && (
 					<li className="nav-item text-center">
 						<Link className="nav-link portfolio-name" to={`${match.url}/profile`}>
-							{image && (<img src={image} alt="" className="rounded-circle mr-3" height={25} width={25}/>)}
+							{image && (<img src={image} alt="" className="rounded-circle mr-3" height={35} width={35}/>)}
 							{name}
 						</Link>
 					</li>
@@ -34,13 +34,39 @@ const PortfolioNav = ({name, image})=>{
 				
 			</ul>
 			<ul className="nav mt-3">
-			{match.url==="/myportfolio" ? (
+			{location.pathname==='/myportfolio' && (
 				<li>
-					<a className="btn btn-outline-light">Edit</a>
+					<Link className="btn btn-outline-success" to={`${match.url}/edit/about`}>Edit</Link>
 				</li>
-			): (
+			)} 
+			{location.pathname==='/myportfolio/about' && (
 				<li>
-					<a className="btn btn-outline-light">Connect</a>
+					<Link className="btn btn-outline-success" to={`${match.url}/edit/about`}>Edit</Link>
+				</li>
+			)} 
+			{location.pathname==='/myportfolio/work' && (
+				<React.Fragment>
+					<li>
+						<Link className="btn btn-outline-success mx-3" to={`${match.url}/edit/collections`}>Add Collection</Link>
+					</li>
+					<li>
+						<Link className="btn btn-outline-success" to={`${match.url}/edit/videos`}>Add Video</Link>
+					</li>
+				</React.Fragment>
+			)}
+			{location.pathname==='/myportfolio/timeline' && (
+				<li>
+					<Link className="btn btn-outline-success" to={`${match.url}/edit/timeline`}>Add Post To Timeline</Link>
+				</li>
+			)}
+			{location.pathname==='/myportfolio/profile' && (
+				<li>
+					<Link className="btn btn-outline-success" to={`${match.url}/edit/profile`}>Edit</Link>
+				</li>
+			)}
+			{match.url==='/portfolios'&& (
+				<li>
+					<a className="btn btn-outline-success">Connect</a>
 				</li>
 			)}
 

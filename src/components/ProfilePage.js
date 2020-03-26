@@ -1,6 +1,6 @@
-import React, {Component} from 'react'; 
+import React from 'react'; 
 
-const ProfilePage = ({location,birthday, type, profileImage})=>{
+const ProfilePage = ({location,birthday, type, profileImage, url})=>{
 	return (
 		<div className="container mt-5">
 			<div className="row justify-content-center">
@@ -21,8 +21,7 @@ const ProfilePage = ({location,birthday, type, profileImage})=>{
 							</div>
 						</div>
 					</div>
-				</div>
-				
+				</div>	
 			</div>
 		</div>
 	)
