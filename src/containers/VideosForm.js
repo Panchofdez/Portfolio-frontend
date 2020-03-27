@@ -2,7 +2,7 @@ import React, {Component}  from 'react';
 import {connect} from 'react-redux';
 import {createVideo, editVideo} from '../store/actions/portfolios';
 import {addErrorMessage} from '../store/actions/errors';
-
+import { toast } from 'react-toastify';
 
 class VideosForm extends Component{
 	constructor(props){
@@ -17,6 +17,9 @@ class VideosForm extends Component{
 	handleChange=(e)=>{
 		this.setState({[e.target.name]:e.target.value});
 	};
+    notifySuccess=(message)=>{
+    	toast.success(message, {autoClose:2000});   	
+    };
 	handleSave=async (e)=>{
 		e.preventDefault();
 		if(this.state.link === ""){
@@ -36,6 +39,7 @@ class VideosForm extends Component{
 					link:link
 				}, this.props.video._id);
 				this.props.history.push("/myportfolio/work");
+				this.notifySuccess("Successfully Saved Changes");
 			}else{
 				await this.props.createVideo({
 					video:{
@@ -46,6 +50,7 @@ class VideosForm extends Component{
 				});
 				let videos = this.state.videos.concat(this.state.title);
 				this.setState({videos});
+				this.notifySuccess("Successfully Added Video")
 			}
 		}catch(err){
 
@@ -57,7 +62,6 @@ class VideosForm extends Component{
 		const videosAdded = videos.map((video)=>{
 			return <div key={video} className="alert alert-success">Successfully added {video}</div>
 		})
-		console.log(this.props.video);
 		return (
 			<div className="row justify-content-center mt-5">
 				<div className="col-md-8">
@@ -97,7 +101,7 @@ class VideosForm extends Component{
 									name="description"
 								/>
 								{this.props.video? (
-									<button className="btn btn-outline-success my-3" type="submit" >Update Video</button>
+									<button className="btn btn-outline-success my-3" type="submit" >Save Changes</button>
 								):(
 									<button className="btn btn-outline-success my-3" type="submit" >Add Video</button>
 								)}
@@ -106,6 +110,13 @@ class VideosForm extends Component{
 							</div>
 					</form>						
 					{videosAdded}
+					{this.props.match.url.split('/')[1] ==='myportfolio' && (
+					<button 
+						className="btn btn-outline-success my-3 form-control" 
+						onClick={()=>this.props.history.push('/myportfolio/work')}>
+						Go Back
+					</button>
+				)}
 				</div>
 			</div>
 

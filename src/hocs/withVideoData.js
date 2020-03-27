@@ -8,7 +8,7 @@ export default function withVideoData(WrappedComponent){
 		render(){
 			const arr= this.props.history.location.pathname.split("/");
 			const id = arr[arr.length-1];
-			const video = this.props.portfolio.videos.find((v)=>v._id==id);
+			const video = this.props.portfolio.videos.find((v)=>v._id===id);
 			return <WrappedComponent {...this.props} video={video}/>
 		}
 	}

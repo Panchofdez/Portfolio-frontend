@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {createTimelinePost, editTimelinePost} from '../store/actions/portfolios';
+import { toast } from 'react-toastify';
 
 class TimelineForm extends Component{
 	constructor(props){
@@ -15,6 +16,9 @@ class TimelineForm extends Component{
 	handleChange=(e)=>{
 		this.setState({[e.target.name]:e.target.value});
 	};
+	notifySuccess=(message)=>{
+    	toast.success(message, {autoClose:2000});   	
+    };
 	handleSave=async(e)=>{
 		e.preventDefault();
 		try{
@@ -27,6 +31,7 @@ class TimelineForm extends Component{
 					}
 				}, this.props.post._id);
 				this.props.history.push('/myportfolio/timeline');
+				this.notifySuccess("Successfully Saved Changes");
 			}else{
 				await this.props.createTimelinePost({
 					post:{
@@ -38,6 +43,7 @@ class TimelineForm extends Component{
 				});
 				let timelineArr= this.state.timeline.concat({title:this.state.title,date:this.state.date,text:this.state.text});
 				this.setState({timeline:timelineArr, title:"", date:"", text:""});
+				this.notifySuccess('Successfully Added Post To Timeline');
 			}	
 			
 		}catch(err){
@@ -117,10 +123,10 @@ class TimelineForm extends Component{
 								{timelinePosts}
 							</div>
 							<button className="btn btn-success  form-control my-3" onClick={()=>{
-								if(this.props.portfolio){
-									this.props.history.push('/myportfolio/timeline');
+								if(this.props.match.url.split('/')[2]==='create'){
+									this.props.history.push('/myportfolio');									
 								}else{
-									this.props.history.push('/myportfolio')
+									this.props.history.push('/myportfolio/timeline');	
 								}
 								
 							}}>Finish</button>

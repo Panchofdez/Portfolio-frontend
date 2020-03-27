@@ -7,7 +7,7 @@ import CommentsPage from './CommentsPage';
 import TimelinePage from './TimelinePage';
 import ProfilePage from '../components/ProfilePage';
 import WorkPage from '../components/WorkPage';
-import {getMyPortfolio, getPortfolio} from '../store/actions/portfolios';
+import {getMyPortfolio, getPortfolio, clearPortfolio} from '../store/actions/portfolios';
 import Loading from '../components/Loading';
 import AboutForm from './AboutForm';
 import TimelineForm from './TimelineForm';
@@ -27,9 +27,16 @@ class PortfolioPage extends Component{
 		}
 		
 	}
+	componentWillUnmount(){
+		this.props.clearPortfolio();
+	}
 	async fetchMyPortfolio(){
 		try{
 			await this.props.getMyPortfolio();
+			console.log(this.props.portfolio);
+			if(!this.props.portfolio){
+				this.props.history.push('/myportfolio/create');
+			}
 		}catch(err){
 			return;
 		}
@@ -78,8 +85,14 @@ class PortfolioPage extends Component{
 					<Route exact path={`${url}/comments`}>
 						<CommentsPage comments={portfolio.comments} {...this.props}/>
 					</Route>
+					<Route exact path='/myportfolio/edit/profile'>
+						<ProfileForm {...this.props} portfolio={portfolio}/>
+					</Route>
 					<Route exact path='/myportfolio/edit/about'>
-						<AboutForm {...this.props}/>
+						<AboutForm 
+							{...this.props} 
+							portfolio={portfolio}
+						/>
 					</Route>
 					<Route exact path='/myportfolio/edit/timeline'>
 						<TimelineForm {...this.props}/>
@@ -93,9 +106,6 @@ class PortfolioPage extends Component{
 					<Route path='/myportfolio/edit/videos/:id' component={withVideoData(VideosForm)}/>
 					<Route path='/myportfolio/edit/collections/:id' component={withCollectionData(CollectionForm)}/>
 					<Route path='/myportfolio/edit/timeline/:id' component={withPostData(TimelineForm)}/>
-					<Route exact path='/myportfolio/edit/profile'>
-						<ProfileForm {...this.props}/>
-					</Route>
 					<Route path={`${url}`}>
 						<AboutPage 
 							about={portfolio.about} 
@@ -110,9 +120,10 @@ class PortfolioPage extends Component{
 }
 function mapStateToProps(state){
 	return {
-		portfolio:state.showPortfolio.portfolio
+		portfolio:state.showPortfolio.portfolio,
+		user:state.currentUser.name
 
 	}
 }
 
-export default withRouter(connect(mapStateToProps, {getMyPortfolio, getPortfolio})(PortfolioPage));
+export default withRouter(connect(mapStateToProps, {getMyPortfolio, getPortfolio, clearPortfolio})(PortfolioPage));

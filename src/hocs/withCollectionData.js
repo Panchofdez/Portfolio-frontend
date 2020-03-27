@@ -8,7 +8,7 @@ export default function withCollectionData(WrappedComponent){
 		render(){
 			const arr= this.props.history.location.pathname.split("/");
 			const id = arr[arr.length-1];
-			const collection = this.props.portfolio.collections.find((c)=>c._id==id);
+			const collection = this.props.portfolio.collections.find((c)=>c._id===id);
 			return <WrappedComponent {...this.props} collection={collection}/>
 		}
 	}

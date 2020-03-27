@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {createCollection, editCollection} from '../store/actions/portfolios';
 import {addErrorMessage} from '../store/actions/errors';
+ import { toast } from 'react-toastify';
 
 
-class WorkForm extends Component{
+
+class CollectionForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
@@ -20,6 +22,12 @@ class WorkForm extends Component{
 	onFileChange=(e)=>{
 		this.setState({photos:e.target.files});
 	};
+	notifyUpload = ()=>{
+        toast("Upload In Progress", { autoClose: 4000 });
+    };
+    notifySuccess=(message)=>{
+    	toast.success(message);
+    };
 	handleSubmit=async (e)=>{
 		e.preventDefault();
 		if(!this.state.photos && !this.props.collection){
@@ -31,6 +39,7 @@ class WorkForm extends Component{
 			for(var x = 0; x<this.state.photos.length; x++) {
 	       		data.append('photos', this.state.photos[x])
 	   		}
+	   		this.notifyUpload();
 		}
    		data.append('title', this.state.title);
 	   	data.append('description', this.state.description);
@@ -38,6 +47,7 @@ class WorkForm extends Component{
    			if(this.props.collection){
    				await this.props.editCollection(data, this.props.collection._id);
    				this.props.history.push('/myportfolio/work');
+   				this.notifySuccess("Successfully Saved Changes");
    			}else{
    				await this.props.createCollection(data);
 	   			const newArr = this.state.collections.concat({title:this.state.title});
@@ -47,6 +57,7 @@ class WorkForm extends Component{
 	   				photos:null,
 	   				collections:newArr
 	   			});
+	   			this.notifySuccess("Successfully Added Collection")
    			}  			
    		}catch(err){
    			return;
@@ -56,7 +67,7 @@ class WorkForm extends Component{
 	render(){
 		const {title, description,photos,collections}=this.state;
 		const collectionsAdded = collections.map((collection)=>(
-			<div key={collection.title} className="alert alert-success">Successfully added {collection.title}</div>
+			<div key={collection.title} className="alert alert-success">Added {collection.title}</div>
 		))
 		let photosArr =[];
 		if(photos){
@@ -119,7 +130,7 @@ class WorkForm extends Component{
 							
 						</div>
 						{this.props.collection? (
-							<button className="btn btn-outline-success my-3" type="submit">Edit Collection</button>
+							<button className="btn btn-outline-success my-3" type="submit">Save Changes</button>
 						):(
 							<button className="btn btn-outline-success my-3" type="submit">Add Collection</button>
 						)}
@@ -134,4 +145,4 @@ class WorkForm extends Component{
 }
 
 
-export default connect(null,{createCollection, addErrorMessage, editCollection})(WorkForm);
+export default connect(null,{createCollection, addErrorMessage, editCollection})(CollectionForm);

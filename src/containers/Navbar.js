@@ -35,13 +35,8 @@ const Navbar =(props)=>{
 								</a>
 
 								<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-									<Link className="dropdown-item" to="/myaccount">Account</Link>
-								
-									<Link className="dropdown-item" to="/myportfolio/create">Create Portfolio</Link>
-								
+									<Link className="dropdown-item" to="/myaccount">Account</Link>								
 									<Link className="dropdown-item" to="/myportfolio">My Portfolio</Link>
-							
-									
 									<Link className='dropdown-item' to="/" onClick={()=>signout()}>Log Out</Link>
 								</div>
 							</li>

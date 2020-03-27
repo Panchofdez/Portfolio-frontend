@@ -10,28 +10,29 @@ import PortfolioPage from './PortfolioPage'
 import ProfilePage from '../components/ProfilePage';
 import withAuth from '../hocs/withAuth';
 import {clearErrorMessage} from '../store/actions/errors';
+import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure();
 
 class Main extends Component{
     componentDidUpdate(prevProps) {
-      if (prevProps.location !== this.props.location && this.props.error){
+        console.log(this.props.error);
+        if (prevProps.location !== this.props.location && this.props.error){
+            this.props.clearErrorMessage();
+        }else if(this.props.error){
+            this.notify();
+        }
+        
+    };
+    notify = ()=>{
+        toast.error(this.props.error);
         this.props.clearErrorMessage();
-      }
     }
     render(){
-        const {error} = this.props;
         return(
-            <>
+            <React.Fragment>
                 <Navbar/>
-                {error && (
-                    <div className="row justify-content-center">
-                        <div className="col-md-8">
-                            <div className="alert alert-danger my-3">
-                                {error}
-                            </div>
-                        </div>
-                    </div>
-                )}
                 <Switch>
                     <Route exact path="/signup" render={(props)=><AuthForm type="signup" buttonText="Sign Up" {...props}/>}/>
                     <Route exact path="/signin" render={(props)=><AuthForm type="signin" buttonText="Sign In" {...props}/>}/>
@@ -43,7 +44,7 @@ class Main extends Component{
                     <Route path="/myaccount" component={withAuth(ProfilePage)}/>
 
                 </Switch>
-            </>
+            </React.Fragment>
         )
     }
  

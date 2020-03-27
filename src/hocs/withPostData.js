@@ -8,7 +8,7 @@ export default function withPostData(WrappedComponent){
 		render(){
 			const arr= this.props.history.location.pathname.split("/");
 			const id = arr[arr.length-1];
-			const post = this.props.portfolio.timeline.find((p)=>p._id==id);
+			const post = this.props.portfolio.timeline.find((p)=>p._id===id);
 			return <WrappedComponent {...this.props} post={post}/>
 		}
 	}

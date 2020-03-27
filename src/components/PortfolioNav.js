@@ -9,14 +9,18 @@ const PortfolioNav = ({name, image, location})=>{
 		<div className="nav justify-content-between container">
 
 			<ul className="nav nav-tabs mt-3" id="portfolio-nav">
-				{name && (
+				{name ? (
 					<li className="nav-item text-center">
 						<Link className="nav-link portfolio-name" to={`${match.url}/profile`}>
-							{image && (<img src={image} alt="" className="rounded-circle mr-3" height={35} width={35}/>)}
+							{image && (<img src={image} alt="" className="rounded-circle mr-3" id="myportfolio-profile-pic"/>)}
 							{name}
 						</Link>
 					</li>
 
+				): (
+					<li className="nav-item text-center">
+						<Link className="nav-link" to={`${match.url}/profile`}>Profile</Link>
+					</li>
 				)}
 				<li className="nav-item text-center">
 					<Link className="nav-link" to={`${match.url}/about`}>About</Link>
@@ -47,7 +51,7 @@ const PortfolioNav = ({name, image, location})=>{
 			{location.pathname==='/myportfolio/work' && (
 				<React.Fragment>
 					<li>
-						<Link className="btn btn-outline-success mx-3" to={`${match.url}/edit/collections`}>Add Collection</Link>
+						<Link className="btn btn-outline-success mx-2" to={`${match.url}/edit/collections`}>Add Collection</Link>
 					</li>
 					<li>
 						<Link className="btn btn-outline-success" to={`${match.url}/edit/videos`}>Add Video</Link>

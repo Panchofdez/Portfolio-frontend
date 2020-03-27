@@ -27,7 +27,7 @@ class PortfolioList extends Component{
 		));
 		return(
 			<div>
-				<div id="home-header" className="container">
+				<div id="home-header" className="container-fluid">
 					<div className="row justify-content-center">
 						<div className="col-md-8 text-center mt-5">
 							<h1> Discover our community</h1>
@@ -41,7 +41,7 @@ class PortfolioList extends Component{
 						</div>
 					</div>
 				</div>
-				<div className="container mt-3">
+				<div className="container">
 					<ul className="row m-0 p-0">
 						{portfoliosList}
 					</ul>

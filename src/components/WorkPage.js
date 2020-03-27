@@ -22,7 +22,6 @@ class WorkPage extends Component{
 		this.setState({photos:[],title:"", description:""});
 	}
 	render(){
-		console.log(this.state.photos);
 		const collections = this.props.collections.map(collection =>{
 			return (
 				<div key={collection._id} className="col-lg-6 col-12 album">

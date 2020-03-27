@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {createAboutPage, editAboutPage} from '../store/actions/portfolios';
+import { toast } from 'react-toastify';
 
 class AboutForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			name: this.props.portfolio ? this.props.portfolio.name : "Give your portfolio a name",
 			statement:  this.props.portfolio ? this.props.portfolio.statement : "Make a statement",
 			about: this.props.portfolio ? this.props.portfolio.about : 'This is your chance to tell us something about who you are and what you do',
 			image:null
@@ -19,24 +19,33 @@ class AboutForm extends Component{
 	onFileChange=(e)=>{
 		this.setState({image:e.target.files[0]});
 	};
+	notifyUpload = ()=>{
+        toast("Upload In Progress", { autoClose: 2000 });
+    };
+    notifySuccess=()=>{
+    	toast.success("Successfully saved changes", {autoClose:3000});   	
+    };
 	handleSubmit=async (e)=>{
 		e.preventDefault();
 		let formData = new FormData();
-  		formData.append('name', this.state.name);
   		formData.append('statement', this.state.statement);
   		formData.append('about',this.state.about);
-  		formData.append('type', this.state.type);
   		if(this.state.image){
   			formData.append('image', this.state.image);
+  			this.notifyUpload();
   		}
   		
   		try{
   			if(this.props.portfolio){
   				await this.props.editAboutPage(formData);
   				this.props.history.push('/myportfolio/about');
+  				this.notifySuccess();
+  				
 	  		}else{
 	  			await this.props.createAboutPage(formData);
 				this.props.history.push('/myportfolio/create/work');
+				this.notifySuccess();
+				
 	  		}
   			
   		}catch(err){
@@ -45,7 +54,7 @@ class AboutForm extends Component{
   		
 	}
 	render(){
-		const {name, statement, about, image} = this.state;
+		const { statement, about, image} = this.state;
 		return(
 
 			<form encType='multipart/form-data' onSubmit={this.handleSubmit}>
@@ -64,14 +73,6 @@ class AboutForm extends Component{
 						)}					
 						
 						<div className="form-group">
-						 	<label htmlFor="name">Name</label>
-						 	<input
-						 		value={name} 
-								onChange={this.handleChange}
-								name="name"
-								className="form-control mb-3"
-								type="text"
-							/>
 							<label htmlFor="statement">Mission Statement</label>
 							<textarea 
 
@@ -83,7 +84,7 @@ class AboutForm extends Component{
 								name="statement"
 
 							/>
-							<label htmlFor="upload-image">Upload a Header Image</label>
+							<label htmlFor="upload-image">Upload a Background Header Image</label>
 							<div className="input-group mb-3" id="upload-image">
 								<div className="custom-file">
 									<input 
@@ -109,7 +110,12 @@ class AboutForm extends Component{
 								onChange={this.handleChange}
 								name="about"
 							/>
-							<button className="btn btn-success form-control mt-3" type="submit" >Next</button>
+							{this.props.portfolio ?(
+								<button className="btn btn-success form-control mt-3" type="submit" >Save Changes</button>
+							):(
+								<button className="btn btn-success form-control mt-3" type="submit" >Next</button>
+							)}
+							
 						</div>
 					</div>
 				</div>
@@ -119,9 +125,4 @@ class AboutForm extends Component{
 	
 }
 
-function mapStateToProps(state){
-	return {
-		portfolio:state.showPortfolio.portfolio
-	}
-}
-export default connect(mapStateToProps, {createAboutPage,editAboutPage})(AboutForm);
+export default connect(null, {createAboutPage,editAboutPage})(AboutForm);

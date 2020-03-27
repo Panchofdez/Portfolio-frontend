@@ -16,6 +16,11 @@ const showPortfolio = (portfolio) =>{
 	}
 }
 
+export const clearPortfolio = () =>{
+	return{
+		type:'CLEAR_PORTFOLIO'
+	}
+}
 
 export const fetchPortfolios = ()=>{
 	return async dispatch =>{
@@ -35,6 +40,32 @@ export const getPortfolio = (id)=>{
 		try{
 			const response = await axios.get(`/portfolios/${id}`);
 			dispatch(showPortfolio(response.data))
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+export const createComment = (text, id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.post(`/portfolios/${id}/comments`, text);
+			console.log(response);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+export const deleteComment = (id, comment_id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.delete(`/portfolios/${id}/comments/${comment_id}`);
+			console.log(response);
+			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
 			throw Error(err);
@@ -226,3 +257,4 @@ export const getMyPortfolio = () =>{
 		}
 	}
 }
+
