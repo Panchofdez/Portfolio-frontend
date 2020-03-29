@@ -9,10 +9,15 @@ class ProfileForm extends Component{
 		super(props);
 		this.state={
 			image:null,
-			location: this.props.portfolio ? this.props.portfolio.location : "City/Country",
+			location: this.props.portfolio ? this.props.portfolio.location : "City,Country",
 			birthday: this.props.portfolio? this.props.portfolio.birthday : "Year",
 			type:this.props.portfolio? this.props.portfolio.type :"Profession/Occupation",
 			name: this.props.portfolio ? this.props.portfolio.name : "Your name or name of your business",
+			email:this.props.portfolio? this.props.portfolio.email :"Your email",
+			phone: this.props.portfolio?this.props.portfolio.phone:"Your phone number",
+			facebook: this.props.portfolio?this.props.portfolio.facebook:"https://www.facebook.com/yourusername",
+			instagram: this.props.portfolio?this.props.portfolio.instagram:"https://www.instagram.com/yourusername",
+
 
 		}
 	};
@@ -43,6 +48,10 @@ class ProfileForm extends Component{
   		formData.append('birthday', this.state.birthday);
   		formData.append('type',this.state.type);
   		formData.append('name', this.state.name);
+  		formData.append('email', this.state.email);
+  		formData.append('phone', this.state.phone);
+  		formData.append('facebook', this.state.facebook);
+  		formData.append('instagram', this.state.instagram);
   		if(this.state.image){
   			formData.append('image', this.state.image);
   			this.notifyUpload();
@@ -66,7 +75,7 @@ class ProfileForm extends Component{
 
 	render(){
 		console.log(this.props.portfolio);
-		const {image, location,birthday,type, name}=this.state;
+		const {image, location,birthday,type, name, email, phone, instagram, facebook}=this.state;
 		return (
 			<form encType='multipart/form-data' onSubmit={this.handleSubmit}>
 				<div className="row justify-content-center mt-5">
@@ -83,7 +92,7 @@ class ProfileForm extends Component{
 						)}
 						
 						<div className="form-group">
-							<label htmlFor="name">Give your portfolio a name</label>
+							<label htmlFor="name">Give your portfolio a name *</label>
 						 	<input
 						 		value={name} 
 								onChange={this.handleChange}
@@ -91,7 +100,7 @@ class ProfileForm extends Component{
 								className="form-control mb-3"
 								type="text"
 							/>
-							<label htmlFor="profile-pic">Upload your profile picture</label>
+							<label htmlFor="profile-pic">Upload your profile picture *</label>
 							<div className="input-group">
 								<div className="custom-file mb-3" >
 									<input 
@@ -106,6 +115,15 @@ class ProfileForm extends Component{
 								</div>
 							</div>
 							{this.props.portfolio && (<p>Current Profile Picture: {this.props.portfolio.profileImage}</p>)}
+							<label htmlFor="type">What do you do? *</label>
+							<input
+								className="form-control mb-3" 
+								id="type" 
+								value={type} 
+								onChange={this.handleChange}
+								name="type"
+								type="text"
+							/>
 							<label htmlFor="location">Location</label>
 						 	<input
 						 		value={location} 
@@ -115,6 +133,7 @@ class ProfileForm extends Component{
 								type="text"
 								id="location"
 							/>
+							
 							<label htmlFor="statement">Year of Birth</label>
 							<input
 
@@ -125,16 +144,46 @@ class ProfileForm extends Component{
 								name="birthday"
 								type="text"
 
-							/>
-							<label htmlFor="type">What do you do?</label>
+							/>							
+							<h3 className="my-3">Contact Information</h3>
+							<label htmlFor="type">Email</label>
 							<input
 								className="form-control mb-3" 
-								id="type" 
-								value={type} 
+								id="email" 
+								value={email} 
 								onChange={this.handleChange}
-								name="type"
+								name="email"
 								type="text"
 							/>
+							<label htmlFor="type">Phone Number</label>
+							<input
+								className="form-control mb-3" 
+								id="phone" 
+								value={phone} 
+								onChange={this.handleChange}
+								name="phone"
+								type="text"
+							/>
+							<h3 className="my-3">Social Media</h3>
+							<label htmlFor="type">Facebook</label>
+							<input
+								className="form-control mb-3" 
+								id="facebook" 
+								value={facebook} 
+								onChange={this.handleChange}
+								name="facebook"
+								type="text"
+							/>
+							<label htmlFor="type">Instagram</label>
+							<input
+								className="form-control mb-3" 
+								id="instagram" 
+								value={instagram} 
+								onChange={this.handleChange}
+								name="instagram"
+								type="text"
+							/>
+
 							{this.props.portfolio ?(
 								<button className="btn btn-success form-control mt-3" type="submit" >Save Changes</button>
 							):(

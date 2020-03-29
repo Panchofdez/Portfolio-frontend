@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
-const AboutPage = ({about, statement, image}) =>{
+const AboutPage = ({about, statement, image, url}) =>{
+	useEffect(() => {
+	  window.scrollTo(0, 0)
+	}, []);
 	return (
 		<div>
 			<div 
@@ -9,17 +12,18 @@ const AboutPage = ({about, statement, image}) =>{
 					background:`url(${image}) center center / cover no-repeat`,
 					minHeight:'600px'
 				}}
-			>
+			>				
 				<div className="col-md-10 text-center ">
-					<h2 className="">{statement}</h2>
+					<h1 className="">{statement}</h1>
 				</div>	
 				
 			</div>	
-			<div id="about" className="container-fluid row justify-content-center text-center p-3 my-3 ">
-				<div className="container my-3 col-md-10">
-					<p className="p-5 my-3">{about}</p>	
+			<div id="about" className="container-fluid row">
+				<div className="container my-3 col-10 justify-content-center text-justify p-3">
+					<h5 className="p-5 my-3">{about}</h5>	
 				</div>		
 			</div>
+			
 		</div>		
 	)
 }

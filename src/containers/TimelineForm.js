@@ -12,7 +12,10 @@ class TimelineForm extends Component{
 			date: this.props.post ? this.props.post.date : "",
 			text: this.props.post ? this.props.post.text : ""
 		}
-	}
+	};
+	componentDidMount() {
+	  window.scrollTo(0, 0)
+	};
 	handleChange=(e)=>{
 		this.setState({[e.target.name]:e.target.value});
 	};
@@ -65,14 +68,13 @@ class TimelineForm extends Component{
 		})
 
 		const {title, date, text} = this.state;
-		const {url}= this.props.match;
 		return(
 			
 			<div className="row justify-content-center mt-5">
 				<div className="col-md-8">
 					{!this.props.portfolio && <p className="float-right">Step 4 of 4</p>}
 					<h1>Timeline</h1>
-					<p>Add achievements, events and past jobs to your career timeline</p>					
+					<p>Add achievements, events, education and past jobs to your career timeline</p>					
 					<form onSubmit={this.handleSave}>
 							<div className="form-group">
 							 	<label htmlFor="title">Title</label> 

@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import {useRouteMatch, Route, Switch} from 'react-router-dom';
 import AboutForm from '../containers/AboutForm';
 import TimelineForm from '../containers/TimelineForm';
@@ -34,10 +34,6 @@ const PortfolioForm =(props)=>{
 	
 };
 
-function mapStateToProps(state){
-	return {
-		portfolio:state.showPortfolio.portfolio
-	}
-}
+
 
 export default PortfolioForm;

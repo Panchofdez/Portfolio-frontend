@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {authenticateUser} from '../store/actions/auth';
+import {toast } from 'react-toastify';
 
 
 
@@ -18,11 +19,19 @@ class AuthForm extends Component{
 	handleChange = e =>{
 		this.setState({[e.target.name]:e.target.value});
 	};
+	notify = ()=>{
+        toast.info(`Welcome ${this.state.name}! When you are ready, head over to MyPortfolio to create your portfolio`);
+    }
 	handleSubmit = async(e)=>{
 		e.preventDefault();
 		try{
-			await this.props.authenticateUser(this.props.type,this.state)		
+
+			await this.props.authenticateUser(this.props.type,this.state);
+			if(this.props.match.url ==='/signup'){
+				this.notify();	
+			}	
 			this.props.history.push('/portfolios');
+
 		}catch(err){
 			return;
 		}
@@ -31,8 +40,9 @@ class AuthForm extends Component{
 	};
 	render(){
 
-		const {email, password,name} = this.state;
+		const {email,password,name} = this.state;
 		const {type, buttonText} = this.props;
+		console.log(this.props.match.url);
 		
 		return(
 			<div className="row justify-content-center w-100 m-0 auth-container">

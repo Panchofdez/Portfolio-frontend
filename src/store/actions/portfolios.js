@@ -22,6 +22,18 @@ export const clearPortfolio = () =>{
 	}
 }
 
+export const searchPortfolios =(query)=>{
+	return async dispatch =>{
+		try{
+			const response =await axios.get(`/portfolios?search=${query}`);
+			dispatch(loadPortfolios(response.data))
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}		
+}
+
 export const fetchPortfolios = ()=>{
 	return async dispatch =>{
 		try{

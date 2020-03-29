@@ -49,7 +49,7 @@ class VideosForm extends Component{
 					}
 				});
 				let videos = this.state.videos.concat(this.state.title);
-				this.setState({videos});
+				this.setState({videos, title:"", description:"", link:""});
 				this.notifySuccess("Successfully Added Video")
 			}
 		}catch(err){
@@ -110,13 +110,6 @@ class VideosForm extends Component{
 							</div>
 					</form>						
 					{videosAdded}
-					{this.props.match.url.split('/')[1] ==='myportfolio' && (
-					<button 
-						className="btn btn-outline-success my-3 form-control" 
-						onClick={()=>this.props.history.push('/myportfolio/work')}>
-						Go Back
-					</button>
-				)}
 				</div>
 			</div>
 

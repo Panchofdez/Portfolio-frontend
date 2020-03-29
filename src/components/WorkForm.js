@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import VideosForm from '../containers/VideosForm';
 import CollectionForm from '../containers/CollectionForm';
 
 const WorkForm =(props)=>{
+	useEffect(() => {
+	  window.scrollTo(0, 0)
+	}, []);
 	return (
 		<div>
 			<div className="row justify-content-center mt-5">

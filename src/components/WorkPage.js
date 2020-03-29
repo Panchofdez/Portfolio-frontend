@@ -1,5 +1,4 @@
 import React , {Component} from 'react';
-import {Link} from 'react-router-dom';
 import PhotosPage from './PhotosPage';
 import VideosPage from './VideosPage';
 
@@ -15,6 +14,9 @@ class WorkPage extends Component{
 		this.handlePress=this.handlePress.bind(this);
 		this.backToWork=this.backToWork.bind(this);
 	}
+	componentDidMount() {
+	  window.scrollTo(0, 0)
+	}
 	handlePress(photos, title, description, id){
 		this.setState({photos,title, description, id});
 	}
@@ -24,24 +26,23 @@ class WorkPage extends Component{
 	render(){
 		const collections = this.props.collections.map(collection =>{
 			return (
-				<div key={collection._id} className="col-lg-6 col-12 album">
+				<div key={collection._id} className="col-lg-6 col-12  justify-content-center album">
 					<img 
-						className="img-fluid my-3" 
+						className="img-fluid my-3 rounded collection" 
 						src={collection.photos[0].image} 
 						onClick={()=>this.handlePress(collection.photos,collection.title, collection.description, collection._id)} 
 						alt=""
 					/>
-					<h5 className='text-center mb-3'>{collection.title}</h5>
+					<h4 className='text-center mb-3 px-5'>{collection.title}</h4>
 				</div>
 			)
 		})
 		if(this.state.photos.length===0){
 			return(
-				<div className="container my-5">
-					<h1 className="text-center">Work</h1>
-					<div className="row justify-content-center">
+				<div className="container my-3 px-0">
+					<div className="row justify-content-center mb-5">
 						{collections}
-					</div>
+					</div>				
 					<VideosPage videos={this.props.videos} {...this.props}/>
 				</div>
 			)

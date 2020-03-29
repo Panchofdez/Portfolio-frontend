@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import { Timeline, TimelineItem }  from 'vertical-timeline-component-for-react';
 import {Link} from 'react-router-dom';
@@ -6,6 +6,9 @@ import {deleteTimelinePost} from '../store/actions/portfolios';
 
 
 const TimelinePage = (props)=>{
+	useEffect(() => {
+	  window.scrollTo(0, 0)
+	}, []);
 	const timelinePosts = props.timeline.map(post=>{
 		return (
 			<TimelineItem
@@ -20,7 +23,7 @@ const TimelinePage = (props)=>{
 			    </p>
 			    {props.match.url==='/myportfolio' && (
 					<React.Fragment>
-						<Link className="btn btn-outline-warning mr-2" to={`/myportfolio/edit/timeline/${post._id}`}>Edit</Link>
+						<Link className="btn btn-outline-warning mr-2" to={`/myportfolio/edit/timeline/${post._id}`}><i className="fas fa-pen"></i></Link>
 						<button 
 							className="btn btn-outline-danger" 
 							onClick={async()=>{
@@ -31,7 +34,7 @@ const TimelinePage = (props)=>{
 									return;
 								}	
 							}}>
-							Delete
+							<i className="fas fa-trash"></i>
 						</button>
 					</React.Fragment>
 				)}

@@ -2,7 +2,9 @@ import React from 'react';
 
 const Loading = ()=>{
 	return (
-		<div className="loading-icon"></div>
+		<div id="loading-container">
+			<div className="loading-icon"></div>
+		</div>
 	)
 }
 

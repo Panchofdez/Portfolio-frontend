@@ -52,18 +52,19 @@ class PortfolioPage extends Component{
 	render(){
 		const {portfolio} = this.props;
 		if(!portfolio){
-			return (<div className="justify-content-center align-items-center"><Loading/></div>);
+			return (<Loading/>);
 		}
 		const {url} = this.props.match;
 		return (
 			<div>
-				<PortfolioNav name={portfolio.name} image={portfolio.profileImage} {...this.props}/>			
+				<PortfolioNav name={portfolio.name} image={portfolio.profileImage} id={portfolio._id} {...this.props}/>			
 				<Switch>				
 					<Route exact path={`${url}/about`}>
 						<AboutPage 
 							about={portfolio.about} 
 							statement={portfolio.statement} 
 							image={portfolio.headerImage}
+							url={url}
 							{...this.props}
 						/>
 					</Route>
@@ -74,6 +75,10 @@ class PortfolioPage extends Component{
 							birthday={portfolio.birthday}
 							profileImage={portfolio.profileImage}
 							url={url}
+							email={portfolio.email}
+							phone={portfolio.phone}
+							instagram={portfolio.instagram}
+							facebook={portfolio.facebook}
 						/>
 					</Route>
 					<Route exact path={`${url}/timeline`}>
@@ -110,7 +115,8 @@ class PortfolioPage extends Component{
 						<AboutPage 
 							about={portfolio.about} 
 							statement={portfolio.statement} 
-							image={portfolio.headerImage}/>
+							image={portfolio.headerImage}
+							url={url}/>
 					</Route>
 
 				</Switch>	

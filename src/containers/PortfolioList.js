@@ -1,17 +1,36 @@
 import React, {Component} from 'react';
 import PortfolioCard from '../components/PortfolioCard';
 import {connect} from 'react-redux';
-import {fetchPortfolios} from '../store/actions/portfolios';
+import {fetchPortfolios,searchPortfolios} from '../store/actions/portfolios';
 import Loading from '../components/Loading';
 
 
 class PortfolioList extends Component{
+	constructor(props){
+		super(props);
+		this.state={
+			search:"Find A Portfolio"
+		}
+	}
 	componentDidMount(){
 		this.getPortfolios();
 	}
 	async getPortfolios(){
 		try{
 			await this.props.fetchPortfolios();
+		}catch(err){
+			console.log(err);
+			return;
+		}
+	};
+	handleChange=(e)=>{
+		this.setState({[e.target.name]:e.target.value});
+	};
+	handleSearch=async(e)=>{
+		e.preventDefault();
+		try{
+			await this.props.searchPortfolios(this.state.search);
+			this.setState({search:"Find A Portfolio"});
 		}catch(err){
 			console.log(err);
 			return;
@@ -31,20 +50,35 @@ class PortfolioList extends Component{
 					<div className="row justify-content-center">
 						<div className="col-md-8 text-center mt-5">
 							<h1> Discover our community</h1>
-							<div className="input-group my-3">
-								<input type="text" className="form-control" placeholder="Search by name..." aria-label="searchBar" />
-								<div className="input-group-append">
-									<button className="input-group-text btn btn-outline-dark" id="search-btn">Search</button>
+							<form onSubmit={this.handleSearch}>
+								<div className="input-group my-5">
+									<input 
+										type="text" 
+										name="search"
+										value={this.state.search} 
+										onChange={this.handleChange} 
+										className="form-control" 
+										aria-label="searchBar" />
+									<div className="input-group-append">
+										<button className="input-group-text btn btn-outline-dark" id="search-btn" type="submit">Search</button>
+									</div>
 								</div>
-							</div>
-							<button className="btn btn-outline-light my-3">Advanced Search</button>
+							</form>
 						</div>
 					</div>
 				</div>
 				<div className="container">
+				{portfolios.length===0? (
+					<div className="text-center" id="no-matches">
+						<h5 className="mt-5">Sorry no matches were found, please try again</h5>					
+					</div>
+				):(
 					<ul className="row m-0 p-0">
 						{portfoliosList}
 					</ul>
+
+				)}
+					
 				</div>
 	
 			</div>
@@ -59,4 +93,4 @@ function mapStateToProps(state){
 	}
 }
 
-export default connect(mapStateToProps,{fetchPortfolios})(PortfolioList);
+export default connect(mapStateToProps,{searchPortfolios,fetchPortfolios})(PortfolioList);

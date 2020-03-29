@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {createComment, deleteComment} from '../store/actions/portfolios';
-import Loading from '../components/Loading';
+import {addErrorMessage} from '../store/actions/errors';
+import { toast } from 'react-toastify';
 
 class CommentsPage extends Component{
 	constructor(props){
@@ -10,23 +11,31 @@ class CommentsPage extends Component{
 			text:"Give your testimonial or referral here"
 		};
 	}
+	componentDidMount() {
+	  window.scrollTo(0, 0)
+	};
 	handleChange=(e)=>{
 		this.setState({text:e.target.value});
 	};
+	notifySuccess=()=>{
+    	toast.success("Successfully posted comment", {autoClose:2000});   	
+    };
 	handleSubmit=async(e)=>{
 		e.preventDefault();
+		if(!this.state.text){
+			this.props.addErrorMessage("Comments can't be blank");
+			return;
+		}
 		try{
 			await this.props.createComment(this.state, this.props.portfolio._id);
 			this.setState({text:"Give your testimonial or referral here..."});
+			this.notifySuccess();
 		}catch(err){
 			return;
 		}
 		
 	};
 	render(){
-		if(!this.props.portfolio){
-			return (<div className="justify-content-center align-items-center"><Loading/></div>);
-		}
 		const comments = this.props.portfolio.comments.map(comment=>{
 			return (
 				<div key={comment._id} className="card col-md-12 p-0 mb-3">
@@ -36,6 +45,7 @@ class CommentsPage extends Component{
 						</div>
 						<div className="col-9">
 							<div className="card-body">
+							{this.props.currentUser===comment.author.id && (
 								<button 
 									className="btn btn-outline-danger float-right"
 									onClick={async()=>{
@@ -47,8 +57,11 @@ class CommentsPage extends Component{
 										}
 									}}
 								>
-									Delete
+									<i class="fas fa-trash"></i>
 								</button>
+
+							)}
+								
 								<h5 className="card-title">{comment.author.name}</h5>
 								<p className="card-text"><small className="text-muted">{comment.createdAt}</small></p>
 								<p className="card-text">{comment.text}</p>
@@ -77,7 +90,7 @@ class CommentsPage extends Component{
 											onChange={this.handleChange}
 											rows="3"
 										/>
-										<button className="btn btn-outline-success mb-3" type="Submit">Post</button>
+										<button className="btn btn-outline-success mb-3" type="Submit"><i class="fas fa-plus"></i> Post</button>
 									</form>
 								</div>
 								<div className="row justify-content-center p-3">
@@ -94,10 +107,11 @@ class CommentsPage extends Component{
 
 function mapStateToProps(state){
 	return {
-		portfolio:state.showPortfolio.portfolio
+		portfolio:state.showPortfolio.portfolio,
+		currentUser:state.currentUser.user.userId
 	}
 	
 }
 
 
-export default connect(mapStateToProps,{createComment, deleteComment})(CommentsPage);
+export default connect(mapStateToProps,{createComment, deleteComment,addErrorMessage})(CommentsPage);

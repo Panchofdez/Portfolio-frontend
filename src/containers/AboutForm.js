@@ -7,11 +7,14 @@ class AboutForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			statement:  this.props.portfolio ? this.props.portfolio.statement : "Make a statement",
+			statement:  this.props.portfolio ? this.props.portfolio.statement : "A small statement or title",
 			about: this.props.portfolio ? this.props.portfolio.about : 'This is your chance to tell us something about who you are and what you do',
 			image:null
 		}
 		
+	};
+	componentDidMount() {
+	  window.scrollTo(0, 0)
 	}
 	handleChange=(e)=>{
 		this.setState({[e.target.name]:e.target.value});
@@ -54,10 +57,10 @@ class AboutForm extends Component{
   		
 	}
 	render(){
-		const { statement, about, image} = this.state;
+		const { statement, about, image, service} = this.state;
 		return(
 
-			<form encType='multipart/form-data' onSubmit={this.handleSubmit}>
+			<form encType='multipart/form-data' onSubmit={this.handleSubmit} >
 
 				<div className="row justify-content-center mt-5">
 					<div className="col-md-8">
@@ -85,6 +88,7 @@ class AboutForm extends Component{
 
 							/>
 							<label htmlFor="upload-image">Upload a Background Header Image</label>
+							<p><small>An image that will make your portfolio stand out</small></p>
 							<div className="input-group mb-3" id="upload-image">
 								<div className="custom-file">
 									<input 
@@ -110,6 +114,7 @@ class AboutForm extends Component{
 								onChange={this.handleChange}
 								name="about"
 							/>
+							
 							{this.props.portfolio ?(
 								<button className="btn btn-success form-control mt-3" type="submit" >Save Changes</button>
 							):(
