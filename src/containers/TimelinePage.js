@@ -15,7 +15,7 @@ const TimelinePage = (props)=>{
 			    key={post._id}
 			    dateText={post.date}
 			    style={{ color: '#5cb85c'}}
-			    dateInnerStyle={{ background: '#5cb85c' }}
+			    dateInnerStyle={{ background: '#fff', color:"#161716" }}
 			  >
 			    <h3 style={{color:'#fff'}} className="mb-3">{post.title}</h3>
 			    <p style={{color:'#fff'}}>

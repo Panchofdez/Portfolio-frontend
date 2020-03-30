@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {createComment, deleteComment} from '../store/actions/portfolios';
 import {addErrorMessage} from '../store/actions/errors';
 import { toast } from 'react-toastify';
+import Moment from 'react-moment';
 
 class CommentsPage extends Component{
 	constructor(props){
@@ -63,7 +64,13 @@ class CommentsPage extends Component{
 							)}
 								
 								<h5 className="card-title">{comment.author.name}</h5>
-								<p className="card-text"><small className="text-muted">{comment.createdAt}</small></p>
+								<p className="card-text">
+									<small className="text-muted">
+										<Moment format="DD/MM/YYYY">
+                							{comment.createdAt}
+            							</Moment>
+            						</small>
+            					</p>
 								<p className="card-text">{comment.text}</p>
 								
 							</div>

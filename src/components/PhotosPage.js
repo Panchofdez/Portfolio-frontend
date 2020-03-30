@@ -40,7 +40,7 @@ const PhotosPage =(props)=>{
 		<div className="container mt-5">
 			<div className="row justify-content-center mt-5">
 				<div className="col-10 text-justify">
-					<button className="btn btn-outline-light mb-3" onClick={()=> goBack()}>Go Back</button>
+					<button className="btn btn-outline-light mb-3 ml-2 float-right" onClick={()=> goBack()}>Go Back</button>
 					{match.url==='/myportfolio' && (
 						<React.Fragment>
 							<Link className="btn btn-outline-warning float-right" to={`/myportfolio/edit/collections/${id}`}><i className="fas fa-pen"></i></Link>

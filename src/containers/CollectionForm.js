@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {createCollection, editCollection} from '../store/actions/portfolios';
 import {addErrorMessage} from '../store/actions/errors';
- import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 

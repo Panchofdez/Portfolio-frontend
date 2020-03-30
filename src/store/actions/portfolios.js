@@ -59,6 +59,19 @@ export const getPortfolio = (id)=>{
 	}
 }
 
+export const endorse = (id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.post(`/portfolios/${id}/endorse`);
+			console.log(response);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
 export const createComment = (text, id)=>{
 	return async dispatch=>{
 		try{

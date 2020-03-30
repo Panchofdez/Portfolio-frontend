@@ -1,10 +1,14 @@
 import React from 'react';
-import {useRouteMatch, Link} from 'react-router-dom'
+import {useRouteMatch, Link} from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 
-const PortfolioNav = ({name, image, location, id})=>{
+const PortfolioNav = ({name, image, location, id, endorse})=>{
 	let match = useRouteMatch();
+	const notifySuccess=(message)=>{
+    	toast.success(message);
+    };
 	return (
 		<div className="nav justify-content-between container">
 
@@ -70,7 +74,21 @@ const PortfolioNav = ({name, image, location, id})=>{
 			)}
 			{match.path==='/portfolios/:id' ?(
 				<li>
-					<a className="btn btn-outline-light ml-2">Follow</a>
+					<a 
+						className="btn btn-outline-light ml-2" 
+						onClick={async()=>{		
+							try{
+								await endorse(id);
+								notifySuccess(`You are now endorsing ${name}!`);
+							}catch(err){
+								console.log(err);
+								return;
+							}			
+							
+						}}
+					>
+						Endorse
+					</a>
 				</li>
 			):(
 				<li>

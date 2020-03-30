@@ -42,8 +42,6 @@ class AuthForm extends Component{
 
 		const {email,password,name} = this.state;
 		const {type, buttonText} = this.props;
-		console.log(this.props.match.url);
-		
 		return(
 			<div className="row justify-content-center w-100 m-0 auth-container">
 				<div className="col-md-4 mt-5">

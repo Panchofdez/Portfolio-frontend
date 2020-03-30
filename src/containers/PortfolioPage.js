@@ -7,7 +7,7 @@ import CommentsPage from './CommentsPage';
 import TimelinePage from './TimelinePage';
 import ProfilePage from '../components/ProfilePage';
 import WorkPage from '../components/WorkPage';
-import {getMyPortfolio, getPortfolio, clearPortfolio} from '../store/actions/portfolios';
+import {getMyPortfolio, getPortfolio, clearPortfolio, endorse} from '../store/actions/portfolios';
 import Loading from '../components/Loading';
 import AboutForm from './AboutForm';
 import TimelineForm from './TimelineForm';
@@ -30,6 +30,16 @@ class PortfolioPage extends Component{
 	componentWillUnmount(){
 		this.props.clearPortfolio();
 	}
+	componentDidUpdate(prevProps){
+		if(prevProps.location.pathname !== this.props.location.pathname){
+			if(this.props.location.pathname.split("/")[1]==='myportfolio'){
+				this.fetchMyPortfolio();
+			}else{
+				this.fetchPortfolio();
+			}
+		}
+		
+	}
 	async fetchMyPortfolio(){
 		try{
 			await this.props.getMyPortfolio();
@@ -44,20 +54,21 @@ class PortfolioPage extends Component{
 	async fetchPortfolio(){
 		try{
 			const id = this.props.history.location.pathname.split('/')[2];
+			console.log(id);
 			await this.props.getPortfolio(id);
 		}catch(err){
 			return;
 		}
 	}
 	render(){
-		const {portfolio} = this.props;
+		const {portfolio, endorse} = this.props;
 		if(!portfolio){
 			return (<Loading/>);
 		}
 		const {url} = this.props.match;
 		return (
 			<div>
-				<PortfolioNav name={portfolio.name} image={portfolio.profileImage} id={portfolio._id} {...this.props}/>			
+				<PortfolioNav name={portfolio.name} image={portfolio.profileImage} id={portfolio._id} endorse={endorse} {...this.props}/>			
 				<Switch>				
 					<Route exact path={`${url}/about`}>
 						<AboutPage 
@@ -70,15 +81,9 @@ class PortfolioPage extends Component{
 					</Route>
 					<Route exact path={`${url}/profile`}>
 						<ProfilePage 
-							location={portfolio.location}
-							type={portfolio.type}
-							birthday={portfolio.birthday}
-							profileImage={portfolio.profileImage}
+							portfolio={portfolio}
 							url={url}
-							email={portfolio.email}
-							phone={portfolio.phone}
-							instagram={portfolio.instagram}
-							facebook={portfolio.facebook}
+							{...this.props}
 						/>
 					</Route>
 					<Route exact path={`${url}/timeline`}>
@@ -132,4 +137,4 @@ function mapStateToProps(state){
 	}
 }
 
-export default withRouter(connect(mapStateToProps, {getMyPortfolio, getPortfolio, clearPortfolio})(PortfolioPage));
+export default withRouter(connect(mapStateToProps, {getMyPortfolio, getPortfolio, clearPortfolio, endorse})(PortfolioPage));
