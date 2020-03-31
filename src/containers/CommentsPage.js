@@ -58,7 +58,7 @@ class CommentsPage extends Component{
 										}
 									}}
 								>
-									<i class="fas fa-trash"></i>
+									<i className="fas fa-trash"></i>
 								</button>
 
 							)}
@@ -97,7 +97,7 @@ class CommentsPage extends Component{
 											onChange={this.handleChange}
 											rows="3"
 										/>
-										<button className="btn btn-outline-success mb-3" type="Submit"><i class="fas fa-plus"></i> Post</button>
+										<button className="btn btn-outline-success mb-3" type="Submit"><i className="fas fa-plus"></i> Post</button>
 									</form>
 								</div>
 								<div className="row justify-content-center p-3">

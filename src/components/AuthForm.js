@@ -20,7 +20,8 @@ class AuthForm extends Component{
 		this.setState({[e.target.name]:e.target.value});
 	};
 	notify = ()=>{
-        toast.info(`Welcome ${this.state.name}! When you are ready, head over to MyPortfolio to create your portfolio`);
+        toast(`Welcome ${this.state.name}! When you are ready, head over to MyPortfolio to create your portfolio`, {autoClose:10000});
+        toast('You can support other fellow professionals by going to their portfolio and endorsing them',  {autoClose:10000});
     }
 	handleSubmit = async(e)=>{
 		e.preventDefault();

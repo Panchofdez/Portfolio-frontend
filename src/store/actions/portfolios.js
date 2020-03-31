@@ -63,7 +63,18 @@ export const endorse = (id)=>{
 	return async dispatch=>{
 		try{
 			const response = await axios.post(`/portfolios/${id}/endorse`);
-			console.log(response);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+export const stopEndorse = (id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.post(`/portfolios/${id}/stopendorse`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -89,7 +100,6 @@ export const deleteComment = (id, comment_id)=>{
 	return async dispatch=>{
 		try{
 			const response = await axios.delete(`/portfolios/${id}/comments/${comment_id}`);
-			console.log(response);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));

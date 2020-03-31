@@ -107,7 +107,10 @@ class CollectionForm extends Component{
 							{this.props.collection?(
 								<label htmlFor="upload-image">Add More Photos</label>
 							):(
-								<label htmlFor="upload-image">Upload Photos</label>
+								<React.Fragment>
+									<label htmlFor="upload-image">Upload Photos</label>
+									<p><small>You can add up to 5 photos at a time</small></p>
+								</React.Fragment>
 							)}
 							
 							<div className="input-group" id="upload-image">

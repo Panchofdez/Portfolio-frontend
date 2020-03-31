@@ -4,10 +4,13 @@ import { toast } from 'react-toastify';
 
 
 
-const PortfolioNav = ({name, image, location, id, endorse})=>{
+const PortfolioNav = ({name, image, location, id, endorse, stopEndorse,setEndorseState, endorseCheck})=>{
 	let match = useRouteMatch();
-	const notifySuccess=(message)=>{
-    	toast.success(message);
+	const notifySuccess = (message)=>{
+		toast.success(message);
+	}
+	const notifyWarning=(message)=>{
+    	toast.warning(message);
     };
 	return (
 		<div className="nav justify-content-between container">
@@ -16,7 +19,7 @@ const PortfolioNav = ({name, image, location, id, endorse})=>{
 				{name ? (
 					<li className="nav-item text-center">
 						<Link className="nav-link portfolio-name" to={`${match.url}/profile`}>
-							{image && (<img src={image} alt="" className="rounded-circle mr-3" id="myportfolio-profile-pic"/>)}
+							{image && (<img src={image} alt="" className="rounded-circle mr-3 myportfolio-profile-pic"/>)}
 							{name}
 						</Link>
 					</li>
@@ -72,14 +75,16 @@ const PortfolioNav = ({name, image, location, id, endorse})=>{
 					<Link className="btn btn-outline-warning" to={`${match.url}/edit/profile`}><i className="fas fa-pen"></i></Link>
 				</li>
 			)}
-			{match.path==='/portfolios/:id' ?(
+			{match.path==='/portfolios/:id' && endorseCheck && (
 				<li>
 					<a 
 						className="btn btn-outline-light ml-2" 
 						onClick={async()=>{		
 							try{
-								await endorse(id);
-								notifySuccess(`You are now endorsing ${name}!`);
+								await stopEndorse(id);
+								setEndorseState();
+								notifyWarning(`You have stopped endorsing ${name}`);
+
 							}catch(err){
 								console.log(err);
 								return;
@@ -87,10 +92,31 @@ const PortfolioNav = ({name, image, location, id, endorse})=>{
 							
 						}}
 					>
+						Endorsing
+					</a>
+				</li>
+			)}
+			{match.path==='/portfolios/:id' && !endorseCheck  &&(
+				<li>
+					<a 
+						className="btn btn-outline-light ml-2" 
+						onClick={async()=>{		
+							try{
+								await endorse(id);
+								setEndorseState();
+								notifySuccess(`You are now endorsing ${name}!`);
+							}catch(err){
+								console.log(err);
+								return;
+							}										
+						}}
+					>
 						Endorse
 					</a>
 				</li>
-			):(
+			)}
+
+			{match.path==='/myportfolio' &&(
 				<li>
 					<a className="btn btn-outline-light ml-2" data-toggle="modal" data-target="#shareModal">Share</a>
 				</li>

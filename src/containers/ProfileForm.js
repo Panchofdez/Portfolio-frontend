@@ -15,8 +15,8 @@ class ProfileForm extends Component{
 			name: this.props.portfolio ? this.props.portfolio.name : "Your name or name of your business",
 			email:this.props.portfolio? this.props.portfolio.email :"Your email",
 			phone: this.props.portfolio?this.props.portfolio.phone:"Your phone number",
-			facebook: this.props.portfolio?this.props.portfolio.facebook:"https://www.facebook.com/yourusername",
-			instagram: this.props.portfolio?this.props.portfolio.instagram:"https://www.instagram.com/yourusername",
+			facebook: this.props.portfolio?this.props.portfolio.facebook:"",
+			instagram: this.props.portfolio?this.props.portfolio.instagram:"",
 
 
 		}
@@ -166,6 +166,7 @@ class ProfileForm extends Component{
 							/>
 							<h3 className="my-3">Social Media</h3>
 							<label htmlFor="type">Facebook</label>
+							<p><small>Example: https://www.facebook.com/yourusername</small></p>
 							<input
 								className="form-control mb-3" 
 								id="facebook" 
@@ -175,6 +176,7 @@ class ProfileForm extends Component{
 								type="text"
 							/>
 							<label htmlFor="type">Instagram</label>
+							<p><small>Example: https://www.instagram.com/yourusername</small></p>
 							<input
 								className="form-control mb-3" 
 								id="instagram" 

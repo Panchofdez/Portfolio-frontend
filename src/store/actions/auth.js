@@ -42,3 +42,40 @@ export const signout = () =>{
 		dispatch(setCurrentUser({}));
 	}
 }
+
+export const getCurrentUser =()=>{
+	return async dispatch =>{
+		try{
+			const response = await axios.get('/user');
+			dispatch(setCurrentUser(response.data));
+		}catch(err){
+			dispatch(addErrorMessage(err.response.data.error));
+			throw new Error(err);
+		}
+	}
+}
+
+export const readNotification = (id)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.put(`/notifications/${id}`);
+			dispatch(setCurrentUser(response.data));
+		}catch(err){
+			dispatch(addErrorMessage(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+export const clearNotifications = ()=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.put('/notifications');
+			dispatch(setCurrentUser(response.data));
+		}catch(err){
+			dispatch(addErrorMessage(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+

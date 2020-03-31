@@ -8,10 +8,12 @@ import PortfolioList from './PortfolioList';
 import PortfolioForm from '../components/PortfolioForm';
 import PortfolioPage from './PortfolioPage'
 import ProfilePage from '../components/ProfilePage';
+import NotificationsPage from '../containers/NotificationsPage';
 import withAuth from '../hocs/withAuth';
 import {clearErrorMessage} from '../store/actions/errors';
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 toast.configure();
 
@@ -31,7 +33,7 @@ class Main extends Component{
     render(){
         return(
             <React.Fragment>
-                <Navbar/>
+                <Navbar {...this.props}/>
                 <Switch>
                     <Route exact path="/signup" render={(props)=><AuthForm type="signup" buttonText="Sign Up" {...props}/>}/>
                     <Route exact path="/signin" render={(props)=><AuthForm type="signin" buttonText="Sign In" {...props}/>}/>
@@ -41,7 +43,7 @@ class Main extends Component{
                     <Route path="/myportfolio/create" component={withAuth(PortfolioForm)}/>
                     <Route path="/myportfolio" component={withAuth(PortfolioPage)}/>
                     <Route path="/myaccount" component={withAuth(ProfilePage)}/>
-
+                    <Route exact path="/notifications" component={withAuth(NotificationsPage)}/>
                 </Switch>
             </React.Fragment>
         )
@@ -51,7 +53,8 @@ class Main extends Component{
 
 function mapStateToProps(state){
     return{
-        error:state.errors.error
+        error:state.errors.error,
+        currentUser:state.currentUser.user
     }
     
 }

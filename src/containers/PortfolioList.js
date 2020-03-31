@@ -13,7 +13,7 @@ class PortfolioList extends Component{
 		}
 	}
 	componentDidMount(){
-		this.getPortfolios();
+		this.getPortfolios();	
 	}
 	async getPortfolios(){
 		try{

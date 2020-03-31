@@ -6,8 +6,15 @@ const ProfilePage = (props)=>{
 	useEffect(() => {
 	  window.scrollTo(0, 0)
 	}, []);
+
 	const supporters = portfolio.supporters.map((s)=>(		
-		<Link to={s.portfolio? `/portfolios/${s.portfolio}` : `/portfolios/${portfolio._id}/profile`} className="btn btn-outline-light m-2" key={s._id}>{s.name}</Link>
+		<Link
+			to={s.portfolio? `/portfolios/${s.portfolio}` : `/portfolios/${portfolio._id}/profile`} 
+			className="btn btn-outline-light btn-lg m-2" 
+			key={s._id}
+		>
+		{s.profileImage &&	(<img src={s.profileImage} className="rounded-circle myportfolio-profile-pic" alt=""/>)}  {s.name}
+		</Link>
 	))
 	return (
 		<div className="container mt-5">
