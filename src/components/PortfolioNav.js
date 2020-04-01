@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 
 
-const PortfolioNav = ({name, image, location, id, endorse, stopEndorse,setEndorseState, endorseCheck})=>{
+const PortfolioNav = ({name, image, location, id, recommend, unRecommend,setRecommendationState, recommendationCheck})=>{
 	let match = useRouteMatch();
 	const notifySuccess = (message)=>{
 		toast.success(message);
@@ -16,74 +16,82 @@ const PortfolioNav = ({name, image, location, id, endorse, stopEndorse,setEndors
 		<div className="nav justify-content-between container">
 
 			<ul className="nav nav-tabs mt-3" id="portfolio-nav">
-				{name ? (
-					<li className="nav-item text-center">
-						<Link className="nav-link portfolio-name" to={`${match.url}/profile`}>
-							{image && (<img src={image} alt="" className="rounded-circle mr-3 myportfolio-profile-pic"/>)}
-							{name}
-						</Link>
-					</li>
-
-				): (
-					<li className="nav-item text-center">
-						<Link className="nav-link" to={`${match.url}/profile`}>Profile</Link>
-					</li>
-				)}
-				<li className="nav-item text-center">
-					<Link className="nav-link" to={`${match.url}/about`}>About</Link>
-				</li>
-				<li className="nav-item text-center">
-					<Link className="nav-link" to={`${match.url}/work`}>Work</Link>
-				</li>
-				<li className="nav-item text-center">
-					<Link className="nav-link" to={`${match.url}/timeline`}>Timeline</Link>
-				</li>
 				
-				<li className="nav-item text-center">
-					<Link className="nav-link" to={`${match.url}/comments`}>Comments</Link>
-				</li>
+				<div>
+					{name ? (
+						<li className="nav-item text-center">
+							<Link className="nav-link portfolio-name" to={`${match.url}/profile`}>
+								{image && (<img src={image} alt="" className="rounded-circle mr-3 myportfolio-profile-pic"/>)}
+								{name}
+							</Link>
+						</li>
+
+					): (
+						<li className="nav-item text-center">
+							<Link className="nav-link" to={`${match.url}/profile`}>Profile</Link>
+						</li>
+					)}
+				</div>
+				<div style={{display:'flex', flexDirection:'row'}}>
+					<li className="nav-item text-center">
+						<Link className="nav-link" to={`${match.url}/about`}>About</Link>
+					</li>
+					<li className="nav-item text-center">
+						<Link className="nav-link" to={`${match.url}/work`}>Work</Link>
+					</li>
+					<li className="nav-item text-center">
+						<Link className="nav-link" to={`${match.url}/timeline`}>Timeline</Link>
+					</li>
+					
+					<li className="nav-item text-center">
+						<Link className="nav-link" to={`${match.url}/comments`}>Comments</Link>
+					</li>
+					<li className="nav-item text-center">
+						<Link className="nav-link" to={`${match.url}/recommendations`}>Recommendations</Link>
+					</li>
+				</div>
 				
 			</ul>
 			<ul className="nav mt-3">
 			{location.pathname==='/myportfolio' && (
 				<li>
-					<Link className="btn btn-outline-warning" to={`${match.url}/edit/about`}><i className="fas fa-pen"></i></Link>
+					<Link className="btn btn-outline-warning ml-2" to={`${match.url}/edit/about`}><i className="fas fa-pen"></i></Link>
 				</li>
 			)} 
 			{location.pathname==='/myportfolio/about' && (
 				<li>
-					<Link className="btn btn-outline-warning" to={`${match.url}/edit/about`}><i className="fas fa-pen"></i></Link>
+					<Link className="btn btn-outline-warning ml-2" to={`${match.url}/edit/about`}><i className="fas fa-pen"></i></Link>
 				</li>
 			)} 
 			{location.pathname==='/myportfolio/work' && (
 				<React.Fragment>
 					<li>
-						<Link className="btn btn-outline-success mx-2" to={`${match.url}/edit/collections`}><i className="fas fa-plus"></i> Collection</Link>
+						<Link className="btn btn-outline-success mx-2" to={`${match.url}/edit/collections`}><i className="fas fa-plus"></i> Collections</Link>
 					</li>
 					<li>
-						<Link className="btn btn-outline-success" to={`${match.url}/edit/videos`}><i className="fas fa-plus"></i> Video</Link>
+						<Link className="btn btn-outline-success" to={`${match.url}/edit/videos`}><i className="fas fa-plus"></i> Videos</Link>
 					</li>
 				</React.Fragment>
 			)}
 			{location.pathname==='/myportfolio/timeline' && (
 				<li>
-					<Link className="btn btn-outline-success" to={`${match.url}/edit/timeline`}><i className="fas fa-plus"></i> Post</Link>
+					<Link className="btn btn-outline-success ml-2" to={`${match.url}/edit/timeline`}><i className="fas fa-plus"></i> Post</Link>
 				</li>
 			)}
 			{location.pathname==='/myportfolio/profile' && (
 				<li>
-					<Link className="btn btn-outline-warning" to={`${match.url}/edit/profile`}><i className="fas fa-pen"></i></Link>
+					<Link className="btn btn-outline-warning ml-2" to={`${match.url}/edit/profile`}><i className="fas fa-pen"></i></Link>
 				</li>
 			)}
-			{match.path==='/portfolios/:id' && endorseCheck && (
+			{match.path==='/portfolios/:id' && recommendationCheck && (
 				<li>
-					<a 
-						className="btn btn-outline-light ml-2" 
+					<button 
+						className="btn btn-outline-success ml-2" 
 						onClick={async()=>{		
 							try{
-								await stopEndorse(id);
-								setEndorseState();
-								notifyWarning(`You have stopped endorsing ${name}`);
+								await unRecommend(id);
+								setRecommendationState();
+								notifyWarning(`You have stopped recommending ${name}`);
 
 							}catch(err){
 								console.log(err);
@@ -92,27 +100,27 @@ const PortfolioNav = ({name, image, location, id, endorse, stopEndorse,setEndors
 							
 						}}
 					>
-						Endorsing
-					</a>
+						Recommending
+					</button>
 				</li>
 			)}
-			{match.path==='/portfolios/:id' && !endorseCheck  &&(
+			{match.path==='/portfolios/:id' && !recommendationCheck  &&(
 				<li>
-					<a 
-						className="btn btn-outline-light ml-2" 
+					<button 
+						className="btn btn-outline-success ml-2" 
 						onClick={async()=>{		
 							try{
-								await endorse(id);
-								setEndorseState();
-								notifySuccess(`You are now endorsing ${name}!`);
+								await recommend(id);
+								setRecommendationState();
+								notifySuccess(`You are now recommending ${name}!`);
 							}catch(err){
 								console.log(err);
 								return;
 							}										
 						}}
 					>
-						Endorse
-					</a>
+						Recommend
+					</button>
 				</li>
 			)}
 

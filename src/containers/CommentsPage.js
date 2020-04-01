@@ -21,6 +21,9 @@ class CommentsPage extends Component{
 	notifySuccess=()=>{
     	toast.success("Successfully posted comment", {autoClose:2000});   	
     };
+    notifyDelete=(msg)=>{
+    	toast.warning(msg, {autoClose:2000});
+    }
 	handleSubmit=async(e)=>{
 		e.preventDefault();
 		if(!this.state.text){
@@ -52,6 +55,7 @@ class CommentsPage extends Component{
 									onClick={async()=>{
 										try{
 											await this.props.deleteComment(this.props.portfolio._id, comment._id);
+											this.notifyDelete("Deleted comment")
 										}catch(err){
 											console.log(err);
 											return;
@@ -100,7 +104,7 @@ class CommentsPage extends Component{
 										<button className="btn btn-outline-success mb-3" type="Submit"><i className="fas fa-plus"></i> Post</button>
 									</form>
 								</div>
-								<div className="row justify-content-center p-3">
+								<div className="row justify-content-center p-3" id="comments">
 									{comments}
 								</div>
 							</div>

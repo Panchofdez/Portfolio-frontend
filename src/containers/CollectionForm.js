@@ -12,6 +12,7 @@ class CollectionForm extends Component{
 		this.state={
 			title:this.props.collection? this.props.collection.title: "",
 			description:this.props.collection? this.props.collection.description:"",
+			id:1,
 			photos:null,
 			collections:[]
 		}	
@@ -50,12 +51,13 @@ class CollectionForm extends Component{
    				this.notifySuccess("Successfully Saved Changes");
    			}else{
    				await this.props.createCollection(data);
-	   			const newArr = this.state.collections.concat({title:this.state.title});
+	   			const newArr = this.state.collections.concat({title:this.state.title, id:this.state.id});
 	   			this.setState({
 	   				title:"",
 	   				description:"",
 	   				photos:null,
-	   				collections:newArr
+	   				collections:newArr,
+	   				id:this.state.id +1
 	   			});
 	   			this.notifySuccess("Successfully Added Collection")
    			}  			
@@ -65,18 +67,17 @@ class CollectionForm extends Component{
    		
 	}
 	render(){
-		const {title, description,photos,collections}=this.state;
+		const {title, description,photos,collections, id}=this.state;
 		const collectionsAdded = collections.map((collection)=>(
-			<div key={collection.title} className="alert alert-success">Added {collection.title}</div>
+			<div key={collection.id} className="alert alert-success">Added {collection.title}</div>
 		))
 		let photosArr =[];
 		if(photos){
 			for(let x =0;x<photos.length; x++){
-				console.log(photos[x]);
 				photosArr.push(photos[x].name)
 			};
 		}
-		const uploadedPhotos = photosArr.map((photo)=><li className="ml-3">{photo}</li>)
+		const uploadedPhotos = photosArr.map((photo)=><li key={photo} className="ml-3">{photo}</li>)
 		return (
 			<div className="row justify-content-center mt-5">
 				<div className="col-md-8">

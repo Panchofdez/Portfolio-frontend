@@ -4,12 +4,16 @@ const AboutPage = ({about, statement, image, url}) =>{
 	useEffect(() => {
 	  window.scrollTo(0, 0)
 	}, []);
+	let style =""
+	if(image){
+		style=`url(${image}) center center / cover no-repeat`
+	}
 	return (
 		<div>
 			<div 
 				className="container-fluid row justify-content-center align-items-center p-5 my-3 mx-0"
 				style={{
-					background:`url(${image}) center center / cover no-repeat`,
+					background: style,
 					minHeight:'600px'
 				}}
 			>				

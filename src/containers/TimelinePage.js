@@ -3,12 +3,16 @@ import {connect} from 'react-redux';
 import { Timeline, TimelineItem }  from 'vertical-timeline-component-for-react';
 import {Link} from 'react-router-dom';
 import {deleteTimelinePost} from '../store/actions/portfolios';
+import {toast} from 'react-toastify';
 
 
 const TimelinePage = (props)=>{
 	useEffect(() => {
 	  window.scrollTo(0, 0)
 	}, []);
+	const notifyDelete=(msg)=>{
+    	toast.warning(msg, {autoClose:2000});
+    }
 	const timelinePosts = props.timeline.map(post=>{
 		return (
 			<TimelineItem
@@ -29,6 +33,7 @@ const TimelinePage = (props)=>{
 							onClick={async()=>{
 								try{
 									await props.deleteTimelinePost(post._id);
+									notifyDelete('Deleted post from your timeline');
 									props.history.push('/myportfolio/timeline');
 								}catch(err){
 									return;

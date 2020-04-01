@@ -59,7 +59,9 @@ export const readNotification = (id)=>{
 	return async dispatch=>{
 		try{
 			const response = await axios.put(`/notifications/${id}`);
+			console.log(response.data);
 			dispatch(setCurrentUser(response.data));
+			return response.data;
 		}catch(err){
 			dispatch(addErrorMessage(err.response.data.error));
 			throw Error(err);

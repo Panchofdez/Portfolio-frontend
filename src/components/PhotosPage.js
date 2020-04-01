@@ -3,9 +3,13 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'; 
 import {deleteCollection,deleteCollectionPhoto} from '../store/actions/portfolios';
 import {addErrorMessage} from '../store/actions/errors';
+import {toast} from 'react-toastify';
 
 
 const PhotosPage =(props)=>{
+	const notifyDelete=(msg)=>{
+    	toast.warning(msg, {autoClose:2000});
+    }
 	const {photos,title,description,id, goBack, deleteCollectionPhoto, deleteCollection, addErrorMessage, match}= props;
 	const collectionPhotos = photos.map(photo=>(
 			<div key={photo.imageId} className="row justify-content-center my-3">
@@ -23,6 +27,7 @@ const PhotosPage =(props)=>{
 								}
 								try{
 									await deleteCollectionPhoto(id,photo.imageId);
+									notifyDelete('Deleted photo from your collection');
 									goBack();
 								}catch(err){
 									return;
@@ -49,6 +54,7 @@ const PhotosPage =(props)=>{
 								onClick={async()=>{
 									try{
 										await deleteCollection(id);
+										notifyDelete('Deleted entire collection')
 										goBack();
 									}catch(err){
 										return;

@@ -17,14 +17,14 @@ export default function withPortfolioCheck(WrappedComponent){
 				}
 			}
 			checkPortfolioOwnership();
-
-		};
-		render(){
-			console.log(this.props.portfolio);
+			console.log(this.props.portfolio)
 			if(this.props.portfolio){
 				this.props.history.push('/myportfolio');
 
 			}
+
+		};
+		render(){
 			return <WrappedComponent {...this.props}/>
 		}
 	}

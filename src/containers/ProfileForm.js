@@ -74,7 +74,6 @@ class ProfileForm extends Component{
 	}
 
 	render(){
-		console.log(this.props.portfolio);
 		const {image, location,birthday,type, name, email, phone, instagram, facebook}=this.state;
 		return (
 			<form encType='multipart/form-data' onSubmit={this.handleSubmit}>

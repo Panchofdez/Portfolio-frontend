@@ -13,16 +13,9 @@ class Navbar extends Component{
 			this.fetchCurrentUser();
 		}
 	}
-	componentDidUpdate(prevProps){
-		if(prevProps.currentUser!==this.props.currentUser && this.props.currentUser.notifications){
-			this.props.currentUser.notifications.forEach((n)=>this.notification(n.text));
-		}
-	}
 	fetchCurrentUser = async()=>{
         try{
             await this.props.getCurrentUser();
-            let notifications=[];
-            notifications.forEach((n)=>this.notification(n.text));
         }catch(err){
             console.log(err);
             return;
@@ -31,8 +24,17 @@ class Navbar extends Component{
     notification=(message)=>{
         toast(message);
     };
+    notificationPress=async(id, portfolio)=>{
+    	try{
+    		console.log(id)
+			await this.props.readNotification(id);
+			this.props.history.push(`/portfolios/${portfolio}`);
+		}catch(err){
+			return;
+		}
+    }
 	render(){
-		const {currentUser, isAuthenticated,signout, readNotification, history, clearNotifications} = this.props;
+		const {currentUser, isAuthenticated,signout, history, clearNotifications} = this.props;
 		let notifications=[];
 		if(currentUser.notifications){
 			notifications = currentUser.notifications.map((n)=>{
@@ -41,14 +43,7 @@ class Navbar extends Component{
 						key={n._id}
 						className="dropdown-item border-bottom card p-0" 
 						style={{fontSize:'13px'}}
-						onClick={async()=>{
-							try{
-								await readNotification(n._id);
-								history.push(`/portfolios/${n.portfolio}`);
-							}catch(err){
-								return;
-							}
-						}}
+						onClick={()=>this.notificationPress(n._id,n.portfolio)}
 					>
 						<div className="row no-gutters p-0 notification-container">
 							<div className="col-2">
@@ -63,6 +58,11 @@ class Navbar extends Component{
 				)
 			})
 		}
+		let color = '';
+		if(notifications.length>0){
+			color='red'
+		}
+
 		return(
 			<nav className="navbar navbar-expand navbar-light bg-white">
 				<div className="container ">
@@ -88,10 +88,18 @@ class Navbar extends Component{
 									<Link to="/portfolios" className="nav-link">Home</Link>
 								</li>
 								<li className="nav-item dropdown mx-3">
-									<a className="nav-link" id="notifications" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<a 
+										style={{color}}
+										className="nav-link" 
+										id="notifications" 
+										role="button" 
+										data-toggle="dropdown" 
+										aria-haspopup="true" 
+										aria-expanded="false"
+									>
 										<i className="far fa-bell"></i> {notifications.length}
 									</a>
-									<div className="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdown">						
+									<div className="dropdown-menu dropdown-menu-sm-right dropdown-menu-left py-0" aria-labelledby="navbarDropdown">						
 										{notifications}
 										{notifications.length>0 ? (
 											<button 

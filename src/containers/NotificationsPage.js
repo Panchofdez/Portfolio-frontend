@@ -5,6 +5,7 @@ import axios from 'axios';
 import Moment from 'react-moment';
 
 class NotificationsPage extends Component{
+	_isMounted=false;
 	constructor(props){
 		super(props);
 		this.state={
@@ -12,13 +13,19 @@ class NotificationsPage extends Component{
 		}
 	}
 	componentDidMount(){
+		this._isMounted=true
 		this.fetchNotifications();
+	}
+	componentWillUnmount(){
+		this._isMounted=false;
 	}
 	fetchNotifications=async()=>{
 		try{
 			const response = await axios.get('/notifications');
 			console.log(response.data);
-			this.setState({notifications:response.data})
+			if(this._isMounted===true){
+				this.setState({notifications:response.data})
+			}
 		}catch(err){
 			this.props.addErrorMessage(err);
 			return;
@@ -28,7 +35,9 @@ class NotificationsPage extends Component{
 		try{
 			const response = await axios.delete(`/notifications/${id}`);
 			console.log(response.data);
-			this.setState({notifications:response.data});
+			if(this._isMounted===true){
+				this.setState({notifications:response.data});
+			}			
 		}catch(err){
 			this.props.addErrorMessage(err);
 			return;

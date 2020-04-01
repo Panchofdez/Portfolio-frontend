@@ -59,10 +59,10 @@ export const getPortfolio = (id)=>{
 	}
 }
 
-export const endorse = (id)=>{
+export const recommend = (id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.post(`/portfolios/${id}/endorse`);
+			const response = await axios.post(`/portfolios/${id}/recommend`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -71,10 +71,10 @@ export const endorse = (id)=>{
 	}
 }
 
-export const stopEndorse = (id)=>{
+export const unRecommend = (id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.post(`/portfolios/${id}/stopendorse`);
+			const response = await axios.post(`/portfolios/${id}/unrecommend`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));

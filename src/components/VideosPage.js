@@ -2,9 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {deleteVideo} from '../store/actions/portfolios';
+import {toast} from 'react-toastify';
+
 
 
 const VideosPage = ({videos, deleteVideo, history, match})=>{
+	const notifyDelete=(msg)=>{
+    	toast.warning(msg, {autoClose:2000});
+    }
 	const videosArr =videos.map(video=>{		
 		return (
 			<div key={video._id} className="row container-fluid px-0 my-5">
@@ -24,6 +29,7 @@ const VideosPage = ({videos, deleteVideo, history, match})=>{
 								onClick={async()=>{
 									try{
 										await deleteVideo(video._id);
+										notifyDelete('Deleted Video');
 										history.push('/myportfolio/work');
 									}catch(err){
 										return;

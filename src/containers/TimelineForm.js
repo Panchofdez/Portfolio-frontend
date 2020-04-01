@@ -10,7 +10,8 @@ class TimelineForm extends Component{
 			timeline:[],
 			title:this.props.post ? this.props.post.title : "",
 			date: this.props.post ? this.props.post.date : "",
-			text: this.props.post ? this.props.post.text : ""
+			text: this.props.post ? this.props.post.text : "",
+			id:1
 		}
 	};
 	componentDidMount() {
@@ -44,8 +45,8 @@ class TimelineForm extends Component{
 					}
 
 				});
-				let timelineArr= this.state.timeline.concat({title:this.state.title,date:this.state.date,text:this.state.text});
-				this.setState({timeline:timelineArr, title:"", date:"", text:""});
+				let timelineArr= this.state.timeline.concat({title:this.state.title,date:this.state.date,text:this.state.text, id:this.state.id});
+				this.setState({timeline:timelineArr, title:"", date:"", text:"", id:this.state.id+1});
 				this.notifySuccess('Successfully Added Post To Timeline');
 			}	
 			
@@ -57,7 +58,7 @@ class TimelineForm extends Component{
 	render(){
 		const timelinePosts = this.state.timeline.map(post=>{
 			return (
-				<div key={post.title} className="card mb-2">
+				<div key={post.id} className="card mb-2">
 					<div className="card-body">
 						<h5 className="card-title">{post.title}</h5>
 						<h6 className="card-subtitle">{post.date}</h6>
