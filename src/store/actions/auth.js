@@ -19,7 +19,7 @@ export const setAuthorizationToken = (token)=>{
 export const authenticateUser = (type,formData) =>{
 	return async dispatch =>{
 		try{
-			const response = await axios.post(`/${type}`,formData);
+			const response = await axios.post(`/api/${type}`,formData);
 			const {token,...user} = response.data;
 			localStorage.setItem('jwtToken', token);			
 			setAuthorizationToken(token);
@@ -46,7 +46,7 @@ export const signout = () =>{
 export const getCurrentUser =()=>{
 	return async dispatch =>{
 		try{
-			const response = await axios.get('/user');
+			const response = await axios.get('/api/user');
 			dispatch(setCurrentUser(response.data));
 		}catch(err){
 			dispatch(addErrorMessage(err.response.data.error));
@@ -58,7 +58,7 @@ export const getCurrentUser =()=>{
 export const readNotification = (id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.put(`/notifications/${id}`);
+			const response = await axios.put(`/api/notifications/${id}`);
 			console.log(response.data);
 			dispatch(setCurrentUser(response.data));
 			return response.data;
@@ -72,7 +72,7 @@ export const readNotification = (id)=>{
 export const clearNotifications = ()=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.put('/notifications');
+			const response = await axios.put('/api/notifications');
 			dispatch(setCurrentUser(response.data));
 		}catch(err){
 			dispatch(addErrorMessage(err.response.data.error));

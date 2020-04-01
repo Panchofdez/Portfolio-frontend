@@ -21,7 +21,7 @@ class NotificationsPage extends Component{
 	}
 	fetchNotifications=async()=>{
 		try{
-			const response = await axios.get('/notifications');
+			const response = await axios.get('/api/notifications');
 			console.log(response.data);
 			if(this._isMounted===true){
 				this.setState({notifications:response.data})
@@ -33,7 +33,7 @@ class NotificationsPage extends Component{
 	};
 	deleteNotification= async(id)=>{
 		try{
-			const response = await axios.delete(`/notifications/${id}`);
+			const response = await axios.delete(`/api/notifications/${id}`);
 			console.log(response.data);
 			if(this._isMounted===true){
 				this.setState({notifications:response.data});
