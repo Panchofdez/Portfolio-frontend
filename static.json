@@ -5,7 +5,7 @@
   },
   "proxies": {
     "/api/": {
-      "origin": "https://portfolio-app-pf.herokuapp.com/api"
+      "origin": "${API_URL}"
     }
   }
 }
