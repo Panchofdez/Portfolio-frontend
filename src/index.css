@@ -198,7 +198,6 @@ body {
   min-height: 100vh;
   background-color: #161716;
   color:white;
-  padding-bottom: 50px;
 }
 
 .navbar{
@@ -206,11 +205,13 @@ body {
 }
 
 .landing{
-  min-height: 100vh;
+  min-height: 90vh;
   min-width: 100%;
   margin:0;
   padding:0;
   background: url('/landing.jpg') center center / cover no-repeat;
+  display:flex;
+  align-items: center;
   
  
 }
@@ -384,11 +385,19 @@ h3:hover .service-btn{
 
 }
 
+.signup-btn{
+  font-weight: bold;
+}
 
-
-
+.title{
+  font-weight: bold;
+}
 
 #comments{
   display: flex;
   flex-direction: column-reverse;
+}
+
+.fa-camera, .fa-video, .fa-history, .fa-medal, .fa-hands-helping, .fa-comments{
+  font-size: 60px;
 }

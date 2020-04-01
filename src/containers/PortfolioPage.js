@@ -79,13 +79,13 @@ class PortfolioPage extends Component{
 		this.setState({recommending:!this.state.recommending});
 	}
 	render(){
-		const {portfolio, recommend, unRecommend, user, addErrorMessage} = this.props;
+		const {portfolio, recommend, unRecommend, addErrorMessage} = this.props;
 		const {url} = this.props.match;
 		if(!portfolio){
 			return (<Loading/>);
 		}else{
 			return (
-				<div>
+				<div className="pb-5">
 					<PortfolioNav 
 						name={portfolio.name} 
 						image={portfolio.profileImage} 

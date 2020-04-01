@@ -80,10 +80,10 @@ class NotificationsPage extends Component{
 			</div>
 		));
 		return (
-			<div className="container mt-5">
+			<div className="container mt-5 pb-5">
 				<div className="row justify-content-center">
 					<div className="col-md-10">
-						<h2 className="my-3">Notifications</h2>
+						<h2 className="my-3">Your Notifications</h2>
 						<div className="card border border-white bg-transparent p-0">
 							<div className="card-body p-3">
 								<div className="row justify-content-center p-3">

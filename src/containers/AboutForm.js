@@ -57,7 +57,7 @@ class AboutForm extends Component{
   		
 	}
 	render(){
-		const { statement, about, image, service} = this.state;
+		const { statement, about, image} = this.state;
 		return(
 
 			<form encType='multipart/form-data' onSubmit={this.handleSubmit} >

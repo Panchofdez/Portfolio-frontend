@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react'; 
-import {Link} from 'react-router-dom'
 
 const ProfilePage = (props)=>{
-	const {portfolio, url} = props;
+	const {portfolio} = props;
 	useEffect(() => {
 	  window.scrollTo(0, 0)
 	}, []);

@@ -110,6 +110,15 @@ class VideosForm extends Component{
 							</div>
 					</form>						
 					{videosAdded}
+					{this.props.location.pathname.split("/")[2]!=='create' && (
+						<button 
+							className="btn btn-success form-control my-3" 
+							type="submit"
+							onClick={()=>this.props.history.push('/myportfolio/work')}
+						>
+							Go Back
+						</button>
+					)}
 				</div>
 			</div>
 

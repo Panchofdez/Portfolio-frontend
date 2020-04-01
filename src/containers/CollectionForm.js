@@ -67,7 +67,7 @@ class CollectionForm extends Component{
    		
 	}
 	render(){
-		const {title, description,photos,collections, id}=this.state;
+		const {title, description,photos,collections}=this.state;
 		const collectionsAdded = collections.map((collection)=>(
 			<div key={collection.id} className="alert alert-success">Added {collection.title}</div>
 		))
@@ -77,6 +77,7 @@ class CollectionForm extends Component{
 				photosArr.push(photos[x].name)
 			};
 		}
+		console.log(this.props.location.pathname)
 		const uploadedPhotos = photosArr.map((photo)=><li key={photo} className="ml-3">{photo}</li>)
 		return (
 			<div className="row justify-content-center mt-5">
@@ -138,9 +139,18 @@ class CollectionForm extends Component{
 						):(
 							<button className="btn btn-outline-success my-3" type="submit">Add Collection</button>
 						)}
-						
+
 					</form>
 					{collectionsAdded}
+					{this.props.location.pathname.split("/")[2]!=='create' && (
+						<button 
+							className="btn btn-success form-control my-3" 
+							type="submit"
+							onClick={()=>this.props.history.push('/myportfolio/work')}
+						>
+							Go Back
+						</button>
+					)}
 				</div>
 			</div>
 

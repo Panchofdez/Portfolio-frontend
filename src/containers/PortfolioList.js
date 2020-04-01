@@ -45,7 +45,7 @@ class PortfolioList extends Component{
 			<PortfolioCard {...p} key={p._id} history={this.props.history}/>
 		));
 		return(
-			<div>
+			<div className="pb-5">
 				<div id="home-header" className="container-fluid">
 					<div className="row justify-content-center">
 						<div className="col-md-8 text-center mt-5">
