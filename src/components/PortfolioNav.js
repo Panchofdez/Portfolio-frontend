@@ -142,7 +142,7 @@ const PortfolioNav = ({name, image, location, id, recommend, unRecommend,setReco
 							</button>
 						</div>
 						<div className="modal-body">
-							<p>{`localhost:3000/portfolios/${id}`}</p>
+							<p>{`https://portfolio-app-frontend-pf.herokuapp.com//${id}`}</p>
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
