@@ -8,7 +8,4 @@
       "origin": "${API_URL}"
     }
   }
-},
-{
-  "max_body_size": "30m",
 }
