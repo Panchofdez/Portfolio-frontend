@@ -78,7 +78,7 @@ class ProfileForm extends Component{
 		return (
 			<form encType='multipart/form-data' onSubmit={this.handleSubmit}>
 				<div className="row justify-content-center mt-5">
-					<div className="col-md-8">
+					<div className="col-md-8 col-10">
 						{this.props.portfolio ?(
 							<h1>Edit Your Profile Page</h1>
 						):(

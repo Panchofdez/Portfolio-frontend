@@ -401,3 +401,7 @@ h3:hover .service-btn{
 .fa-camera, .fa-video, .fa-history, .fa-medal, .fa-hands-helping, .fa-comments{
   font-size: 60px;
 }
+
+img{
+  object-fit:cover;
+}

@@ -81,7 +81,7 @@ class CollectionForm extends Component{
 		const uploadedPhotos = photosArr.map((photo)=><li key={photo} className="ml-3">{photo}</li>)
 		return (
 			<div className="row justify-content-center mt-5">
-				<div className="col-md-8">
+				<div className="col-md-8 col-10">
 					{this.props.collection ? (
 						<h2>Edit Your Collection</h2>
 					):(

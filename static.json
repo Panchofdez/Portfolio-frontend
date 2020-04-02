@@ -1,6 +1,6 @@
 {
   "root": "build/",
-  "max_body_size": "10m",
+  "max_body_size": "100m",
   "routes": {
     "/**": "index.html"
   },

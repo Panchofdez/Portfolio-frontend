@@ -45,7 +45,7 @@ class AuthForm extends Component{
 		const {type, buttonText} = this.props;
 		return(
 			<div className="row justify-content-center w-100 m-0 auth-container">
-				<div className="col-md-4 mt-5">
+				<div className="col-md-4 col-10 mt-5">
 					<form onSubmit={this.handleSubmit}>
 						{this.props.type==="signup" &&( 
 							<div className="form-group">
@@ -86,10 +86,6 @@ class AuthForm extends Component{
 								name="password"
 								className="form-control"
 							/>
-						</div>
-						<div className="form-group form-check">
-							<input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-							<label className="form-check-label" htmlFor="exampleCheck1">Remember Me</label>
 						</div>
 						<button type="submit" className="btn btn-outline-success btn-block my-3" >{buttonText}</button>
 					</form>
