@@ -1,5 +1,6 @@
 {
   "root": "build/",
+  "max_body_size": "10m",
   "routes": {
     "/**": "index.html"
   },
@@ -8,7 +9,4 @@
       "origin": "${API_URL}"
     }
   }
-}
-{
-  "max_body_size": "10m"
 }
