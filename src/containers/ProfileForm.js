@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {createProfilePage, editProfilePage} from '../store/actions/portfolios';
 import {addErrorMessage} from '../store/actions/errors';
 import { toast } from 'react-toastify';
+import axios from 'axios';
+import {setTokenHeader} from '../services/apiCall';
 
 class ProfileForm extends Component{
 	constructor(props){
@@ -17,6 +19,8 @@ class ProfileForm extends Component{
 			phone: this.props.portfolio?this.props.portfolio.phone:"Your phone number",
 			facebook: this.props.portfolio?this.props.portfolio.facebook:"",
 			instagram: this.props.portfolio?this.props.portfolio.instagram:"",
+			profileImage:null,
+			profileImageId:null
 
 
 		}
@@ -53,8 +57,17 @@ class ProfileForm extends Component{
   		formData.append('facebook', this.state.facebook);
   		formData.append('instagram', this.state.instagram);
   		if(this.state.image){
-  			formData.append('image', this.state.image);
-  			this.notifyUpload();
+  			setTokenHeader();
+    		const data = new FormData();
+	    	data.append('file', this.state.image);
+	    	data.append('upload_preset', 'panchofdez')
+	    	const res = await axios.post('https://api.cloudinary.com/v1_1/fdez/image/upload', data);
+	    	const token =localStorage.jwtToken;
+	    	setTokenHeader(token)
+	  		formData.append('profileImage', res.data.secure_url)
+	  		formData.append('profileImageId', res.data.public_id)
+	  		this.notifyUpload();
+  			
   		}
 		try{
 			if(this.props.portfolio){

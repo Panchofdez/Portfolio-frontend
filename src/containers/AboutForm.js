@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {createAboutPage, editAboutPage} from '../store/actions/portfolios';
 import { toast } from 'react-toastify';
+import axios from 'axios';
+import {setTokenHeader} from '../services/apiCall';
 
 class AboutForm extends Component{
 	constructor(props){
@@ -34,8 +36,16 @@ class AboutForm extends Component{
   		formData.append('statement', this.state.statement);
   		formData.append('about',this.state.about);
   		if(this.state.image){
-  			formData.append('image', this.state.image);
-  			this.notifyUpload();
+  			setTokenHeader();
+    		const data = new FormData();
+	    	data.append('file', this.state.image);
+	    	data.append('upload_preset', 'panchofdez')
+	    	const res = await axios.post('https://api.cloudinary.com/v1_1/fdez/image/upload', data);
+	    	const token =localStorage.jwtToken;
+	    	setTokenHeader(token)
+	  		formData.append('headerImage', res.data.secure_url)
+	  		formData.append('headerImageId', res.data.public_id)
+	  		this.notifyUpload();
   		}
   		
   		try{
