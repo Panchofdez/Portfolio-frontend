@@ -18,7 +18,7 @@ const VideosPage = ({videos, deleteVideo, history, match})=>{
 						<iframe className="rounded" title={video._id} width="560" height="315" src={`https://www.youtube.com/embed/${video.link}?rel=0`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 					</div>
 				</div>
-				<div className="col-md-4 mt-3 text-justify align-self-center pr-0">
+				<div className="col-md-4 mt-3 text-center align-self-center pr-0">
 					<h3>{video.title}</h3>
 					<p>{video.description}</p>
 					{match.url==='/myportfolio' && (
