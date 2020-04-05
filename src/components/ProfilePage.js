@@ -16,7 +16,7 @@ const ProfilePage = (props)=>{
 						</div>
 						<div className="col-md-5 justify-content-center">
 							
-							<div className="text-center mx-auto border px-3 py-auto h-100">
+							<div className="text-center mx-auto border pt-5 p-3  h-100">
 								<h5 className="my-3">{portfolio.type}</h5>
 								{portfolio.birthday && <h5 className="my-3">Born in {portfolio.birthday}</h5>}
 								<h5 className="my-3">{portfolio.location}</h5>						
