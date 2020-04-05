@@ -10,7 +10,6 @@ import withPortfolioCheck from '../hocs/withPortfolioCheck';
 
 const PortfolioForm =(props)=>{
 	let {path} = useRouteMatch();
-	
 	return(
 		<div className='container'>
 			<Switch>				
@@ -22,7 +21,7 @@ const PortfolioForm =(props)=>{
 					<TimelineForm {...props}/>
 				</Route>
 				<Route exact path={`${path}/work`}>
-					<WorkForm {...props}/>
+					<WorkForm {...props} path={path}/>
 				</Route>
 				<Route path={path} component={withPortfolioCheck(ProfileForm)}/>
 				

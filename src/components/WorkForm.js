@@ -6,6 +6,7 @@ const WorkForm =(props)=>{
 	useEffect(() => {
 	  window.scrollTo(0, 0)
 	}, []);
+	console.log(props.location.pathname);
 	return (
 		<div>
 			<div className="row justify-content-center mt-5">
@@ -28,7 +29,7 @@ const WorkForm =(props)=>{
 			<VideosForm {...props}/>
 			<div className="row justify-content-center mt-5">
 				<div className="col-md-8 col-10">
-					{props.location.pathname==='/myportfolio/create' ? (
+					{props.location.pathname==='/myportfolio/create/work' ? (
 						<button className="btn btn-success form-control" onClick={()=>props.history.push('/myportfolio/create/timeline')}>Next</button>
 					):(
 						<button className="btn btn-success form-control" onClick={()=>props.history.push('/myportfolio/work')}>Save Changes</button>

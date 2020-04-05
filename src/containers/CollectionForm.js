@@ -24,9 +24,6 @@ class CollectionForm extends Component{
 	onFileChange=(e)=>{
 		this.setState({photo:e.target.files[0]});
 	};
-	notifyUpload = ()=>{
-        toast("Upload In Progress", { autoClose: 2000 });
-    };
     notifySuccess=(message)=>{
     	toast.success(message, { autoClose: 2000 });
     };
@@ -45,7 +42,6 @@ class CollectionForm extends Component{
 	    	const res = await axios.post('https://api.cloudinary.com/v1_1/fdez/image/upload', data);
 	    	const token = localStorage.jwtToken;
 	    	setTokenHeader(token)
-	    	this.notifyUpload();
 	  		formData = {
 	   			title:this.state.title,
 	   			description:this.state.description,
@@ -71,7 +67,7 @@ class CollectionForm extends Component{
 	   			this.setState({
 	   				title:"",
 	   				description:"",
-	   				photos:null,
+	   				photo:null,
 	   				collections:newArr,
 	   				id:this.state.id +1
 	   			});
