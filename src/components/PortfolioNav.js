@@ -64,24 +64,25 @@ const PortfolioNav = ({name, image, location, id, recommend, unRecommend,setReco
 				</li>
 			)} 
 			{location.pathname==='/myportfolio/work' && (
-				<React.Fragment>
-					<li>
-						<Link className="btn btn-outline-success mx-2" to={`${match.url}/edit/collections`}><i className="fas fa-plus"></i> Collections</Link>
-					</li>
-					<li>
-						<Link className="btn btn-outline-success" to={`${match.url}/edit/videos`}><i className="fas fa-plus"></i> Videos</Link>
-					</li>
-				</React.Fragment>
+				<li>
+					<Link className="btn btn-outline-warning ml-2" to={`${match.url}/edit/work`}><i className="fas fa-pen"></i></Link>
+				</li>
+	
 			)}
 			{location.pathname==='/myportfolio/timeline' && (
 				<li>
-					<Link className="btn btn-outline-success ml-2" to={`${match.url}/edit/timeline`}><i className="fas fa-plus"></i> Post</Link>
+					<Link className="btn btn-outline-warning ml-2" to={`${match.url}/edit/timeline`}><i className="fas fa-pen"></i></Link>
 				</li>
 			)}
 			{location.pathname==='/myportfolio/profile' && (
-				<li>
-					<Link className="btn btn-outline-warning ml-2" to={`${match.url}/edit/profile`}><i className="fas fa-pen"></i></Link>
-				</li>
+				<React.Fragment>
+					<li>
+						<Link className="btn btn-outline-warning ml-2" to={`${match.url}/edit/profile`}><i className="fas fa-pen"></i></Link>
+					</li>
+					<li>
+						<Link className="btn btn-outline-success ml-2" to="/myportfolio/edit/contactinfo" ><i className="fas fa-plus"></i> Contact Info</Link>
+					</li>
+				</React.Fragment>
 			)}
 			{match.path==='/portfolios/:id' && recommendationCheck && (
 				<li>

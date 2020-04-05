@@ -27,17 +27,13 @@ class AboutForm extends Component{
 	clearText=(e)=>{
     	this.setState({[e.target.name]:""})
     };
-	notifyUpload = ()=>{
-        toast("Upload In Progress", { autoClose: 2000 });
-    };
     notifySuccess=()=>{
     	toast.success("Successfully saved changes", {autoClose:3000});   	
     };
 	handleSubmit=async (e)=>{
 		e.preventDefault();
-		let formData = new FormData();
-  		formData.append('statement', this.state.statement);
-  		formData.append('about',this.state.about);
+		console.log(this.state);
+		let formData = {}
   		if(this.state.image){
   			setTokenHeader();
     		const data = new FormData();
@@ -46,11 +42,20 @@ class AboutForm extends Component{
 	    	const res = await axios.post('https://api.cloudinary.com/v1_1/fdez/image/upload', data);
 	    	const token =localStorage.jwtToken;
 	    	setTokenHeader(token)
-	  		formData.append('headerImage', res.data.secure_url)
-	  		formData.append('headerImageId', res.data.public_id)
-	  		this.notifyUpload();
+	  		formData ={
+	  			headerImage:res.data.secure_url,
+	  			headerImageId:res.data.public_id,
+	  			about:this.state.about,
+	  			statement:this.state.statement
+	  		}
+  		}else{
+  			formData={
+  				headerImage:"",
+	  			headerImageId:"",
+	  			about:this.state.about,
+	  			statement:this.state.statement
+  			}
   		}
-  		
   		try{
   			if(this.props.portfolio){
   				await this.props.editAboutPage(formData);
@@ -89,18 +94,6 @@ class AboutForm extends Component{
 						)}					
 						
 						<div className="form-group">
-							<label htmlFor="statement">Mission Statement</label>
-							<textarea 
-
-								className="form-control mb-3" 
-								id="statement" 
-								rows="2" 
-								value={statement} 
-								onChange={this.handleChange}
-								name="statement"
-								onFocus={!this.props.portfolio && this.clearText}
-
-							/>
 							<label htmlFor="upload-image">Upload a Cover Photo</label>
 							<p><small>An image that will make your portfolio stand out</small></p>
 							<div className="input-group mb-3" id="upload-image">
@@ -119,6 +112,18 @@ class AboutForm extends Component{
 							{this.props.portfolio && ( 
 								<p>Current Header Image: {this.props.portfolio.headerImage}</p>
 							)}
+							<label htmlFor="statement">Mission Statement</label>
+							<textarea 
+
+								className="form-control mb-3" 
+								id="statement" 
+								rows="2" 
+								value={statement} 
+								onChange={this.handleChange}
+								name="statement"
+								onFocus={!this.props.portfolio ? this.clearText: undefined}
+
+							/>
 							<label htmlFor="about">About</label>
 							<textarea 
 								className="form-control mb-3" 
@@ -127,7 +132,7 @@ class AboutForm extends Component{
 								value={about} 
 								onChange={this.handleChange}
 								name="about"
-								onFocus={!this.props.portfolio && this.clearText}
+								onFocus={!this.props.portfolio ? this.clearText: undefined}
 							/>
 							
 							{this.props.portfolio ?(

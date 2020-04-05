@@ -14,12 +14,7 @@ class ProfileForm extends Component{
 			location: this.props.portfolio ? this.props.portfolio.location : "City,Country",
 			birthday: this.props.portfolio? this.props.portfolio.birthday : "Year",
 			type:this.props.portfolio? this.props.portfolio.type :"Profession/Occupation",
-			name: this.props.portfolio ? this.props.portfolio.name : "Your name or name of your business",
-			email:this.props.portfolio? this.props.portfolio.email :"Your email",
-			phone: this.props.portfolio?this.props.portfolio.phone:"Your phone number",
-			facebook: this.props.portfolio?this.props.portfolio.facebook:"Example: https://www.facebook.com/yourusername",
-			instagram: this.props.portfolio?this.props.portfolio.instagram:"Example: https://www.instagram.com/yourusername"
-
+			name: this.props.portfolio ? this.props.portfolio.name : "Your name or name of your business"
 		}
 	};
 	handleChange=(e)=>{
@@ -28,9 +23,6 @@ class ProfileForm extends Component{
 	handleFileChange=(e)=>{
 		this.setState({image:e.target.files[0]});
 	};
-	notifyUpload = ()=>{
-        toast("Upload In Progress", { autoClose: 2000 });
-    };
     notifySuccess=()=>{
     	toast.success("Successfully saved changes", {autoClose:3000});   	
     };
@@ -47,15 +39,7 @@ class ProfileForm extends Component{
 			this.props.addErrorMessage("You must provide a name, profile picture, occupation and your location");
 			return;
 		}
-		let formData = new FormData();
-  		formData.append('location', this.state.location);
-  		formData.append('birthday', this.state.birthday);
-  		formData.append('type',this.state.type);
-  		formData.append('name', this.state.name);
-  		formData.append('email', this.state.email);
-  		formData.append('phone', this.state.phone);
-  		formData.append('facebook', this.state.facebook);
-  		formData.append('instagram', this.state.instagram);
+		let formData = {};
   		if(this.state.image){
   			setTokenHeader();
     		const data = new FormData();
@@ -64,10 +48,23 @@ class ProfileForm extends Component{
 	    	const res = await axios.post('https://api.cloudinary.com/v1_1/fdez/image/upload', data);
 	    	const token =localStorage.jwtToken;
 	    	setTokenHeader(token)
-	  		formData.append('profileImage', res.data.secure_url)
-	  		formData.append('profileImageId', res.data.public_id)
-	  		this.notifyUpload();
-  			
+	  		formData={
+	  			profileImage: res.data.secure_url,
+	  			profileImageId:res.data.public_id,
+	  			type:this.state.type,
+	  			name:this.state.name,
+	  			birthday:this.state.birthday,
+	  			location:this.state.location
+	  		}
+  		}else{
+  			formData={
+	  			profileImage:"",
+	  			profileImageId:"",
+	  			type:this.state.type,
+	  			name:this.state.name,
+	  			birthday:this.state.birthday,
+	  			location:this.state.location
+	  		}
   		}
 		try{
 			if(this.props.portfolio){
@@ -87,13 +84,13 @@ class ProfileForm extends Component{
 	}
 
 	render(){
-		const {image, location,birthday,type, name, email, phone, instagram, facebook}=this.state;
+		const {image, location,birthday,type, name}=this.state;
 		return (
 			<form encType='multipart/form-data' onSubmit={this.handleSubmit}>
 				<div className="row justify-content-center mt-5">
 					<div className="col-md-8 col-10">
 						{this.props.portfolio ?(
-							<h2>Edit Your Profile Page</h2>
+							<h1>Edit Your Profile Page</h1>
 						):(
 							<React.Fragment>
 								<p className="float-right">Step 1 of 4</p>
@@ -111,7 +108,7 @@ class ProfileForm extends Component{
 								name="name"
 								className="form-control mb-3"
 								type="text"
-								onFocus={!this.props.portfolio && this.clearText}
+								onFocus={!this.props.portfolio ? this.clearText : undefined}
 							/>
 							<label htmlFor="profile-pic">Upload your profile picture *</label>
 							<div className="input-group">
@@ -136,7 +133,7 @@ class ProfileForm extends Component{
 								onChange={this.handleChange}
 								name="type"
 								type="text"
-								onFocus={!this.props.portfolio && this.clearText}
+								onFocus={!this.props.portfolio ? this.clearText :undefined}
 							/>
 							<label htmlFor="location">Location *</label>
 						 	<input
@@ -146,7 +143,7 @@ class ProfileForm extends Component{
 								className="form-control mb-3"
 								type="text"
 								id="location"
-								onFocus={!this.props.portfolio && this.clearText}
+								onFocus={!this.props.portfolio ? this.clearText : undefined}
 							/>
 							
 							<label htmlFor="statement">Year of Birth (optional)</label>
@@ -158,53 +155,10 @@ class ProfileForm extends Component{
 								onChange={this.handleChange}
 								name="birthday"
 								type="text"
-								onFocus={!this.props.portfolio && this.clearText}
+								onFocus={!this.props.portfolio ? this.clearText: undefined}
 
 							/>							
-							<h4 className="my-3">Contact Information (optional)</h4>
-							<label htmlFor="type">Email</label>
-							<input
-								className="form-control mb-3" 
-								id="email" 
-								value={email} 
-								onChange={this.handleChange}
-								name="email"
-								type="text"
-								onFocus={!this.props.portfolio && this.clearText}
-							/>
-							<label htmlFor="type">Phone Number</label>
-							<input
-								className="form-control mb-3" 
-								id="phone" 
-								value={phone} 
-								onChange={this.handleChange}
-								name="phone"
-								type="text"
-								onFocus={!this.props.portfolio && this.clearText}
-							/>
-							<label htmlFor="type">Facebook</label>
-							<input
-								className="form-control mb-3" 
-								id="facebook" 
-								value={facebook} 
-								onChange={this.handleChange}
-								name="facebook"
-								type="text"
-								onFocus={!this.props.portfolio && this.clearText}
-								
-							/>
-							<label htmlFor="type">Instagram</label>
-							<input
-								className="form-control mb-3" 
-								id="instagram" 
-								value={instagram} 
-								onChange={this.handleChange}
-								name="instagram"
-								type="text"
-								onFocus={!this.props.portfolio && this.clearText}
-
-							/>
-
+		
 							{this.props.portfolio ?(
 								<button className="btn btn-success form-control mt-3" type="submit" >Save Changes</button>
 							):(

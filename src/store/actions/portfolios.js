@@ -150,6 +150,7 @@ export const editAboutPage = (formData)=>{
 	return async dispatch =>{
 		try{
 			const response = await axios.put('/api/myportfolio/about', formData);
+			console.log(response.data)
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error))
@@ -288,6 +289,19 @@ export const getMyPortfolio = () =>{
 		try{
 			const response = await axios.get('/api/myportfolio');
 			dispatch(showPortfolio(response.data))
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}
+
+
+export const editContactInfo = (info)=>{
+	return async dispatch=>{
+		try{
+			const response = await axios.put('/api/myportfolio/contactinfo', info);
+			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
 			throw Error(err);

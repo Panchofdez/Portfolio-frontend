@@ -8,17 +8,19 @@ import TimelinePage from './TimelinePage';
 import ProfilePage from '../components/ProfilePage';
 import WorkPage from '../components/WorkPage';
 import RecommendationsPage from '../components/RecommendationsPage';
-import {getMyPortfolio, getPortfolio, clearPortfolio, recommend, unRecommend} from '../store/actions/portfolios';
 import Loading from '../components/Loading';
 import AboutForm from './AboutForm';
 import TimelineForm from './TimelineForm';
+import WorkForm from '../components/WorkForm';
 import CollectionForm from './CollectionForm';
 import VideosForm from './VideosForm';
 import ProfileForm from './ProfileForm';
+import ContactInfoForm from './ContactInfoForm';
 import withVideoData from '../hocs/withVideoData';
 import withCollectionData from '../hocs/withCollectionData';
 import withPostData from '../hocs/withPostData';
 import{addErrorMessage} from '../store/actions/errors';
+import {getMyPortfolio, getPortfolio, clearPortfolio, recommend, unRecommend} from '../store/actions/portfolios';
 
 class PortfolioPage extends Component{
 	constructor(props){
@@ -135,6 +137,9 @@ class PortfolioPage extends Component{
 						<Route exact path='/myportfolio/edit/profile'>
 							<ProfileForm {...this.props} portfolio={portfolio}/>
 						</Route>
+						<Route exact path='/myportfolio/edit/contactinfo'>
+							<ContactInfoForm portfolio={portfolio} {...this.props}/>
+						</Route>
 						<Route exact path='/myportfolio/edit/about'>
 							<AboutForm 
 								{...this.props} 
@@ -144,11 +149,8 @@ class PortfolioPage extends Component{
 						<Route exact path='/myportfolio/edit/timeline'>
 							<TimelineForm {...this.props}/>
 						</Route>
-						<Route exact path='/myportfolio/edit/collections'>
-							<CollectionForm {...this.props}/>
-						</Route>
-						<Route exact path='/myportfolio/edit/videos'>
-							<VideosForm {...this.props}/>
+						<Route exact path='/myportfolio/edit/work'>
+							<WorkForm {...this.props}/>
 						</Route>
 						<Route path='/myportfolio/edit/videos/:id' component={withVideoData(VideosForm)}/>
 						<Route path='/myportfolio/edit/collections/:id' component={withCollectionData(CollectionForm)}/>

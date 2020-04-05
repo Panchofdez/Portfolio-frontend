@@ -63,17 +63,8 @@ class VideosForm extends Component{
 			return <div key={video} className="alert alert-success">Successfully added {video}</div>
 		})
 		return (
-			<div className="row justify-content-center mt-5">
+			<div className="row justify-content-center mt-3">
 				<div className="col-md-8 col-10">
-					{this.props.location.pathname.split("/")[2]!=='create' && (
-						<button 
-							className="btn btn-outline-light float-right mb-5" 
-							type="submit"
-							onClick={()=>this.props.history.push('/myportfolio/work')}
-						>
-							Go Back
-						</button>
-					)}
 					{this.props.video ? (
 						<h1>Edit Your Video</h1>
 					): (
@@ -85,7 +76,7 @@ class VideosForm extends Component{
 					
 					
 					<form onSubmit={this.handleSave}>
-							<div className="form-group">
+							<div className="form-group mb-0">
 								<label htmlFor="date">Youtube Link</label>
 							 	<input
 							 		value={link} 
@@ -118,7 +109,8 @@ class VideosForm extends Component{
 								
 							</div>
 					</form>	
-					<h3>Successfully Added:</h3>					
+					{!this.props.video && <h4>Successfully Added:</h4>	 }
+									
 					{videosAdded}
 				</div>
 			</div>

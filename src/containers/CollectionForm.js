@@ -28,7 +28,7 @@ class CollectionForm extends Component{
         toast("Upload In Progress", { autoClose: 2000 });
     };
     notifySuccess=(message)=>{
-    	toast.success(message);
+    	toast.success(message, { autoClose: 2000 });
     };
 	handleSubmit=async (e)=>{
 		e.preventDefault();
@@ -88,17 +88,8 @@ class CollectionForm extends Component{
 			<div key={collection.id} className="alert alert-success">{collection.title}</div>
 		))
 		return (
-			<div className="row justify-content-center mt-5">
+			<div className="row justify-content-center mt-4">
 				<div className="col-md-8 col-10">
-					{this.props.location.pathname.split("/")[2]!=='create' && (
-						<button 
-							className="btn btn-outline-light mb-5 float-right" 
-							type="submit"
-							onClick={()=>this.props.history.push('/myportfolio/work')}
-						>
-							Go Back
-						</button>
-					)}
 					{this.props.collection ? (
 						<h2 >Edit Your Collection</h2>
 					):(
@@ -106,7 +97,7 @@ class CollectionForm extends Component{
 					)}
 
 					<form encType='multipart/form-data' onSubmit={this.handleSubmit} >
-						<div className="form-group">
+						<div className="form-group mb-0">
 						 	<label htmlFor="name">Title</label>
 						 	<input
 						 		value={title} 
@@ -119,7 +110,7 @@ class CollectionForm extends Component{
 
 								className="form-control mb-3" 
 								id="collection-description" 
-								rows="4" 
+								rows="3" 
 								value={description} 
 								onChange={this.handleChange}
 								name="description"
@@ -156,7 +147,8 @@ class CollectionForm extends Component{
 						)}
 
 					</form>
-					<h3>Successfully Added:</h3>
+					{!this.props.collection && <h4>Successfully Added:</h4> }
+					
 					{collectionsAdded}
 					
 				</div>
