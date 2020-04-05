@@ -8,8 +8,8 @@ const WorkForm =(props)=>{
 	}, []);
 	console.log(props.location.pathname);
 	return (
-		<div>
-			<div className="row justify-content-center mt-5 pb-5">
+		<div className="pb-5">
+			<div className="row justify-content-center mt-5">
 				
 				{props.location.pathname==='/myportfolio/create/work' ? (
 					<div className="col-md-8 col-10">

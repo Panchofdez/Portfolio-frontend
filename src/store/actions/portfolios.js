@@ -99,7 +99,7 @@ export const createComment = (text, id)=>{
 export const deleteComment = (id, comment_id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.delete(`/portfolios/${id}/comments/${comment_id}`);
+			const response = await axios.delete(`/api/portfolios/${id}/comments/${comment_id}`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
