@@ -17,11 +17,8 @@ class ProfileForm extends Component{
 			name: this.props.portfolio ? this.props.portfolio.name : "Your name or name of your business",
 			email:this.props.portfolio? this.props.portfolio.email :"Your email",
 			phone: this.props.portfolio?this.props.portfolio.phone:"Your phone number",
-			facebook: this.props.portfolio?this.props.portfolio.facebook:"",
-			instagram: this.props.portfolio?this.props.portfolio.instagram:"",
-			profileImage:null,
-			profileImageId:null
-
+			facebook: this.props.portfolio?this.props.portfolio.facebook:"Example: https://www.facebook.com/yourusername",
+			instagram: this.props.portfolio?this.props.portfolio.instagram:"Example: https://www.instagram.com/yourusername"
 
 		}
 	};
@@ -37,14 +34,17 @@ class ProfileForm extends Component{
     notifySuccess=()=>{
     	toast.success("Successfully saved changes", {autoClose:3000});   	
     };
+    clearText=(e)=>{
+    	this.setState({[e.target.name]:""})
+    }
 	handleSubmit=async (e)=>{
 		e.preventDefault();
-		if(!this.state.type || !this.state.name){
-			this.props.addErrorMessage("You must provide a name, profile picture and your occupation");
+		if(!this.state.type || !this.state.name || !this.state.location){
+			this.props.addErrorMessage("You must provide a name, profile picture, occupation and your location");
 			return;
 		}
 		if(!this.state.image && !this.props.portfolio){
-			this.props.addErrorMessage("You must provide a name, profile picture and your occupation");
+			this.props.addErrorMessage("You must provide a name, profile picture, occupation and your location");
 			return;
 		}
 		let formData = new FormData();
@@ -93,12 +93,12 @@ class ProfileForm extends Component{
 				<div className="row justify-content-center mt-5">
 					<div className="col-md-8 col-10">
 						{this.props.portfolio ?(
-							<h1>Edit Your Profile Page</h1>
+							<h2>Edit Your Profile Page</h2>
 						):(
 							<React.Fragment>
 								<p className="float-right">Step 1 of 4</p>
 								<h1>Create Your Portfolio!</h1>
-								<p>Remember you can always edit your portfolio later</p>
+								<p>You can always edit your portfolio later</p>
 								<p>Lets start by setting up your Profile Page so we can make it easier for people to find and identify you</p>
 							</React.Fragment>
 						)}
@@ -111,6 +111,7 @@ class ProfileForm extends Component{
 								name="name"
 								className="form-control mb-3"
 								type="text"
+								onFocus={!this.props.portfolio && this.clearText}
 							/>
 							<label htmlFor="profile-pic">Upload your profile picture *</label>
 							<div className="input-group">
@@ -135,8 +136,9 @@ class ProfileForm extends Component{
 								onChange={this.handleChange}
 								name="type"
 								type="text"
+								onFocus={!this.props.portfolio && this.clearText}
 							/>
-							<label htmlFor="location">Location</label>
+							<label htmlFor="location">Location *</label>
 						 	<input
 						 		value={location} 
 								onChange={this.handleChange}
@@ -144,9 +146,10 @@ class ProfileForm extends Component{
 								className="form-control mb-3"
 								type="text"
 								id="location"
+								onFocus={!this.props.portfolio && this.clearText}
 							/>
 							
-							<label htmlFor="statement">Year of Birth</label>
+							<label htmlFor="statement">Year of Birth (optional)</label>
 							<input
 
 								className="form-control mb-3" 
@@ -155,9 +158,10 @@ class ProfileForm extends Component{
 								onChange={this.handleChange}
 								name="birthday"
 								type="text"
+								onFocus={!this.props.portfolio && this.clearText}
 
 							/>							
-							<h3 className="my-3">Contact Information</h3>
+							<h4 className="my-3">Contact Information (optional)</h4>
 							<label htmlFor="type">Email</label>
 							<input
 								className="form-control mb-3" 
@@ -166,6 +170,7 @@ class ProfileForm extends Component{
 								onChange={this.handleChange}
 								name="email"
 								type="text"
+								onFocus={!this.props.portfolio && this.clearText}
 							/>
 							<label htmlFor="type">Phone Number</label>
 							<input
@@ -175,10 +180,9 @@ class ProfileForm extends Component{
 								onChange={this.handleChange}
 								name="phone"
 								type="text"
+								onFocus={!this.props.portfolio && this.clearText}
 							/>
-							<h3 className="my-3">Social Media</h3>
 							<label htmlFor="type">Facebook</label>
-							<p><small>Example: https://www.facebook.com/yourusername</small></p>
 							<input
 								className="form-control mb-3" 
 								id="facebook" 
@@ -186,9 +190,10 @@ class ProfileForm extends Component{
 								onChange={this.handleChange}
 								name="facebook"
 								type="text"
+								onFocus={!this.props.portfolio && this.clearText}
+								
 							/>
 							<label htmlFor="type">Instagram</label>
-							<p><small>Example: https://www.instagram.com/yourusername</small></p>
 							<input
 								className="form-control mb-3" 
 								id="instagram" 
@@ -196,6 +201,8 @@ class ProfileForm extends Component{
 								onChange={this.handleChange}
 								name="instagram"
 								type="text"
+								onFocus={!this.props.portfolio && this.clearText}
+
 							/>
 
 							{this.props.portfolio ?(

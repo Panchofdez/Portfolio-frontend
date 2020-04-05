@@ -24,6 +24,9 @@ class AboutForm extends Component{
 	onFileChange=(e)=>{
 		this.setState({image:e.target.files[0]});
 	};
+	clearText=(e)=>{
+    	this.setState({[e.target.name]:""})
+    };
 	notifyUpload = ()=>{
         toast("Upload In Progress", { autoClose: 2000 });
     };
@@ -95,9 +98,10 @@ class AboutForm extends Component{
 								value={statement} 
 								onChange={this.handleChange}
 								name="statement"
+								onFocus={!this.props.portfolio && this.clearText}
 
 							/>
-							<label htmlFor="upload-image">Upload a Background Header Image</label>
+							<label htmlFor="upload-image">Upload a Cover Photo</label>
 							<p><small>An image that will make your portfolio stand out</small></p>
 							<div className="input-group mb-3" id="upload-image">
 								<div className="custom-file">
@@ -123,6 +127,7 @@ class AboutForm extends Component{
 								value={about} 
 								onChange={this.handleChange}
 								name="about"
+								onFocus={!this.props.portfolio && this.clearText}
 							/>
 							
 							{this.props.portfolio ?(

@@ -65,6 +65,15 @@ class VideosForm extends Component{
 		return (
 			<div className="row justify-content-center mt-5">
 				<div className="col-md-8 col-10">
+					{this.props.location.pathname.split("/")[2]!=='create' && (
+						<button 
+							className="btn btn-outline-light float-right mb-5" 
+							type="submit"
+							onClick={()=>this.props.history.push('/myportfolio/work')}
+						>
+							Go Back
+						</button>
+					)}
 					{this.props.video ? (
 						<h1>Edit Your Video</h1>
 					): (
@@ -108,17 +117,9 @@ class VideosForm extends Component{
 								
 								
 							</div>
-					</form>						
+					</form>	
+					<h3>Successfully Added:</h3>					
 					{videosAdded}
-					{this.props.location.pathname.split("/")[2]!=='create' && (
-						<button 
-							className="btn btn-success form-control my-3" 
-							type="submit"
-							onClick={()=>this.props.history.push('/myportfolio/work')}
-						>
-							Go Back
-						</button>
-					)}
 				</div>
 			</div>
 

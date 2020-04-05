@@ -162,6 +162,7 @@ export const editAboutPage = (formData)=>{
 export const createCollection = (collection)=>{
 	return async dispatch=>{
 		try{
+			console.log(collection);
 			const response = await axios.post('/api/myportfolio/collections', collection);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
@@ -174,6 +175,7 @@ export const createCollection = (collection)=>{
 export const editCollection = (collection, id)=>{
 	return async dispatch=>{
 		try{
+			console.log(collection);
 			const response = await axios.put(`/api/myportfolio/collections/${id}`, collection);
 			dispatch(showPortfolio(response.data));
 		}catch(err){

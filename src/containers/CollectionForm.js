@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {createCollection, editCollection} from '../store/actions/portfolios';
 import {addErrorMessage} from '../store/actions/errors';
 import { toast } from 'react-toastify';
-
+import axios from 'axios';
+import {setTokenHeader} from '../services/apiCall';
 
 
 class CollectionForm extends Component{
@@ -13,7 +14,7 @@ class CollectionForm extends Component{
 			title:this.props.collection? this.props.collection.title: "",
 			description:this.props.collection? this.props.collection.description:"",
 			id:1,
-			photos:null,
+			photo:null,
 			collections:[]
 		}	
 	};
@@ -21,36 +22,51 @@ class CollectionForm extends Component{
 		this.setState({[e.target.name]:e.target.value});
 	};
 	onFileChange=(e)=>{
-		this.setState({photos:e.target.files});
+		this.setState({photo:e.target.files[0]});
 	};
 	notifyUpload = ()=>{
-        toast("Upload In Progress", { autoClose: 4000 });
+        toast("Upload In Progress", { autoClose: 2000 });
     };
     notifySuccess=(message)=>{
     	toast.success(message);
     };
 	handleSubmit=async (e)=>{
 		e.preventDefault();
-		if(!this.state.photos && !this.props.collection){
-			this.props.addErrorMessage('You must add at least one image to your collection');
+		if(!this.state.photo && !this.props.collection){
+			this.props.addErrorMessage('You must add one image to your collection');
 			return;
 		}
-		let data = new FormData();
-		if(this.state.photos){
-			for(var x = 0; x<this.state.photos.length; x++) {
-	       		data.append('photos', this.state.photos[x])
+		let formData={};
+		if(this.state.photo){
+			setTokenHeader();
+    		const data = new FormData();
+	    	data.append('file', this.state.photo);
+	    	data.append('upload_preset', 'panchofdez')
+	    	const res = await axios.post('https://api.cloudinary.com/v1_1/fdez/image/upload', data);
+	    	const token = localStorage.jwtToken;
+	    	setTokenHeader(token)
+	    	this.notifyUpload();
+	  		formData = {
+	   			title:this.state.title,
+	   			description:this.state.description,
+	   			image:res.data.secure_url,
+	   			imageId:res.data.public_id
 	   		}
-	   		this.notifyUpload();
+	   		
+		}else{
+			formData = {
+	   			title:this.state.title,
+	   			description:this.state.description
+	   		}
 		}
-   		data.append('title', this.state.title);
-	   	data.append('description', this.state.description);
+
    		try{
    			if(this.props.collection){
-   				await this.props.editCollection(data, this.props.collection._id);
+   				await this.props.editCollection(formData, this.props.collection._id);
    				this.props.history.push('/myportfolio/work');
    				this.notifySuccess("Successfully Saved Changes");
    			}else{
-   				await this.props.createCollection(data);
+   				await this.props.createCollection(formData);
 	   			const newArr = this.state.collections.concat({title:this.state.title, id:this.state.id});
 	   			this.setState({
 	   				title:"",
@@ -67,26 +83,28 @@ class CollectionForm extends Component{
    		
 	}
 	render(){
-		const {title, description,photos,collections}=this.state;
+		const {title, description,photo,collections}=this.state;
 		const collectionsAdded = collections.map((collection)=>(
-			<div key={collection.id} className="alert alert-success">Added {collection.title}</div>
+			<div key={collection.id} className="alert alert-success">{collection.title}</div>
 		))
-		let photosArr =[];
-		if(photos){
-			for(let x =0;x<photos.length; x++){
-				photosArr.push(photos[x].name)
-			};
-		}
-		console.log(this.props.location.pathname)
-		const uploadedPhotos = photosArr.map((photo)=><li key={photo} className="ml-3">{photo}</li>)
 		return (
 			<div className="row justify-content-center mt-5">
 				<div className="col-md-8 col-10">
+					{this.props.location.pathname.split("/")[2]!=='create' && (
+						<button 
+							className="btn btn-outline-light mb-5 float-right" 
+							type="submit"
+							onClick={()=>this.props.history.push('/myportfolio/work')}
+						>
+							Go Back
+						</button>
+					)}
 					{this.props.collection ? (
-						<h2>Edit Your Collection</h2>
+						<h2 >Edit Your Collection</h2>
 					):(
 						<h2>Add Collections</h2>
 					)}
+
 					<form encType='multipart/form-data' onSubmit={this.handleSubmit} >
 						<div className="form-group">
 						 	<label htmlFor="name">Title</label>
@@ -107,11 +125,11 @@ class CollectionForm extends Component{
 								name="description"
 							/>
 							{this.props.collection?(
-								<label htmlFor="upload-image">Add More Photos</label>
+								<label htmlFor="upload-image">Add Another Photo</label>
 							):(
 								<React.Fragment>
-									<label htmlFor="upload-image">Upload Photos</label>
-									<p><small>You can add up to 5 photos at a time</small></p>
+									<label htmlFor="upload-image">Add a photo to your collection</label>
+									<p><small>You can always add more later</small></p>
 								</React.Fragment>
 							)}
 							
@@ -119,19 +137,16 @@ class CollectionForm extends Component{
 								<div className="custom-file">
 									<input 
 										type="file" 
-										name="photos"
+										name="photo"
 										className="custom-file-input" 
 										id="photos"
-										multiple
 										onChange={this.onFileChange}
 									/>
-									<label className="custom-file-label" htmlFor="header-image">Choose files</label>
+									{photo ? (<label className="custom-file-label" htmlFor="header-image">{photo.name}</label>
+									):(<label className="custom-file-label" htmlFor="header-image">Choose files</label>)}
+									
 								</div>
 							</div>
-							<ul className="p-0">
-								Photos Uploaded:
-								{uploadedPhotos}
-							</ul>
 							
 						</div>
 						{this.props.collection? (
@@ -141,16 +156,9 @@ class CollectionForm extends Component{
 						)}
 
 					</form>
+					<h3>Successfully Added:</h3>
 					{collectionsAdded}
-					{this.props.location.pathname.split("/")[2]!=='create' && (
-						<button 
-							className="btn btn-success form-control my-3" 
-							type="submit"
-							onClick={()=>this.props.history.push('/myportfolio/work')}
-						>
-							Go Back
-						</button>
-					)}
+					
 				</div>
 			</div>
 

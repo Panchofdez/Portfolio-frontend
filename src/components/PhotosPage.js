@@ -26,7 +26,7 @@ const PhotosPage =(props)=>{
 									return;
 								}
 								try{
-									await deleteCollectionPhoto(id,photo.imageId);
+									await deleteCollectionPhoto(id,photo.imageId.split('/')[1]);
 									notifyDelete('Deleted photo from your collection');
 									goBack();
 								}catch(err){
@@ -64,10 +64,11 @@ const PhotosPage =(props)=>{
 							</button>
 						</React.Fragment>
 					)}
-					
-					<h1 className="my-3">{title}</h1>
-					<p className="mb-5 mt-3">{description}</p>
+				
+					<h2 className="my-3 float-left">{title}</h2>
+					<p className="mb-5 mt-3 float-left">{description}</p>
 					{collectionPhotos}
+				
 				</div>
 			</div>
 		</div>

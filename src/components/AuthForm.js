@@ -21,7 +21,6 @@ class AuthForm extends Component{
 	};
 	notify = ()=>{
         toast(`Welcome ${this.state.name}! When you are ready, head over to MyPortfolio to create your portfolio`, {autoClose:10000});
-        toast('You can support other fellow professionals by recommending them',  {autoClose:10000});
     }
 	handleSubmit = async(e)=>{
 		e.preventDefault();
@@ -87,7 +86,7 @@ class AuthForm extends Component{
 								className="form-control"
 							/>
 						</div>
-						<button type="submit" className="btn btn-outline-success btn-block my-3" >{buttonText}</button>
+						<button type="submit" className="btn btn-success btn-block my-3" >{buttonText}</button>
 					</form>
 					{type==="signup" && (
 						<Link to="/signin" className="nav-link">Already have an account? Sign in instead</Link>

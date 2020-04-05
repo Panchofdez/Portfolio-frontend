@@ -58,7 +58,7 @@ class TimelineForm extends Component{
 	render(){
 		const timelinePosts = this.state.timeline.map(post=>{
 			return (
-				<div key={post.id} className="card mb-2">
+				<div key={post.id} className="alert alert-success card mb-2">
 					<div className="card-body">
 						<h5 className="card-title">{post.title}</h5>
 						<h6 className="card-subtitle">{post.date}</h6>
@@ -122,7 +122,7 @@ class TimelineForm extends Component{
 					{!this.props.post && (
 						<React.Fragment>
 							<div>
-								<h2>Successfully Added:</h2>
+								<h3>Successfully Added:</h3>
 								{timelinePosts}
 							</div>
 							<button className="btn btn-success  form-control my-3" onClick={()=>{
