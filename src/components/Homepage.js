@@ -30,7 +30,7 @@ const HomePage = (props)=>{
 					</div>
 					<div className="col-md-4 mt-5 text-center">
 						<i class="fas fa-hands-helping mx-2"></i>
-						<h5 className="mt-3">Give and recieve recommendations and testimonials to and from other fellow professionals</h5>
+						<h5 className="mt-3">Give and receive recommendations and testimonials to and from other fellow professionals</h5>
 					</div>
 				</div>
 			</div>
