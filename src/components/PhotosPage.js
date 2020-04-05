@@ -67,12 +67,12 @@ const PhotosPage =(props)=>{
 					<div className="float-left">
 						<h2 className="my-3">{title}</h2>
 						<p className="mb-5 mt-3">{description}</p>
-					</div>
-					<div>
-						{collectionPhotos}
-					</div>
-					
-				
+					</div>			
+				</div>
+			</div>
+			<div className="row">
+				<div className="col-10">
+					{collectionPhotos}
 				</div>
 			</div>
 		</div>
