@@ -47,10 +47,10 @@ const PhotosPage =(props)=>{
 				<div className="col-10 text-justify">
 					<button className="btn btn-outline-light mb-3 ml-2 float-right" onClick={()=> goBack()}>Go Back</button>
 					{match.url==='/myportfolio' && (
-						<React.Fragment>
-							<Link className="btn btn-outline-warning float-right" to={`/myportfolio/edit/collections/${id}`}><i className="fas fa-pen"></i></Link>
+						<div className="float-right">
+							<Link className="btn btn-outline-warning" to={`/myportfolio/edit/collections/${id}`}><i className="fas fa-pen"></i></Link>
 							<button 
-								className="btn btn-outline-danger float-right mx-2" 
+								className="btn btn-outline-danger mx-2" 
 								onClick={async()=>{
 									try{
 										await deleteCollection(id);
@@ -62,12 +62,16 @@ const PhotosPage =(props)=>{
 								}}>
 								<i className="fas fa-trash"></i>
 							</button>
-						</React.Fragment>
+						</div>
 					)}
-				
-					<h2 className="my-3 float-left">{title}</h2>
-					<p className="mb-5 mt-3 float-left">{description}</p>
-					{collectionPhotos}
+					<div className="float-left">
+						<h2 className="my-3">{title}</h2>
+						<p className="mb-5 mt-3">{description}</p>
+					</div>
+					<div>
+						{collectionPhotos}
+					</div>
+					
 				
 				</div>
 			</div>
