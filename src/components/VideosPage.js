@@ -13,10 +13,10 @@ const VideosPage = ({videos, deleteVideo, history, match})=>{
 	const videosArr =videos.map(video=>{		
 		return (
 			<div key={video._id} className="row justify-content-center container-fluid px-0 my-5">
-				<div className="col-md-8 mx-auto px-0 ">
+				<div className="col-md-8 mx-auto align-self-center px-0 ">
 					<div className="iframe-container">
-					<iframe className="rounded" title={video._id} width="560" height="315" src={`https://www.youtube.com/embed/${video.link}?rel=0`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-				</div>
+						<iframe className="rounded" title={video._id} width="560" height="315" src={`https://www.youtube.com/embed/${video.link}?rel=0`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+					</div>
 				</div>
 				<div className="col-md-4 mt-3 text-justify align-self-center pr-0">
 					<h3>{video.title}</h3>

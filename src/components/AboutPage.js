@@ -23,7 +23,7 @@ const AboutPage = ({about, statement, image, url}) =>{
 				
 			</div>	
 			<div id="about" className="container-fluid row">
-				<div className="container my-3 col-10 justify-content-center text-justify p-3">
+				<div className="container my-3 col-sm-10 col-12 justify-content-center text-justify p-3">
 					<h5 className="p-5 my-3">{about}</h5>	
 				</div>		
 			</div>
