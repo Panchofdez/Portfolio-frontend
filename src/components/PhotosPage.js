@@ -44,7 +44,7 @@ const PhotosPage =(props)=>{
 	return (
 		<div className="container mt-5">
 			<div className="row justify-content-center mt-5">
-				<div className="col-10 text-justify">
+				<div className="col-10">
 					<button className="btn btn-outline-light mb-3 ml-2 float-right" onClick={()=> goBack()}>Go Back</button>
 					{match.url==='/myportfolio' && (
 						<div className="float-right">
@@ -70,7 +70,7 @@ const PhotosPage =(props)=>{
 					</div>			
 				</div>
 			</div>
-			<div className="row">
+			<div className="row justify-content-center">
 				<div className="col-10">
 					{collectionPhotos}
 				</div>
