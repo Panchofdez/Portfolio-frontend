@@ -2,16 +2,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
 import {createAboutPage, editAboutPage} from '../store/actions/portfolios';
 import { toast } from 'react-toastify';
-import axios from 'axios';
-import {setTokenHeader} from '../services/apiCall';
+import cloudinaryUpload from '../services/cloudinary';
+
 
 class AboutForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			statement:  this.props.portfolio ? this.props.portfolio.statement : "A small statement or title",
 			about: this.props.portfolio ? this.props.portfolio.about : 'This is your chance to tell us something about who you are and what you do',
-			image:null
+			location: this.props.portfolio ? this.props.portfolio.location : "City,Country",
+			birthday: this.props.portfolio? this.props.portfolio.birthday : "Your Birthday",
+			type:this.props.portfolio? this.props.portfolio.type :"Profession/Occupation"
 		}
 		
 	};
@@ -33,30 +34,25 @@ class AboutForm extends Component{
 	handleSubmit=async (e)=>{
 		e.preventDefault();
 		console.log(this.state);
-		let formData = {}
-  		if(this.state.image){
-  			setTokenHeader();
-    		const data = new FormData();
-	    	data.append('file', this.state.image);
-	    	data.append('upload_preset', 'panchofdez')
-	    	const res = await axios.post('https://api.cloudinary.com/v1_1/fdez/image/upload', data);
-	    	const token =localStorage.jwtToken;
-	    	setTokenHeader(token)
-	  		formData ={
-	  			headerImage:res.data.secure_url,
-	  			headerImageId:res.data.public_id,
-	  			about:this.state.about,
-	  			statement:this.state.statement
+		try{
+			let formData = {}
+	  		if(this.state.image){
+	    		const response = await cloudinaryUpload(this.state.image);
+		  		formData ={
+		  			headerImage:response.secure_url,
+		  			headerImageId:response.public_id,
+		  			about:this.state.about,
+		  			statement:this.state.statement
+		  		}
+	  		}else{
+	  			formData={
+	  				headerImage:"",
+		  			headerImageId:"",
+		  			about:this.state.about,
+		  			statement:this.state.statement
+	  			}
 	  		}
-  		}else{
-  			formData={
-  				headerImage:"",
-	  			headerImageId:"",
-	  			about:this.state.about,
-	  			statement:this.state.statement
-  			}
-  		}
-  		try{
+  	
   			if(this.props.portfolio){
   				await this.props.editAboutPage(formData);
   				this.props.history.push('/myportfolio/about');
@@ -83,15 +79,10 @@ class AboutForm extends Component{
 				<div className="row justify-content-center mt-5 pb-5">
 					<div className="col-md-8 col-10">
 						
-						{this.props.portfolio? (
-							<h1 className="my-3">Edit Your About Page</h1>
-						):(
-							<React.Fragment>
-								<p className="float-right">Step 2 of 4</p>
-								<h1 className="my-3">Your About Page</h1>
-								<h5 className="my-3">This is the first thing that people will see so let's make a good first impression!</h5>
-							</React.Fragment>
-						)}					
+					
+						<h1 className="my-3">About Me</h1>
+						<h5 className="my-3">Tell us about who you are and what you do</h5>
+									
 						
 						<div className="form-group">
 							<label htmlFor="upload-image">Upload a Cover Photo</label>
@@ -134,12 +125,8 @@ class AboutForm extends Component{
 								name="about"
 								onFocus={!this.props.portfolio ? this.clearText: undefined}
 							/>
+							<button className="btn button form-control mt-3" type="submit" >Save Changes</button>
 							
-							{this.props.portfolio ?(
-								<button className="btn btn-success form-control mt-3" type="submit" >Save Changes</button>
-							):(
-								<button className="btn btn-success form-control mt-3" type="submit" >Next</button>
-							)}
 							
 						</div>
 					</div>

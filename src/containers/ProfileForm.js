@@ -3,8 +3,7 @@ import {connect} from 'react-redux';
 import {createProfilePage, editProfilePage} from '../store/actions/portfolios';
 import {addErrorMessage} from '../store/actions/errors';
 import { toast } from 'react-toastify';
-import axios from 'axios';
-import {setTokenHeader} from '../services/apiCall';
+import cloudinaryUpload from '../services/cloudinary';
 
 class ProfileForm extends Component{
 	constructor(props){
@@ -41,16 +40,10 @@ class ProfileForm extends Component{
 		}
 		let formData = {};
   		if(this.state.image){
-  			setTokenHeader();
-    		const data = new FormData();
-	    	data.append('file', this.state.image);
-	    	data.append('upload_preset', 'panchofdez')
-	    	const res = await axios.post('https://api.cloudinary.com/v1_1/fdez/image/upload', data);
-	    	const token =localStorage.jwtToken;
-	    	setTokenHeader(token)
+  			const response = await cloudinaryUpload(this.state.image);
 	  		formData={
-	  			profileImage: res.data.secure_url,
-	  			profileImageId:res.data.public_id,
+	  			profileImage: response.secure_url,
+	  			profileImageId:response.public_id,
 	  			type:this.state.type,
 	  			name:this.state.name,
 	  			birthday:this.state.birthday,

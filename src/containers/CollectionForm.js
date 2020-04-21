@@ -4,7 +4,7 @@ import {createCollection, editCollection} from '../store/actions/portfolios';
 import {addErrorMessage} from '../store/actions/errors';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import {setTokenHeader} from '../services/apiCall';
+import cloudinaryUpload from '../services/cloudinary';
 
 
 class CollectionForm extends Component{
@@ -35,18 +35,12 @@ class CollectionForm extends Component{
 		}
 		let formData={};
 		if(this.state.photo){
-			setTokenHeader();
-    		const data = new FormData();
-	    	data.append('file', this.state.photo);
-	    	data.append('upload_preset', 'panchofdez')
-	    	const res = await axios.post('https://api.cloudinary.com/v1_1/fdez/image/upload', data);
-	    	const token = localStorage.jwtToken;
-	    	setTokenHeader(token)
+			const response = await cloudinaryUpload(this.state.photo);
 	  		formData = {
 	   			title:this.state.title,
 	   			description:this.state.description,
-	   			image:res.data.secure_url,
-	   			imageId:res.data.public_id
+	   			image:response.secure_url,
+	   			imageId:response.public_id
 	   		}
 	   		
 		}else{

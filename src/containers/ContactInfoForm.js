@@ -9,8 +9,8 @@ class ContactInfoForm extends Component{
 		this.state={
 			email:this.props.portfolio.email? this.props.portfolio.email :"Your email",
 			phone: this.props.portfolio.phone?this.props.portfolio.phone:"Your phone number",
-			facebook: this.props.portfolio.facebook ?this.props.portfolio.facebook:"Example: https://www.facebook.com/yourusername",
-			instagram: this.props.portfolio.instagram ?this.props.portfolio.instagram:"Example: https://www.instagram.com/yourusername"
+			facebook: this.props.portfolio.facebook ?this.props.portfolio.facebook:"Your Facebook username",
+			instagram: this.props.portfolio.instagram ?this.props.portfolio.instagram:"Your Instagram username"
 
 		}
 	};

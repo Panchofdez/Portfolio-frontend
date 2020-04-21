@@ -64,7 +64,7 @@ class Navbar extends Component{
 		}
 
 		return(
-			<nav className="navbar navbar-expand navbar-light bg-white">
+			<nav className="navbar navbar-expand-md navbar-light bg-white">
 				<div className="container ">
 					<div className="navbar-header">
 						<Link to="/" className="navbar-brand ml-2">Portfolio</Link>
@@ -121,7 +121,7 @@ class Navbar extends Component{
 										<button className="dropdown-item mb-0" onClick={()=>history.push('/notifications')}>Notifications history</button>
 									</div>
 								</li>
-								<li className="nav-item mx-2">
+								<li className="nav-item mx-3">
 									<Link className="nav-link" to="/myportfolio">MyPortfolio</Link>
 								</li>
 								<li className="nav-item dropdown ml-3">

@@ -41,6 +41,7 @@ class Main extends Component{
                     <Route exact path="/portfolios" component={withAuth(PortfolioList)}/>
                     <Route path="/portfolios/:id" component={PortfolioPage}/>
                     <Route path="/myportfolio/create" component={withAuth(PortfolioForm)}/>
+                    <Route path="/myportfolio/edit" component={withAuth(PortfolioForm)}/>
                     <Route path="/myportfolio" component={withAuth(PortfolioPage)}/>
                     <Route path="/myaccount" component={withAuth(ProfilePage)}/>
                     <Route exact path="/notifications" component={withAuth(NotificationsPage)}/>

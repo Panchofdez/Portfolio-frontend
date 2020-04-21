@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import { Timeline, TimelineItem }  from 'vertical-timeline-component-for-react';
 import {Link} from 'react-router-dom';
 import {deleteTimelinePost} from '../store/actions/portfolios';
 import {toast} from 'react-toastify';
-
+import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
 
 const TimelinePage = (props)=>{
 	useEffect(() => {
@@ -15,52 +15,38 @@ const TimelinePage = (props)=>{
     }
 	const timelinePosts = props.timeline.map(post=>{
 		return (
-			<TimelineItem
-			    key={post._id}
-			    dateText={post.date}
-			    style={{ color: '#5cb85c'}}
-			    dateInnerStyle={{ background: '#fff', color:"#161716" }}
+			<VerticalTimelineElement
+				key={post._id}
+			    className="vertical-timeline-element--work"
+			    date={post.date}
+			    contentStyle={{color: '#161716',borderTop: '5px solid  #00ad8e'}}
+			    iconStyle={{ background: '#00ad8e', color: '#fff', width:'25px', height:'25px', left:'6px'}}
+			    
 			  >
-			    <h3 style={{color:'#fff'}} className="mb-3">{post.title}</h3>
-			    <p style={{color:'#fff'}}>
-			      {post.text}
+			    <h3 className="vertical-timeline-element-title">{post.title}</h3>
+			    <p>
+			     {post.text}
 			    </p>
-			    {props.match.url==='/myportfolio' && (
-					<React.Fragment>
-						<Link className="btn btn-outline-warning mr-2" to={`/myportfolio/edit/timeline/${post._id}`}><i className="fas fa-pen"></i></Link>
-						<button 
-							className="btn btn-outline-danger" 
-							onClick={async()=>{
-								try{
-									await props.deleteTimelinePost(post._id);
-									notifyDelete('Deleted post from your timeline');
-									props.history.push('/myportfolio/timeline');
-								}catch(err){
-									return;
-								}	
-							}}>
-							<i className="fas fa-trash"></i>
-						</button>
-					</React.Fragment>
-				)}
-					
-			</TimelineItem>
+			  </VerticalTimelineElement>
 		)
 	})
 	return(
-		<div className="container">
-			<div className="row justify-content-center mt-5">
-				<div className="col-md-10">
-					<Timeline animate lineColor={'#fff'}>
-						{timelinePosts}
-  					</Timeline>
+		<div>
+			<div className="p-3">
+				<div className="d-flex flex-row justify-content-between">
+					<h2 className="mt-3">Timeline</h2>
+					<div>
+						<Link className="btn button mt-3" to="/myportfolio/edit/timeline"><i className="fas fa-pen"></i></Link>
+					</div>
 				</div>
 			</div>
+			<VerticalTimeline layout="1-column">
+				{timelinePosts}
+			</VerticalTimeline>
 		</div>
+			
 	)
 }
 
 export default connect(null,{deleteTimelinePost})(TimelinePage);
-
-
 
