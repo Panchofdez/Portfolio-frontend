@@ -12,13 +12,12 @@ const VideosPage = ({videos, deleteVideo, history, match})=>{
     }
 	const videosArr =videos.map(video=>{		
 		return (
-			<div key={video._id} className="row justify-content-center container-fluid px-0 my-5 mx-0">
-				<div className="col-md-8 mx-auto align-self-center px-0 ">
-					<div className="iframe-container">
-						<iframe className="rounded" title={video._id} width="560" height="315" src={`https://www.youtube.com/embed/${video.link}?rel=0`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-					</div>
+			<div key={video._id} className="row justify-content-center">	
+				<div className="iframe-container">
+					<iframe className="rounded" title={video._id} width="560" height="315" src={`https://www.youtube.com/embed/${video.link}?rel=0`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 				</div>
-				<div className="col-md-4 mt-3 text-center align-self-center pr-0">
+			
+				<div className="p-5 rounded-bottom mb-5 "  style={{backgroundColor:'#fff', color:'#161716'}}>
 					<h3>{video.title}</h3>
 					<p>{video.description}</p>
 					{match.url==='/myportfolio' && (

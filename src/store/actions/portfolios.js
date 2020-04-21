@@ -1,5 +1,5 @@
 import {addError} from './errors';
-import axios from 'axios';
+import {apiCall} from '../../services/apiCall';
 
 const loadPortfolios = (portfolios) =>{
 	return {
@@ -25,7 +25,7 @@ export const clearPortfolio = () =>{
 export const searchPortfolios =(query)=>{
 	return async dispatch =>{
 		try{
-			const response =await axios.get(`/api/portfolios?search=${query}`);
+			const response =await apiCall.get(`/api/portfolios?search=${query}`);
 			dispatch(loadPortfolios(response.data))
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -37,7 +37,8 @@ export const searchPortfolios =(query)=>{
 export const fetchPortfolios = ()=>{
 	return async dispatch =>{
 		try{
-			const response =await axios.get('/api/portfolios');
+			const response =await apiCall.get('/api/portfolios');
+			console.log(response.data);
 			dispatch(loadPortfolios(response.data))
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -50,7 +51,7 @@ export const fetchPortfolios = ()=>{
 export const getPortfolio = (id)=>{
 	return async dispatch =>{
 		try{
-			const response = await axios.get(`/api/portfolios/${id}`);
+			const response = await apiCall.get(`/api/portfolios/${id}`);
 			dispatch(showPortfolio(response.data))
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -62,7 +63,7 @@ export const getPortfolio = (id)=>{
 export const recommend = (id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.post(`/api/portfolios/${id}/recommend`);
+			const response = await apiCall.post(`/api/portfolios/${id}/recommend`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -74,7 +75,7 @@ export const recommend = (id)=>{
 export const unRecommend = (id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.post(`/api/portfolios/${id}/unrecommend`);
+			const response = await apiCall.post(`/api/portfolios/${id}/unrecommend`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -86,7 +87,7 @@ export const unRecommend = (id)=>{
 export const createComment = (text, id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.post(`/api/portfolios/${id}/comments`, text);
+			const response = await apiCall.post(`/api/portfolios/${id}/comments`, text);
 			console.log(response);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
@@ -99,7 +100,7 @@ export const createComment = (text, id)=>{
 export const deleteComment = (id, comment_id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.delete(`/api/portfolios/${id}/comments/${comment_id}`);
+			const response = await apiCall.delete(`/api/portfolios/${id}/comments/${comment_id}`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -111,7 +112,7 @@ export const deleteComment = (id, comment_id)=>{
 export const createProfilePage = (formData)=>{
 	return async dispatch =>{
 		try{
-			 const response = await axios.post('/api/myportfolio/profile', formData);
+			 const response = await apiCall.post('/api/myportfolio/profile', formData);
 			 dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -123,7 +124,7 @@ export const createProfilePage = (formData)=>{
 export const editProfilePage = (formData)=>{
 	return async dispatch =>{
 		try{
-			 const response = await axios.put('/api/myportfolio/profile', formData);
+			 const response = await apiCall.put('/api/myportfolio/profile', formData);
 			 dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -136,7 +137,7 @@ export const editProfilePage = (formData)=>{
 export const createAboutPage = (formData) =>{
 	return async dispatch =>{
 		try{
-			const response = await axios.post('/api/myportfolio/about', formData);
+			const response = await apiCall.post('/api/myportfolio/about', formData);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error))
@@ -149,7 +150,7 @@ export const createAboutPage = (formData) =>{
 export const editAboutPage = (formData)=>{
 	return async dispatch =>{
 		try{
-			const response = await axios.put('/api/myportfolio/about', formData);
+			const response = await apiCall.put('/api/myportfolio/about', formData);
 			console.log(response.data)
 			dispatch(showPortfolio(response.data));
 		}catch(err){
@@ -163,8 +164,7 @@ export const editAboutPage = (formData)=>{
 export const createCollection = (collection)=>{
 	return async dispatch=>{
 		try{
-			console.log(collection);
-			const response = await axios.post('/api/myportfolio/collections', collection);
+			const response = await apiCall.post('/api/myportfolio/collections', collection);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -176,8 +176,7 @@ export const createCollection = (collection)=>{
 export const editCollection = (collection, id)=>{
 	return async dispatch=>{
 		try{
-			console.log(collection);
-			const response = await axios.put(`/api/myportfolio/collections/${id}`, collection);
+			const response = await apiCall.put(`/api/myportfolio/collections/${id}`, collection);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -189,7 +188,7 @@ export const editCollection = (collection, id)=>{
 export const deleteCollection = (id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.delete(`/api/myportfolio/collections/${id}`);
+			const response = await apiCall.delete(`/api/myportfolio/collections/${id}`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -201,7 +200,7 @@ export const deleteCollection = (id)=>{
 export const deleteCollectionPhoto =(id, photo_id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.delete(`/api/myportfolio/collections/${id}/photos/${photo_id}`);
+			const response = await apiCall.delete(`/api/myportfolio/collections/${id}/photos/${photo_id}`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -214,7 +213,7 @@ export const deleteCollectionPhoto =(id, photo_id)=>{
 export const createVideo = (video)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.post('/api/myportfolio/videos', video);
+			const response = await apiCall.post('/api/myportfolio/videos', video);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -227,7 +226,7 @@ export const createVideo = (video)=>{
 export const editVideo = (video, id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.put(`/api/myportfolio/videos/${id}`, video);
+			const response = await apiCall.put(`/api/myportfolio/videos/${id}`, video);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -239,7 +238,7 @@ export const editVideo = (video, id)=>{
 export const deleteVideo=(id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.delete(`/api/myportfolio/videos/${id}`);
+			const response = await apiCall.delete(`/api/myportfolio/videos/${id}`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -251,7 +250,7 @@ export const deleteVideo=(id)=>{
 export const createTimelinePost = (post)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.post('/api/myportfolio/timeline', post);
+			const response = await apiCall.post('/api/myportfolio/timeline', post);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -263,7 +262,7 @@ export const createTimelinePost = (post)=>{
 export const editTimelinePost = (post, id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.put(`/api/myportfolio/timeline/${id}`, post);
+			const response = await apiCall.put(`/api/myportfolio/timeline/${id}`, post);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -275,7 +274,7 @@ export const editTimelinePost = (post, id)=>{
 export const deleteTimelinePost = (id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.delete(`/api/myportfolio/timeline/${id}`);
+			const response = await apiCall.delete(`/api/myportfolio/timeline/${id}`);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -287,7 +286,7 @@ export const deleteTimelinePost = (id)=>{
 export const getMyPortfolio = () =>{
 	return async dispatch =>{
 		try{
-			const response = await axios.get('/api/myportfolio');
+			const response = await apiCall.get('/api/myportfolio');
 			dispatch(showPortfolio(response.data))
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -300,7 +299,7 @@ export const getMyPortfolio = () =>{
 export const editContactInfo = (info)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.put('/api/myportfolio/contactinfo', info);
+			const response = await apiCall.put('/api/myportfolio/contactinfo', info);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));

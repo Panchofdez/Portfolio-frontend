@@ -1,5 +1,4 @@
-import axios from 'axios';
-import {setTokenHeader} from '../../services/apiCall';
+import {apiCall, setTokenHeader} from '../../services/apiCall';
 import {addErrorMessage, clearErrorMessage} from './errors';
 
 
@@ -19,7 +18,7 @@ export const setAuthorizationToken = (token)=>{
 export const authenticateUser = (type,formData) =>{
 	return async dispatch =>{
 		try{
-			const response = await axios.post(`/api/${type}`,formData);
+			const response = await apiCall.post(`/api/${type}`,formData);
 			const {token,...user} = response.data;
 			localStorage.setItem('jwtToken', token);			
 			setAuthorizationToken(token);
@@ -46,7 +45,7 @@ export const signout = () =>{
 export const getCurrentUser =()=>{
 	return async dispatch =>{
 		try{
-			const response = await axios.get('/api/user');
+			const response = await apiCall.get('/api/user');
 			dispatch(setCurrentUser(response.data));
 		}catch(err){
 			dispatch(addErrorMessage(err.response.data.error));
@@ -58,7 +57,7 @@ export const getCurrentUser =()=>{
 export const readNotification = (id)=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.put(`/api/notifications/${id}`);
+			const response = await apiCall.put(`/api/user/notifications/${id}`);
 			console.log(response.data);
 			dispatch(setCurrentUser(response.data));
 			return response.data;
@@ -72,7 +71,7 @@ export const readNotification = (id)=>{
 export const clearNotifications = ()=>{
 	return async dispatch=>{
 		try{
-			const response = await axios.put('/api/notifications');
+			const response = await apiCall.put('/api/user/notifications');
 			dispatch(setCurrentUser(response.data));
 		}catch(err){
 			dispatch(addErrorMessage(err.response.data.error));

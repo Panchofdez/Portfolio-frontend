@@ -10,6 +10,7 @@ import withPortfolioCheck from '../hocs/withPortfolioCheck';
 
 const PortfolioForm =(props)=>{
 	let {path} = useRouteMatch();
+	console.log(path);
 	return(
 		<div className='container'>
 			<Switch>				

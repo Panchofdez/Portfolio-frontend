@@ -1,12 +1,14 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import fixImage from '../services/imageOrientation';
 
 
 const PortfolioCard = ({name,type, _id, profileImage}) =>{
+	const newImage = fixImage(profileImage);
 	return(
 		<div className="col-lg-3 col-md-4 col-6 p-0 m-0" id="card-container">
 			<div className="card h-100 mb-0" id="portfolio-card">
-				<img src={profileImage} className="card-img-top h-50" alt="headerImage"/>
+				<img src={newImage} className="card-img-top h-50 img-fluid" id="card-image" alt="headerImage"/>
 				<div className="card-body text-center" id='portfolio-card-body'>
 					<h5 className="card-title mb-2">{name}</h5>
 					<p className="card-text mb-2">{type}</p>		

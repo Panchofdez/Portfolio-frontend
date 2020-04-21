@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import {apiCall} from '../services/apiCall';
+import fixImage from '../services/imageOrientation';
 
 
 class RecommendationsPage extends Component{
@@ -20,8 +21,8 @@ class RecommendationsPage extends Component{
 	}
 	fetchRecommendations = async()=>{
 		try{
-			const url=`/api/${this.props.match.url}/recommendations`
-			const response = await axios.get(url);
+			const url=`/api${this.props.match.url}/recommendations`
+			const response = await apiCall.get(url);
 			const {recommendations, recommending} =response.data;
 			if(this._isMounted===true){
 				this.setState({recommendations:[...recommendations], recommending:[...recommending]});
@@ -34,11 +35,12 @@ class RecommendationsPage extends Component{
 	}
 	render(){
 		const recommendationCards = this.state.recommendations.map((u)=>{	
+			let newImage = fixImage(u.profileImage);
 			return(
-				<div key={u._id} className="card col-sm-6 p-0 endorse-cards">
+				<div key={u._id} className="card col-lg-6 p-0 endorse-cards">
 					<div className="row no-gutters">
 						<div className="col-sm-3 col-2">
-							<img src={u.profileImage} className="card-img user-card-img" alt=""/>
+							<img src={newImage} className="card-img user-card-img img-fluid" alt="" style={{overflow:'hidden', height:'100%', width : '100%'}}/>
 						</div>
 						<div className="col-sm-9 col-10">
 							<div className="card-body">
@@ -55,12 +57,13 @@ class RecommendationsPage extends Component{
 				</div>
 			)
 		})
-		const recommendingCards = this.state.recommending.map((u)=>{	
+		const recommendingCards = this.state.recommending.map((u)=>{
+			let fixedImage = fixImage(u.profileImage);	
 			return(
-				<div key={u._id} className="card col-sm-6 p-0 endorse-cards">
+				<div key={u._id} className="card col-lg-6 p-0 endorse-cards">
 					<div className="row no-gutters">
 						<div className="col-sm-3 col-2">
-							<img src={u.profileImage} className="card-img user-card-img" alt=""/>
+							<img src={fixedImage} className="card-img user-card-img img-fluid" alt="" style={{overflow:'hidden', height:'100%', width : '100%'}}/>
 						</div>
 						<div className="col-sm-9 col-10">
 							<div className="card-body">
@@ -79,61 +82,56 @@ class RecommendationsPage extends Component{
 		})
 		return(
 			
-			<div className="container mt-5">
-				<div className="row justify-content-center">
-					<div className="col-md-10">
-						<ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
-							<li className="nav-item">
-								<a 
-									className="nav-link active pill-link" 
-									id="pills-home-tab" 
-									data-toggle="pill" 
-									href="#pills-home" 
-									role="tab" 
-									aria-controls="pills-home" 
-									aria-selected="true"
-								>
-									Recommended By
-								</a>
-							</li>
-							<li className="nav-item">
-								<a 
-									className="nav-link pill-link" 
-									id="pills-profile-tab" 
-									data-toggle="pill" 
-									href="#pills-profile" 
-									role="tab" 
-									aria-controls="pills-profile" 
-									aria-selected="false"
-								>
-									Recommending
-								</a>
-							</li>
-						</ul>
-						<div className="tab-content" id="pills-tabContent">
-							<div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-								<div className="card border border-white bg-transparent  p-0">
-									<div className="card-body px-3 py-0">
-										<div className="row p-3">
-											{recommendationCards}
-										</div>
-									</div>
+			<div className="p-3">
+				<ul className="nav nav-pills my-3" id="pills-tab" role="tablist">
+					<li className="nav-item">
+						<a 
+							className="nav-link active pill-link" 
+							id="pills-home-tab" 
+							data-toggle="pill" 
+							href="#pills-home" 
+							role="tab" 
+							aria-controls="pills-home" 
+							aria-selected="true"
+						>
+							Recommended By
+						</a>
+					</li>
+					<li className="nav-item">
+						<a 
+							className="nav-link pill-link" 
+							id="pills-profile-tab" 
+							data-toggle="pill" 
+							href="#pills-profile" 
+							role="tab" 
+							aria-controls="pills-profile" 
+							aria-selected="false"
+						>
+							Recommending
+						</a>
+					</li>
+				</ul>
+				<div className="tab-content" id="pills-tabContent">
+					<div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+						<div className="card border border-white bg-transparent  p-0">
+							<div className="card-body px-3 py-0">
+								<div className="row p-3">
+									{recommendationCards}
 								</div>
 							</div>
-							<div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-								<div className="card border border-white bg-transparent  p-0">
-									<div className="card-body px-3 py-0">
-										<div className="row  p-3">
-											{recommendingCards}
-										</div>
-									</div>
-								</div>
-							</div>
-							
 						</div>
 					</div>
+					<div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+						<div className="card border border-white bg-transparent  p-0">
+							<div className="card-body px-3 py-0">
+								<div className="row  p-3">
+									{recommendingCards}
+								</div>
+							</div>
+						</div>
+					</div>
+					
 				</div>
-
 			</div>
 
 			

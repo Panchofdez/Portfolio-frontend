@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {deleteCollection,deleteCollectionPhoto} from '../store/actions/portfolios';
 import {addErrorMessage} from '../store/actions/errors';
 import {toast} from 'react-toastify';
+import fixImage from '../services/imageOrientation';
 
 
 const PhotosPage =(props)=>{
@@ -11,10 +12,13 @@ const PhotosPage =(props)=>{
     	toast.warning(msg, {autoClose:2000});
     }
 	const {photos,title,description,id, goBack, deleteCollectionPhoto, deleteCollection, addErrorMessage, match}= props;
-	const collectionPhotos = photos.map(photo=>(
+	const collectionPhotos = photos.map(photo=>{
+		let newImage = fixImage(photo.image);
+		console.log(newImage);
+		return(
 			<div key={photo.imageId} className="row justify-content-center my-3">
 				<div className="justify-content-center container col-md-10 col-12 photo-container" >
-					<img src={photo.image} alt="" className="img-fluid photo"/> 
+					<img src={newImage} alt="" className="img-fluid photo"/> 
 				</div>
 				<div className="col-md-10">
 					{match.url==='/myportfolio' && (
@@ -39,7 +43,8 @@ const PhotosPage =(props)=>{
 					)}
 				</div>
 			</div>
-		))
+
+		)})
 
 	return (
 		<div className="container mt-5">
