@@ -66,10 +66,10 @@ class VideosForm extends Component{
 			<div className="row justify-content-center mt-3">
 				<div className="col-md-8 col-10">
 					{this.props.video ? (
-						<h1>Edit Your Video</h1>
+						<h3>Edit Your Video</h3>
 					): (
 						<React.Fragment>
-							<h2>Add Videos</h2>
+							<h3>Videos</h3>
 							<p>Share your videos from youtube by pasting in your youtube video link</p>
 						</React.Fragment>
 					)}
@@ -101,9 +101,9 @@ class VideosForm extends Component{
 									name="description"
 								/>
 								{this.props.video? (
-									<button className="btn btn-outline-success my-3" type="submit" >Save Changes</button>
+									<button className="btn button my-3" type="submit" >Save Changes</button>
 								):(
-									<button className="btn btn-outline-success my-3" type="submit" >Add Video</button>
+									<button className="btn button my-3" type="submit" >Add Video</button>
 								)}
 								
 								

@@ -5,7 +5,7 @@ import React from 'react';
 const PortfolioNav = ()=>{
 	return (
 		
-		<div className="nav flex-column nav-pills mt-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+		<div className="nav flex-column nav-pills mt-md-3 mt-0" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 			<a className="nav-link active" id="v-pills-about-tab" data-toggle="pill" href="#about-page" role="tab" aria-controls="v-pills-about" aria-selected="true">About</a>
 			<a className="nav-link" id="v-pills-work-tab" data-toggle="pill" href="#work-page" role="tab" aria-controls="v-pills-work" aria-selected="false">Work</a>
 			<a className="nav-link" id="v-pills-timeline-tab" data-toggle="pill" href="#timeline-page" role="tab" aria-controls="v-pills-timeline" aria-selected="false">Timeline</a>

@@ -109,7 +109,7 @@ export const deleteComment = (id, comment_id)=>{
 	}
 }
 
-export const createProfilePage = (formData)=>{
+export const createProfile = (formData)=>{
 	return async dispatch =>{
 		try{
 			 const response = await apiCall.post('/api/myportfolio/profile', formData);
@@ -121,7 +121,7 @@ export const createProfilePage = (formData)=>{
 	}
 }
 
-export const editProfilePage = (formData)=>{
+export const editProfile = (formData)=>{
 	return async dispatch =>{
 		try{
 			 const response = await apiCall.put('/api/myportfolio/profile', formData);

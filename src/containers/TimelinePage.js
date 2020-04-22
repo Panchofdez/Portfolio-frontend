@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, useRouteMatch} from 'react-router-dom';
 import {deleteTimelinePost} from '../store/actions/portfolios';
 import {toast} from 'react-toastify';
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
@@ -30,14 +30,17 @@ const TimelinePage = (props)=>{
 			  </VerticalTimelineElement>
 		)
 	})
+	let match = useRouteMatch();
 	return(
 		<div>
 			<div className="p-3">
 				<div className="d-flex flex-row justify-content-between">
 					<h2 className="mt-3">Timeline</h2>
-					<div>
-						<Link className="btn button mt-3" to="/myportfolio/edit/timeline"><i className="fas fa-pen"></i></Link>
-					</div>
+					{match.path ==='/myportfolio' && (
+						<div>
+							<Link className="btn button mt-3" to="/myportfolio/edit/timeline"><i className="fas fa-pen"></i></Link>
+						</div>
+					)}
 				</div>
 			</div>
 			<VerticalTimeline layout="1-column">

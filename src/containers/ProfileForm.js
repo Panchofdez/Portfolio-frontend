@@ -1,169 +1,209 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {createProfilePage, editProfilePage} from '../store/actions/portfolios';
+import {createProfile, editProfile} from '../store/actions/portfolios';
 import {addErrorMessage} from '../store/actions/errors';
+import Loading from '../components/Loading';
 import { toast } from 'react-toastify';
 import cloudinaryUpload from '../services/cloudinary';
+import fixImage from '../services/imageOrientation';
 
 class ProfileForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			image:null,
-			location: this.props.portfolio ? this.props.portfolio.location : "City,Country",
-			birthday: this.props.portfolio? this.props.portfolio.birthday : "Year",
-			type:this.props.portfolio? this.props.portfolio.type :"Profession/Occupation",
-			name: this.props.portfolio ? this.props.portfolio.name : "Your name or name of your business"
+			headerImage: this.props.location.state ? this.props.location.state.portfolio.headerImage : null,
+			showHeaderImage:this.props.location.state ? fixImage(this.props.location.state.portfolio.headerImage) : null,
+			profilePic:this.props.location.state ? this.props.location.state.portfolio.profileImage : null,
+			showProfilePic:this.props.location.state ? fixImage(this.props.location.state.portfolio.profileImage) : null,
+			name: this.props.location.state ? this.props.location.state.portfolio.name : "Your name or name of your business",
+			loading:false
 		}
 	};
 	handleChange=(e)=>{
 		this.setState({[e.target.name]:e.target.value});
 	};
 	handleFileChange=(e)=>{
-		this.setState({image:e.target.files[0]});
+		this.setState({[e.target.name]:e.target.files[0]});
+		if(e.target.name ==="headerImage" && e.target.files[0]){
+			this.setState({showHeaderImage:URL.createObjectURL(e.target.files[0])});
+		}
+		if(e.target.name ==="profilePic" && e.target.files[0]){
+			this.setState({showProfilePic:URL.createObjectURL(e.target.files[0])})
+		}
 	};
     notifySuccess=()=>{
     	toast.success("Successfully saved changes", {autoClose:3000});   	
     };
     clearText=(e)=>{
     	this.setState({[e.target.name]:""})
-    }
+    };
 	handleSubmit=async (e)=>{
 		e.preventDefault();
-		if(!this.state.type || !this.state.name || !this.state.location){
-			this.props.addErrorMessage("You must provide a name, profile picture, occupation and your location");
+
+		if(!this.state.profilePic  || this.state.name===""){
+			this.props.addErrorMessage("You must provide a name and profile picture");
 			return;
 		}
-		if(!this.state.image && !this.props.portfolio){
-			this.props.addErrorMessage("You must provide a name, profile picture, occupation and your location");
-			return;
+		this.setState({loading:true});
+		if(this.props.location.state.portfolio){
+			this.handleEdit();
+		}else{
+			this.handleCreate();
 		}
-		let formData = {};
-  		if(this.state.image){
-  			const response = await cloudinaryUpload(this.state.image);
-	  		formData={
-	  			profileImage: response.secure_url,
-	  			profileImageId:response.public_id,
-	  			type:this.state.type,
-	  			name:this.state.name,
-	  			birthday:this.state.birthday,
-	  			location:this.state.location
-	  		}
-  		}else{
-  			formData={
-	  			profileImage:"",
-	  			profileImageId:"",
-	  			type:this.state.type,
-	  			name:this.state.name,
-	  			birthday:this.state.birthday,
-	  			location:this.state.location
-	  		}
-  		}
+	};
+	handleCreate= async()=>{	
 		try{
-			if(this.props.portfolio){
-				await this.props.editProfilePage(formData);
-				this.props.history.push('/myportfolio/profile');
-				this.notifySuccess();
+			const profilePicRes = await cloudinaryUpload(this.state.profilePic);
+			let data ={}
+			if(this.state.headerImage){
+				const coverPhotoRes = await cloudinaryUpload(this.state.headerImage);
+				data = {
+					name:this.state.name, 
+					profileImage:profilePicRes.secure_url,
+					profileImageId:profilePicRes.public_id,
+					headerImage:coverPhotoRes.secure_url,
+					headerImageId:coverPhotoRes.public_id
+				}
 			}else{
-				await this.props.createProfilePage(formData);
-				this.props.history.push("/myportfolio/create/about");
-				this.notifySuccess();
+				data={
+					name:this.state.name, 
+					profileImage:profilePicRes.secure_url,
+					profileImageId:profilePicRes.public_id,
+				}
 			}
-		
+			
+			await this.props.createProfile(data);
+			this.props.history.push("/myportfolio");
+			this.notifySuccess();
 		}catch(err){
 			console.log(err);
-			return;
+		}
+	};
+	handleEdit = async()=>{
+		try{
+			let formData = {}
+			if(this.state.profilePic !== this.props.location.state.portfolio.profileImage){
+				const profileImageRes = await cloudinaryUpload(this.state.profilePic);
+				if(this.state.headerImage && this.state.headerImage !== this.props.location.state.portfolio.headerImage){
+					const headerImageRes = await cloudinaryUpload(this.state.headerImage);
+					formData = {
+						name:this.state.name,
+						profileImage:profileImageRes.secure_url,
+						profileImageId:profileImageRes.public_id,
+						headerImage:headerImageRes.secure_url,
+						headerImageId:headerImageRes.public_id
+					}
+				}else{
+					formData={
+						name:this.state.name,
+						profileImage:profileImageRes.secure_url,
+						profileImageId:profileImageRes.public_id,
+					}
+				}
+			}else if(this.state.headerImage && this.state.headerImage!== this.props.location.state.portfolio.headerImage){
+				const coverPhotoResponse = await cloudinaryUpload(this.state.headerImage);
+				formData = {
+					name:this.state.name,
+					headerImage:coverPhotoResponse.secure_url,
+					headerImageId:coverPhotoResponse.public_id
+				}
+			}else{
+				formData={
+					name:this.state.name
+				}
+			}
+			await this.props.editProfile(formData);
+			this.props.history.push('/myportfolio');
+			this.notifySuccess();
+		}catch(err){
+
 		}
 	}
 
 	render(){
-		const {image, location,birthday,type, name}=this.state;
-		return (
-			<form encType='multipart/form-data' onSubmit={this.handleSubmit}>
-				<div className="row justify-content-center mt-5 pb-5">
-					<div className="col-md-8 col-10">
-						{this.props.portfolio ?(
-							<h1>Edit Your Profile Page</h1>
-						):(
-							<React.Fragment>
-								<p className="float-right">Step 1 of 4</p>
-								<h1>Create Your Portfolio!</h1>
-								<p>You can always edit your portfolio later</p>
-								<p>Lets start by setting up your Profile Page so we can make it easier for people to find and identify you</p>
-							</React.Fragment>
-						)}
-						
-						<div className="form-group">
-							<label htmlFor="name">Give your portfolio a name *</label>
-						 	<input
-						 		value={name} 
-								onChange={this.handleChange}
-								name="name"
-								className="form-control mb-3"
-								type="text"
-								onFocus={!this.props.portfolio ? this.clearText : undefined}
-							/>
-							<label htmlFor="profile-pic">Upload your profile picture *</label>
-							<div className="input-group">
-								<div className="custom-file mb-3" >
-									<input 
-										type="file" 
-										name="image"
-										className="custom-file-input" 
-										id="profile-pic"
-										onChange={this.handleFileChange}
-									/>
-									{image?(<label className="custom-file-label" htmlFor="header-image">{image.name}</label>):(
-									<label className="custom-file-label" htmlFor="header-image">Choose file</label>)}
-								</div>
-							</div>
-							{this.props.portfolio && (<p>Current Profile Picture: {this.props.portfolio.profileImage}</p>)}
-							<label htmlFor="type">What do you do? *</label>
-							<input
-								className="form-control mb-3" 
-								id="type" 
-								value={type} 
-								onChange={this.handleChange}
-								name="type"
-								type="text"
-								onFocus={!this.props.portfolio ? this.clearText :undefined}
-							/>
-							<label htmlFor="location">Location *</label>
-						 	<input
-						 		value={location} 
-								onChange={this.handleChange}
-								name="location"
-								className="form-control mb-3"
-								type="text"
-								id="location"
-								onFocus={!this.props.portfolio ? this.clearText : undefined}
-							/>
-							
-							<label htmlFor="statement">Year of Birth (optional)</label>
-							<input
-
-								className="form-control mb-3" 
-								id="birthday" 
-								value={birthday} 
-								onChange={this.handleChange}
-								name="birthday"
-								type="text"
-								onFocus={!this.props.portfolio ? this.clearText: undefined}
-
-							/>							
-		
-							{this.props.portfolio ?(
-								<button className="btn btn-success form-control mt-3" type="submit" >Save Changes</button>
+		const {headerImage,profilePic, name, showProfilePic, showHeaderImage, loading}=this.state;
+		let portfolio=null;
+		if(this.props.location.state){
+			portfolio= this.props.location.state.portfolio;
+		}
+		if(loading){
+			return <Loading/>
+		}else{
+			return (
+				<form encType='multipart/form-data' onSubmit={this.handleSubmit}>
+					<div className="row justify-content-center mt-5 pb-5">
+						<div className="col-md-8 col-10">
+							{portfolio ?(
+								<h2>Lets make it easier for people to find and identify you</h2>
 							):(
-								<button className="btn btn-success form-control mt-3" type="submit" >Next</button>
+								<React.Fragment>
+									<h1>Create Your Portfolio!</h1>
+									<p>Lets make it easier for people to find and identify you</p>
+								</React.Fragment>
 							)}
 							
+							<div className="form-group">
+								<label htmlFor="name">Name *</label>
+							 	<input
+							 		value={name} 
+									onChange={this.handleChange}
+									name="name"
+									className="form-control mb-3"
+									type="text"
+									onFocus={!portfolio ? this.clearText : undefined}
+								/>
+								<label htmlFor="profile-pic">Profile Picture *</label>
+								<div className="input-group">
+									<div className="custom-file mb-3" >
+										<input 
+											type="file" 
+											name="profilePic"
+											className="custom-file-input" 
+											id="profile-pic"
+											onChange={this.handleFileChange}
+										/>
+										{profilePic?(<label className="custom-file-label" htmlFor="header-image">{profilePic.name}</label>):(
+										<label className="custom-file-label" htmlFor="header-image">Choose file</label>)}
+									</div>
+								</div>
+								{profilePic ?(
+									<div className="justify-content-center row my-3">
+										<img src={showProfilePic} className="rounded"style={{height:'200px', width:'200px'}}/>
+									</div>
+								):null}
+								<label htmlFor="upload-header-image">Cover Photo</label>
+								<div className="input-group mb-3" id="upload-header-image">
+									<div className="custom-file">
+										<input 
+											type="file" 
+											name="headerImage"
+											className="custom-file-input" 
+											id="header-image"
+											onChange={this.handleFileChange}
+										/>
+										{headerImage?(<label className="custom-file-label" htmlFor="header-image">{headerImage.name}</label>):(
+										<label className="custom-file-label" htmlFor="header-image">Choose file</label>)}
+									</div>
+								</div>
+								{headerImage ?(
+									<div className="justify-content-center row my-3">
+										<div className="col-12" >
+											<img src={showHeaderImage} className="img-fluid rounded" style={{height:'200px', width:'100%'}} />
+										</div>
+									</div>
+								):null}
+			
+								
+								<button className="btn button form-control mt-3" type="submit" >Save Changes</button>
+					
+								
+							</div>
 						</div>
 					</div>
-				</div>
-			</form>		
-		)
+				</form>		
+			)
+		}
 	}
 }
 
-export default connect(null,{createProfilePage, editProfilePage, addErrorMessage})(ProfileForm);
+export default connect(null,{createProfile, editProfile, addErrorMessage})(ProfileForm);

@@ -9,10 +9,10 @@ class AboutForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			about: this.props.portfolio ? this.props.portfolio.about : 'This is your chance to tell us something about who you are and what you do',
+			about: this.props.portfolio ? this.props.portfolio.about : 'Your Bio',
 			location: this.props.portfolio ? this.props.portfolio.location : "City,Country",
 			birthday: this.props.portfolio? this.props.portfolio.birthday : "Your Birthday",
-			type:this.props.portfolio? this.props.portfolio.type :"Profession/Occupation"
+			type:this.props.portfolio? this.props.portfolio.type :"What do you do?"
 		}
 		
 	};
@@ -33,26 +33,13 @@ class AboutForm extends Component{
     };
 	handleSubmit=async (e)=>{
 		e.preventDefault();
-		console.log(this.state);
 		try{
-			let formData = {}
-	  		if(this.state.image){
-	    		const response = await cloudinaryUpload(this.state.image);
-		  		formData ={
-		  			headerImage:response.secure_url,
-		  			headerImageId:response.public_id,
-		  			about:this.state.about,
-		  			statement:this.state.statement
-		  		}
-	  		}else{
-	  			formData={
-	  				headerImage:"",
-		  			headerImageId:"",
-		  			about:this.state.about,
-		  			statement:this.state.statement
-	  			}
-	  		}
-  	
+			const formData={
+				type:this.state.type,
+				about:this.state.about,
+				location:this.state.location,
+				birthday:this.state.birthday
+			}
   			if(this.props.portfolio){
   				await this.props.editAboutPage(formData);
   				this.props.history.push('/myportfolio/about');
@@ -71,51 +58,51 @@ class AboutForm extends Component{
   		
 	}
 	render(){
-		const { statement, about, image} = this.state;
+		const {about, type, location, birthday} = this.state;
 		return(
 
 			<form encType='multipart/form-data' onSubmit={this.handleSubmit} >
 
 				<div className="row justify-content-center mt-5 pb-5">
 					<div className="col-md-8 col-10">
-						
-					
-						<h1 className="my-3">About Me</h1>
-						<h5 className="my-3">Tell us about who you are and what you do</h5>
+						<h2 className="my-3">Tell us about who you are and what you do</h2>
 									
 						
 						<div className="form-group">
-							<label htmlFor="upload-image">Upload a Cover Photo</label>
-							<p><small>An image that will make your portfolio stand out</small></p>
-							<div className="input-group mb-3" id="upload-image">
-								<div className="custom-file">
-									<input 
-										type="file" 
-										name="image"
-										className="custom-file-input" 
-										id="header-image"
-										onChange={this.onFileChange}
-									/>
-									{image?(<label className="custom-file-label" htmlFor="header-image">{image.name}</label>):(
-									<label className="custom-file-label" htmlFor="header-image">Choose file</label>)}
-								</div>
-							</div>
-							{this.props.portfolio && ( 
-								<p>Current Header Image: {this.props.portfolio.headerImage}</p>
-							)}
-							<label htmlFor="statement">Mission Statement</label>
-							<textarea 
+							<label htmlFor="type">Profession/Occupation *</label>
+							<input
+								className="form-control mb-3" 
+								id="type" 
+								value={type} 
+								onChange={this.handleChange}
+								name="type"
+								type="text"
+								onFocus={!this.props.portfolio ? this.clearText :undefined}
+							/>
+							<label htmlFor="location">Location *</label>
+						 	<input
+						 		value={location} 
+								onChange={this.handleChange}
+								name="location"
+								className="form-control mb-3"
+								type="text"
+								id="location"
+								onFocus={!this.props.portfolio ? this.clearText : undefined}
+							/>
+							
+							<label htmlFor="statement">Birthday (optional)</label>
+							<input
 
 								className="form-control mb-3" 
-								id="statement" 
-								rows="2" 
-								value={statement} 
+								id="birthday" 
+								value={birthday} 
 								onChange={this.handleChange}
-								name="statement"
+								name="birthday"
+								type="text"
 								onFocus={!this.props.portfolio ? this.clearText: undefined}
 
-							/>
-							<label htmlFor="about">About</label>
+							/>							
+							<label htmlFor="about">Bio</label>
 							<textarea 
 								className="form-control mb-3" 
 								id="about" 

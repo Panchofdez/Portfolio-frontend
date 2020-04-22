@@ -17,7 +17,10 @@ const PortfolioForm =(props)=>{
 				<Route exact path={`${path}/about`}>
 					<AboutForm {...props}/>
 				</Route>
-				<Route exact path={`${path}/profile`} component={withPortfolioCheck(ProfileForm)}/>
+				<Route exact path={`${path}/profile`}>
+					<ProfileForm {...props}/>
+				</Route>
+
 				<Route exact path={`${path}/timeline`}>
 					<TimelineForm {...props}/>
 				</Route>

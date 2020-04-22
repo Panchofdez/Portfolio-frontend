@@ -81,9 +81,9 @@ class CollectionForm extends Component{
 			<div className="row justify-content-center mt-4">
 				<div className="col-md-8 col-10">
 					{this.props.collection ? (
-						<h2 >Edit Your Collection</h2>
+						<h3 >Edit Your Collection</h3>
 					):(
-						<h2>Add Collections</h2>
+						<h3>Collections</h3>
 					)}
 
 					<form encType='multipart/form-data' onSubmit={this.handleSubmit} >
@@ -131,9 +131,9 @@ class CollectionForm extends Component{
 							
 						</div>
 						{this.props.collection? (
-							<button className="btn btn-outline-success my-3" type="submit">Save Changes</button>
+							<button className="btn button my-3" type="submit">Save Changes</button>
 						):(
-							<button className="btn btn-outline-success my-3" type="submit">Add Collection</button>
+							<button className="btn button my-3" type="submit">Add Collection</button>
 						)}
 
 					</form>

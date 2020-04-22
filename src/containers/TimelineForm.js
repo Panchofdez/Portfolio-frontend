@@ -73,9 +73,7 @@ class TimelineForm extends Component{
 			
 			<div className="row justify-content-center mt-5">
 				<div className="col-md-8 col-10">
-					{!this.props.portfolio && <p className="float-right">Step 4 of 4</p>}
-					<h1>Timeline</h1>
-					<p>Add achievements, events, education and past jobs to your career timeline</p>					
+					<h2 className="my-3">Add achievements, events, education and past jobs to your career timeline</h2>					
 					<form onSubmit={this.handleSave}>
 							<div className="form-group">
 							 	<label htmlFor="title">Title</label> 
@@ -104,14 +102,14 @@ class TimelineForm extends Component{
 								/>
 								{this.props.post? (
 									<button 
-									className="btn btn-outline-success my-3" 
+									className="btn button my-3" 
 										type="submit" 
 									>
 									Save Post
 									</button>
 								):(
 									<button 
-										className="btn btn-outline-success my-3" 
+										className="btn button my-3" 
 										type="submit" 
 									>
 									Add Post To Timeline
@@ -125,14 +123,9 @@ class TimelineForm extends Component{
 								<h3>Successfully Added:</h3>
 								{timelinePosts}
 							</div>
-							<button className="btn btn-success  form-control my-3" onClick={()=>{
-								if(this.props.match.url.split('/')[2]==='create'){
-									this.props.history.push('/myportfolio');									
-								}else{
-									this.props.history.push('/myportfolio/timeline');	
-								}
-								
-							}}>Finish</button>
+							<button className="btn button  form-control my-3" onClick={()=>{
+								this.props.history.push('/myportfolio');							
+							}}>Save Changes</button>
 						</React.Fragment>
 					)}					
 				</div>

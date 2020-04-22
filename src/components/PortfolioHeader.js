@@ -1,5 +1,5 @@
 import React from 'react';
-import {useRouteMatch} from 'react-router-dom';
+import {useRouteMatch, Link} from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
@@ -58,7 +58,8 @@ const PortfolioHeader = ({portfolio, recommending, setRecommendationState, recom
 				)}
 				{match.path==='/myportfolio' &&(
 					<div>
-						<a className="btn button" data-toggle="modal" data-target="#shareModal">Share</a>
+						<a className="btn button mx-2" data-toggle="modal" data-target="#shareModal">Share</a> 
+						<Link className="btn button"  to={{pathname:'/myportfolio/edit/profile', state:{portfolio}}}><i className="fas fa-pen"></i></Link>
 					</div>
 				)}
 			</div>

@@ -44,8 +44,8 @@ html {
   .pill-link{
     font-size: 15px;
   }
-  #header-image{
-    height:120px
+  .header-image{
+    height:140px
   }
   #profile-pic{
     max-height:140px;
@@ -110,7 +110,7 @@ html {
   .pill-link{
     font-size: 17px;
   }
-  #header-image{
+  .header-image{
     height:160px
   }
   #profile-pic{
@@ -118,7 +118,7 @@ html {
     padding-right: 0px;
   }
   #comment-profile-pic{
-    max-height:140px;
+    max-height:180px;
   }
   .carousel-photo{
     height:350px
@@ -177,8 +177,8 @@ html {
   .pill-link{
     font-size: 19px;
   }
-  #header-image{
-    height:180px
+  .header-image{
+    height:200px
   }
   #profile-pic{
      max-height:180px;
@@ -245,8 +245,8 @@ html {
   .pill-link{
     font-size: 20px;
   }
-  #header-image{
-    height:200px;
+  .header-image{
+    height:220px;
   }
   #profile-pic{
      max-height:220px;
