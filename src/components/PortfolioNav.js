@@ -1,17 +1,46 @@
 import React from 'react';
+import {Link, useRouteMatch, useLocation} from 'react-router-dom';
 
 
 
 const PortfolioNav = ()=>{
+	let match = useRouteMatch();
+	let location = useLocation();
 	return (
 		
-		<div className="nav flex-column nav-pills mt-md-3 mt-0" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-			<a className="nav-link active" id="v-pills-about-tab" data-toggle="pill" href="#about-page" role="tab" aria-controls="v-pills-about" aria-selected="true">About</a>
-			<a className="nav-link" id="v-pills-work-tab" data-toggle="pill" href="#work-page" role="tab" aria-controls="v-pills-work" aria-selected="false">Work</a>
-			<a className="nav-link" id="v-pills-timeline-tab" data-toggle="pill" href="#timeline-page" role="tab" aria-controls="v-pills-timeline" aria-selected="false">Timeline</a>
-			<a className="nav-link" id="v-pills-comments-tab" data-toggle="pill" href="#comments-page" role="tab" aria-controls="v-pills-comments" aria-selected="false">Comments</a>
-			<a className="nav-link" id="v-pills-recommendations-tab" data-toggle="pill" href="#recommendations-page" role="tab" aria-controls="v-pills-recommendations" aria-selected="true">Recommendations</a>
+		<div className="nav flex-column nav-pills mt-md-3 mt-0" id="v-pills-tab">
+			<Link 
+				className={location.pathname ===`${match.url}/about`|| location.pathname === match.url ? "nav-link active": "nav-link"} 
+				id="v-pills-about-tab" 
+				to={`${match.url}/about`} 
+			>About
+			</Link>
+			<Link 
+				className={location.pathname ===`${match.url}/work`? "nav-link active": "nav-link"}
+				id="v-pills-work-tab"  
+				to={`${match.url}/work`} 
+			>Work
+			</Link>
+			<Link 
+				className={location.pathname ===`${match.url}/timeline`? "nav-link active": "nav-link"}
+				id="v-pills-timeline-tab" 
+				to={`${match.url}/timeline`}
+			>Timeline
+			</Link>
+			<Link 
+				className={location.pathname ===`${match.url}/comments`? "nav-link active": "nav-link"}
+				id="v-pills-comments-tab" 
+				to={`${match.url}/comments`} 
+			>Comments
+			</Link>
+			<Link 
+				className={location.pathname ===`${match.url}/recommendations`? "nav-link active": "nav-link"}
+				id="v-pills-recommendations-tab"
+				to={`${match.url}/recommendations`}
+			>Recommendations
+			</Link>
 		</div>
+
 
 
 

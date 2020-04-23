@@ -8,9 +8,9 @@ class TimelineForm extends Component{
 		super(props);
 		this.state={
 			timeline:[],
-			title:this.props.post ? this.props.post.title : "",
-			date: this.props.post ? this.props.post.date : "",
-			text: this.props.post ? this.props.post.text : "",
+			title:this.props.location.state ? this.props.location.state.post.title : "",
+			date: this.props.location.state ? this.props.location.state.post.date : "",
+			text: this.props.location.state ? this.props.location.state.post.text : "",
 			id:1
 		}
 	};
@@ -26,14 +26,14 @@ class TimelineForm extends Component{
 	handleSave=async(e)=>{
 		e.preventDefault();
 		try{
-			if(this.props.post){
+			if(this.props.location.state){
 				await this.props.editTimelinePost({
 					post:{
 						title:this.state.title,
 						date:this.state.date,
 						text:this.state.text
 					}
-				}, this.props.post._id);
+				}, this.props.location.state.post._id);
 				this.props.history.push('/myportfolio/timeline');
 				this.notifySuccess("Successfully Saved Changes");
 			}else{
@@ -69,6 +69,10 @@ class TimelineForm extends Component{
 		})
 
 		const {title, date, text} = this.state;
+		let post = null;
+		if(this.props.location.state){
+			post = this.props.location.state.post;
+		}
 		return(
 			
 			<div className="row justify-content-center mt-5">
@@ -100,7 +104,7 @@ class TimelineForm extends Component{
 									onChange={this.handleChange}
 									name="text"
 								/>
-								{this.props.post? (
+								{post? (
 									<button 
 									className="btn button my-3" 
 										type="submit" 
@@ -117,14 +121,13 @@ class TimelineForm extends Component{
 								)}							
 							</div>
 					</form>
-					{!this.props.post && (
+					{!post && (
 						<React.Fragment>
 							<div>
-								<h3>Successfully Added:</h3>
 								{timelinePosts}
 							</div>
 							<button className="btn button  form-control my-3" onClick={()=>{
-								this.props.history.push('/myportfolio');							
+								this.props.history.push('/myportfolio/timeline');							
 							}}>Save Changes</button>
 						</React.Fragment>
 					)}					

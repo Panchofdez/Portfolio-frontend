@@ -44,10 +44,10 @@ class CommentsPage extends Component{
 		const comments = this.props.portfolio.comments.map(comment=>{
 			let newImage = fixImage(comment.author.profileImage);
 			return (
-				<div key={comment._id} class="media rounded p-3 mb-3" style={{backgroundColor:'white', color:'#161716'}}>
-				  <img src={newImage} class="align-self-start mr-3 img-fluid rounded-circle" id="comment-profile-pic" alt="..." />
-				  <div class="media-body">
-				    <h5 class="mt-0">{comment.author.name}</h5>
+				<div key={comment._id} className="media rounded p-3 mb-3" style={{backgroundColor:'white', color:'#161716'}}>
+				  <img src={newImage} className="align-self-start mr-3 img-fluid rounded-circle" id="comment-profile-pic" alt="..." />
+				  <div className="media-body">
+				    <h5 className="mt-0">{comment.author.name}</h5>
 				    <p>
 				    	<small className="text-muted">
 							<Moment format="DD/MM/YYYY">

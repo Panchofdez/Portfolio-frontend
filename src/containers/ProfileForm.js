@@ -73,7 +73,7 @@ class ProfileForm extends Component{
 			}
 			
 			await this.props.createProfile(data);
-			this.props.history.push("/myportfolio");
+			this.props.history.push("/myportfolio/about");
 			this.notifySuccess();
 		}catch(err){
 			console.log(err);
@@ -113,7 +113,7 @@ class ProfileForm extends Component{
 				}
 			}
 			await this.props.editProfile(formData);
-			this.props.history.push('/myportfolio');
+			this.props.history.push('/myportfolio/about');
 			this.notifySuccess();
 		}catch(err){
 

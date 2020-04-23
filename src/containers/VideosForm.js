@@ -9,9 +9,9 @@ class VideosForm extends Component{
 		super(props);
 		this.state={
 			videos:[],
-			title: this.props.video? this.props.video.title : "",
-			description:this.props.video?this.props.video.description : "",
-			link:this.props.video? this.props.video.link : ""
+			title: this.props.location.state ? this.props.location.state.video.title : "",
+			description:this.props.location.state?this.props.location.state.video.description : "",
+			link:this.props.location.state? this.props.location.state.video.link : ""
 		}
 	};
 	handleChange=(e)=>{
@@ -32,12 +32,12 @@ class VideosForm extends Component{
 			return;
 		}
 		try{
-			if(this.props.video){
+			if(this.props.location.state){
 				await this.props.editVideo({
 					title:this.state.title,
 					description:this.state.description,
 					link:link
-				}, this.props.video._id);
+				}, this.props.location.state.video._id);
 				this.props.history.push("/myportfolio/work");
 				this.notifySuccess("Successfully Saved Changes");
 			}else{
@@ -62,15 +62,19 @@ class VideosForm extends Component{
 		const videosAdded = videos.map((video)=>{
 			return <div key={video} className="alert alert-success">Successfully added {video}</div>
 		})
+		let video = null;
+		if(this.props.location.state){
+			video = this.props.location.state.video;
+		}
 		return (
-			<div className="row justify-content-center mt-3">
+			<div className="row justify-content-center mt-5">
 				<div className="col-md-8 col-10">
 					{this.props.video ? (
 						<h3>Edit Your Video</h3>
 					): (
 						<React.Fragment>
 							<h3>Videos</h3>
-							<p>Share your videos from youtube by pasting in your youtube video link</p>
+							<p>Share your videos from youtube by copying and pasting your youtube video link</p>
 						</React.Fragment>
 					)}
 					
@@ -100,7 +104,7 @@ class VideosForm extends Component{
 									onChange={this.handleChange}
 									name="description"
 								/>
-								{this.props.video? (
+								{video? (
 									<button className="btn button my-3" type="submit" >Save Changes</button>
 								):(
 									<button className="btn button my-3" type="submit" >Add Video</button>
@@ -108,9 +112,7 @@ class VideosForm extends Component{
 								
 								
 							</div>
-					</form>	
-					{!this.props.video && <h4>Successfully Added:</h4>	 }
-									
+					</form>			
 					{videosAdded}
 				</div>
 			</div>

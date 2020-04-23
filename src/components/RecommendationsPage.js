@@ -21,7 +21,8 @@ class RecommendationsPage extends Component{
 	}
 	fetchRecommendations = async()=>{
 		try{
-			const url=`/api${this.props.match.url}/recommendations`
+
+			const url=`/api/portfolios/${this.props.id}/recommendations`
 			const response = await apiCall.get(url);
 			const {recommendations, recommending} =response.data;
 			if(this._isMounted===true){

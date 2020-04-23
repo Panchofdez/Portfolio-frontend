@@ -17,7 +17,6 @@ export default function withPortfolioCheck(WrappedComponent){
 				}
 			}
 			checkPortfolioOwnership();
-			console.log(this.props.portfolio)
 			if(this.props.portfolio){
 				this.props.history.push('/myportfolio');
 

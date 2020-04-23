@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Switch, Route, withRouter} from 'react-router-dom';
+import {Switch, Route, withRouter, Redirect} from 'react-router-dom';
 import AboutPage from '../components/AboutPage';
 import CommentsPage from './CommentsPage';
 import TimelinePage from './TimelinePage';
@@ -9,16 +9,6 @@ import WorkPage from '../components/WorkPage';
 import RecommendationsPage from '../components/RecommendationsPage';
 import PortfolioHeader from '../components/PortfolioHeader';
 import Loading from '../components/Loading';
-import AboutForm from './AboutForm';
-import TimelineForm from './TimelineForm';
-import WorkForm from '../components/WorkForm';
-import CollectionForm from './CollectionForm';
-import VideosForm from './VideosForm';
-import ProfileForm from './ProfileForm';
-import ContactInfoForm from './ContactInfoForm';
-import withVideoData from '../hocs/withVideoData';
-import withCollectionData from '../hocs/withCollectionData';
-import withPostData from '../hocs/withPostData';
 import{addErrorMessage} from '../store/actions/errors';
 import PortfolioNav from '../components/PortfolioNav';
 import {getMyPortfolio, getPortfolio, clearPortfolio, recommend, unRecommend} from '../store/actions/portfolios';
@@ -34,6 +24,7 @@ class PortfolioPage extends Component{
 		}
 	}
 	componentDidMount(){
+		console.log('mounted')
 		if(this.props.history.location.pathname.split("/")[1]==='myportfolio'){
 			this.fetchMyPortfolio();
 		}else{
@@ -55,7 +46,7 @@ class PortfolioPage extends Component{
 	// 		}
 	// 	}
 		
-	// }
+	// };
 	fetchMyPortfolio= async()=>{
 		try{
 			await this.props.getMyPortfolio();
@@ -87,8 +78,7 @@ class PortfolioPage extends Component{
 		this.setState({recommending:!this.state.recommending});
 	}
 	render(){
-		const {portfolio, recommend, unRecommend, addErrorMessage, location} = this.props;
-		const {url} = this.props.match;
+		const {portfolio, recommend, unRecommend, addErrorMessage, match, location} = this.props;
 		let style ="";
 		let profilePic="";
 		if(portfolio){
@@ -135,27 +125,29 @@ class PortfolioPage extends Component{
 									unRecommend={unRecommend}
 									location={location}
 								/>
-								<div className="tab-content" id="v-pills-tabContent">
-							      <div className="tab-pane fade show active" id="about-page" role="tabpanel" aria-labelledby="v-pills-about-tab">
-							      	<AboutPage 
-										portfolio={portfolio}
-										{...this.props}
-									/>
-							      </div>
-							      <div className="tab-pane fade" id="work-page" role="tabpanel" aria-labelledby="v-pills-work-tab">
-							      	<WorkPage collections={portfolio.collections} videos={portfolio.videos} {...this.props} />
-							      </div>
-							      <div className="tab-pane fade" id="timeline-page" role="tabpanel" aria-labelledby="v-pills-timeline-tab">
-							      	<TimelinePage timeline={portfolio.timeline} {...this.props}/>
-							      </div>
-							      <div className="tab-pane fade" id="comments-page" role="tabpanel" aria-labelledby="v-pills-comments-tab">
-							      	<CommentsPage comments={portfolio.comments} {...this.props}/>
-							      </div>
-							      <div className="tab-pane fade" id="recommendations-page" role="tabpanel" aria-labelledby="v-pills-recommendations-tab">
-							      	<RecommendationsPage addErrorMessage={addErrorMessage} {...this.props}/>
-							      </div>
-							    </div>
-							
+							    <Switch>				
+									<Route exact path={`${match.path}/about`}>
+										<AboutPage 
+											portfolio={portfolio}
+											{...this.props}
+										/>
+									</Route>
+									<Route exact path={`${match.url}/work`}>
+										<WorkPage collections={portfolio.collections} videos={portfolio.videos} {...this.props} />
+									</Route>
+									<Route exact path={`${match.url}/timeline`}>
+										<TimelinePage timeline={portfolio.timeline} {...this.props}/>
+									</Route>
+									<Route exact path={`${match.url}/comments`}>
+										<CommentsPage comments={portfolio.comments} {...this.props}/>
+									</Route>
+									<Route exact path={`${match.url}/recommendations`}>
+										<RecommendationsPage addErrorMessage={addErrorMessage} id={portfolio._id} {...this.props}/>
+									</Route>
+									<Route path={match.url}>
+										<Redirect to={`${match.url}/about`}/>
+									</Route>
+								</Switch>	
 								
 							</div>
 						</div>
@@ -196,9 +188,7 @@ export default withRouter(connect(mapStateToProps, {getMyPortfolio, getPortfolio
 // <Route exact path='/myportfolio/edit/work'>
 // 	<WorkForm {...this.props}/>
 // </Route>
-// <Route path='/myportfolio/edit/videos/:id' component={withVideoData(VideosForm)}/>
-// <Route path='/myportfolio/edit/collections/:id' component={withCollectionData(CollectionForm)}/>
-// <Route path='/myportfolio/edit/timeline/:id' component={withPostData(TimelineForm)}/>
+
 
 
 // </Switch>	

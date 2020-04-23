@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Moment from 'react-moment';
 import { toast } from 'react-toastify';
 import { readNotification, getCurrentUser, clearNotifications} from '../store/actions/auth';
+import fixImage from '../services/imageOrientation';
 
 
 class Navbar extends Component{
@@ -26,7 +27,7 @@ class Navbar extends Component{
     };
     notificationPress=async(id, portfolio)=>{
     	try{
-    		console.log(id)
+    		console.log(id);
 			await this.props.readNotification(id);
 			this.props.history.push(`/portfolios/${portfolio}`);
 		}catch(err){
@@ -38,6 +39,7 @@ class Navbar extends Component{
 		let notifications=[];
 		if(currentUser.notifications){
 			notifications = currentUser.notifications.map((n)=>{
+				let newImage=fixImage(n.profileImage);
 				return(
 					<div
 						key={n._id}
@@ -46,8 +48,8 @@ class Navbar extends Component{
 						onClick={()=>this.notificationPress(n._id,n.portfolio)}
 					>
 						<div className="row no-gutters p-0 notification-container">
-							<div className="col-2">
-								<img src={n.profileImage} alt="" className="card-img img-fluid"/>
+							<div className="col-2" style={{maxHeight:'60px'}}>
+								<img src={newImage} alt="" className="card-img" style={{height:'100%', width:'100%'}}/>
 							</div>
 							<div className="col-10 card-body p-3 notification">
 								<p className="card-text m-0">{n.text}</p> 
@@ -75,10 +77,10 @@ class Navbar extends Component{
 					<div className="collapse navbar-collapse" id="navbarNav">					
 						{!isAuthenticated ? (
 							<ul className="navbar-nav justify-content-end ml-auto">
-								<li className="nav-item">
+								<li className="nav-item mx-3">
 									<Link to="/signup" className="nav-link">Sign Up</Link>
 								</li>
-								<li className="nav-item">
+								<li className="nav-item mx-3">
 									<Link to="/signin" className="nav-link">Sign in</Link>
 								</li>
 							</ul>

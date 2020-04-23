@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
-import {createAboutPage, editAboutPage} from '../store/actions/portfolios';
+import {editAbout} from '../store/actions/portfolios';
 import { toast } from 'react-toastify';
-import cloudinaryUpload from '../services/cloudinary';
 
 
 class AboutForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			about: this.props.portfolio ? this.props.portfolio.about : 'Your Bio',
-			location: this.props.portfolio ? this.props.portfolio.location : "City,Country",
-			birthday: this.props.portfolio? this.props.portfolio.birthday : "Your Birthday",
-			type:this.props.portfolio? this.props.portfolio.type :"What do you do?"
+			about: this.props.location.state.portfolio ? this.props.location.state.portfolio.about : 'Your Bio',
+			location: this.props.location.state.portfolio ? this.props.location.state.portfolio.location : "City,Country",
+			birthday: this.props.location.state.portfolio?this.props.location.state.portfolio.birthday : "Your Birthday",
+			type:this.props.location.state.portfolio? this.props.location.state.portfolio.type :"What do you do?",
+			loading:false
 		}
 		
 	};
@@ -40,18 +40,10 @@ class AboutForm extends Component{
 				location:this.state.location,
 				birthday:this.state.birthday
 			}
-  			if(this.props.portfolio){
-  				await this.props.editAboutPage(formData);
-  				this.props.history.push('/myportfolio/about');
-  				this.notifySuccess();
-  				
-	  		}else{
-	  			await this.props.createAboutPage(formData);
-				this.props.history.push('/myportfolio/create/work');
-				this.notifySuccess();
-				
-	  		}
-  			
+  			console.log(formData);
+			await this.props.editAbout(formData);
+			this.props.history.push('/myportfolio/about');
+			this.notifySuccess();
   		}catch(err){
   			return;
   		}
@@ -59,6 +51,10 @@ class AboutForm extends Component{
 	}
 	render(){
 		const {about, type, location, birthday} = this.state;
+		let portfolio = null;
+		if(this.props.location.state){
+			portfolio=this.props.location.state.portfolio;
+		}
 		return(
 
 			<form encType='multipart/form-data' onSubmit={this.handleSubmit} >
@@ -77,7 +73,7 @@ class AboutForm extends Component{
 								onChange={this.handleChange}
 								name="type"
 								type="text"
-								onFocus={!this.props.portfolio ? this.clearText :undefined}
+								onFocus={!portfolio ? this.clearText :undefined}
 							/>
 							<label htmlFor="location">Location *</label>
 						 	<input
@@ -87,7 +83,7 @@ class AboutForm extends Component{
 								className="form-control mb-3"
 								type="text"
 								id="location"
-								onFocus={!this.props.portfolio ? this.clearText : undefined}
+								onFocus={!portfolio ? this.clearText : undefined}
 							/>
 							
 							<label htmlFor="statement">Birthday (optional)</label>
@@ -99,7 +95,7 @@ class AboutForm extends Component{
 								onChange={this.handleChange}
 								name="birthday"
 								type="text"
-								onFocus={!this.props.portfolio ? this.clearText: undefined}
+								onFocus={!portfolio ? this.clearText: undefined}
 
 							/>							
 							<label htmlFor="about">Bio</label>
@@ -110,7 +106,7 @@ class AboutForm extends Component{
 								value={about} 
 								onChange={this.handleChange}
 								name="about"
-								onFocus={!this.props.portfolio ? this.clearText: undefined}
+								onFocus={!portfolio ? this.clearText: undefined}
 							/>
 							<button className="btn button form-control mt-3" type="submit" >Save Changes</button>
 							
@@ -124,4 +120,4 @@ class AboutForm extends Component{
 	
 }
 
-export default connect(null, {createAboutPage,editAboutPage})(AboutForm);
+export default connect(null, {editAbout})(AboutForm);

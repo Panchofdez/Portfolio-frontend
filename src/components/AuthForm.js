@@ -86,13 +86,13 @@ class AuthForm extends Component{
 								className="form-control"
 							/>
 						</div>
-						<button type="submit" className="btn btn-success btn-block my-3" >{buttonText}</button>
+						<button type="submit" className="btn button btn-block my-3" >{buttonText}</button>
 					</form>
 					{type==="signup" && (
-						<Link to="/signin" className="nav-link">Already have an account? Sign in instead</Link>
+						<Link to="/signin" className="nav-link pl-0">Already have an account? Sign in instead</Link>
 					)}
 					{type==="signin" && (
-						<Link to="/signup" className="nav-link">Don't have an account? Sign up!</Link>
+						<Link to="/signup" className="nav-link pl-0">Don't have an account? Sign up!</Link>
 					)}
 				</div>
 			</div>

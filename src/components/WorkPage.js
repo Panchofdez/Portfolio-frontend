@@ -1,23 +1,57 @@
 import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
 import PhotosPage from './PhotosPage';
 import VideosPage from './VideosPage';
 import Carousel from './Carousel';
 import {Link, useRouteMatch} from 'react-router-dom';
-
+import { deleteCollection,deleteCollectionPhoto, deleteVideo} from '../store/actions/portfolios';
+import {addErrorMessage} from '../store/actions/errors';
+import {toast} from 'react-toastify';
 
 const  WorkPage = (props)=>{
 	useEffect(()=>{
 	  window.scrollTo(0, 0)
 	},[]);
+	const notifyDelete=(msg)=>{
+    	toast.warning(msg, {autoClose:2000});
+    }
 	let match = useRouteMatch();
-	const {collections, videos} = props;
+	const {collections, videos,deleteCollection, deleteCollectionPhoto, addErrorMessage,deleteVideo,history} = props;
 	const collectionsArr = collections.map(collection =>{
 		return (
-			<div  key={collection._id}>
-				<Carousel collection={collection}/>
-				<div className="p-5 rounded-bottom mb-5" style={{backgroundColor:'#fff', color:'#161716'}}>
+			<div  key={collection._id} className="row mt-4 px-3">
+				<Carousel collection={collection} deleteCollectionPhoto={deleteCollectionPhoto} addErrorMessage={addErrorMessage} history={history}/>
+				<div className="p-5 col-12 rounded-bottom mb-5" style={{backgroundColor:'#fff', color:'#161716'}}>
 					<h4>{collection.title}</h4>
 					<p>{collection.description}</p>
+					{match.url==='/myportfolio/work' && (
+						<div className="float-right">
+							<Link 
+								className="btn button-outline btn-sm mr-3" 
+								to={{
+									pathname:`/myportfolio/edit/collections/${collection._id}`,
+									state:{collection}
+								}}
+							>
+								<i className="fas fa-pen"></i>
+							</Link>
+							<button 
+								className="btn btn-outline-danger btn-sm" 
+								onClick={async()=>{
+									try{
+										await deleteCollection(collection._id);
+										notifyDelete('Deleted Collection');
+									}catch(err){
+										return;
+									}
+									
+								}}
+							>
+								<i className="fas fa-trash"></i>
+							</button>
+						</div>
+					)}
+					
 				</div>
 			</div>
 		)
@@ -25,20 +59,22 @@ const  WorkPage = (props)=>{
 	return(
 
 		<div className="p-3">
-			{match.path ==='/myportfolio' && (
-				<div className="d-flex flex-row justify-content-between">
-					<h2 className="mt-3 mb-4">Work</h2>
+			
+			<div className="d-flex flex-row justify-content-between">
+				<h2 className="mt-3">Work</h2>
+				{match.path ==='/myportfolio/work' && (
 					<div>
 						<Link className="btn button mt-3" to="/myportfolio/edit/work"><i className="fas fa-pen"></i></Link>
 					</div>
-				</div>
-			)}
+				)}
+			</div>
+
 			{collectionsArr}
-			<VideosPage videos={videos} {...props}/>
+			<VideosPage videos={videos} url={match.url} deleteVideo={deleteVideo} {...props}/>
 		</div>
 
 			
 	)
 } 
 
-export default WorkPage;
+export default connect(null, {deleteCollection, deleteCollectionPhoto, deleteVideo, addErrorMessage})(WorkPage);
