@@ -18,7 +18,7 @@ const VideosPage = ({videos, deleteVideo, history, url})=>{
 					<iframe className="rounded" title={video._id} width="560" height="315" src={`https://www.youtube.com/embed/${video.link}?rel=0`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 				</div>
 			
-				<div className="p-5 rounded-bottom mb-5 "  style={{backgroundColor:'#fff', color:'#161716'}}>
+				<div className="p-5 col-12 rounded-bottom mb-5 "  style={{backgroundColor:'#fff', color:'#161716'}}>
 					<h3>{video.title}</h3>
 					<p>{video.description}</p>
 					{url==='/myportfolio/work' && (
