@@ -58,7 +58,6 @@ export const readNotification = (id)=>{
 	return async dispatch=>{
 		try{
 			const response = await apiCall.put(`/api/user/notifications/${id}`);
-			console.log(response.data);
 			dispatch(setCurrentUser(response.data));
 			return response.data;
 		}catch(err){

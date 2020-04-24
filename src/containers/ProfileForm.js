@@ -45,7 +45,7 @@ class ProfileForm extends Component{
 			return;
 		}
 		this.setState({loading:true});
-		if(this.props.location.state.portfolio){
+		if(this.props.location.state && this.props.location.state.portfolio){
 			this.handleEdit();
 		}else{
 			this.handleCreate();
@@ -168,7 +168,7 @@ class ProfileForm extends Component{
 								</div>
 								{profilePic ?(
 									<div className="justify-content-center row my-3">
-										<img src={showProfilePic} className="rounded"style={{height:'200px', width:'200px'}}/>
+										<img src={showProfilePic} className="rounded"style={{height:'200px', width:'200px'}} alt=""/>
 									</div>
 								):null}
 								<label htmlFor="upload-header-image">Cover Photo</label>
@@ -188,7 +188,7 @@ class ProfileForm extends Component{
 								{headerImage ?(
 									<div className="justify-content-center row my-3">
 										<div className="col-12" >
-											<img src={showHeaderImage} className="img-fluid rounded" style={{height:'200px', width:'100%'}} />
+											<img src={showHeaderImage} className="img-fluid rounded" style={{height:'200px', width:'100%'}} alt=""/>
 										</div>
 									</div>
 								):null}

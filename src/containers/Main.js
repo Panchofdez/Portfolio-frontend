@@ -7,9 +7,9 @@ import Homepage from '../components/Homepage';
 import PortfolioList from './PortfolioList';
 import PortfolioForm from '../components/PortfolioForm';
 import PortfolioPage from './PortfolioPage'
-import ProfilePage from '../components/ProfilePage';
 import NotificationsPage from '../containers/NotificationsPage';
 import withAuth from '../hocs/withAuth';
+import withPortfolioCheck from '../hocs/withPortfolioCheck';
 import {clearErrorMessage} from '../store/actions/errors';
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -43,7 +43,6 @@ class Main extends Component{
                     <Route path="/myportfolio/create" component={withAuth(PortfolioForm)}/>
                     <Route path="/myportfolio/edit" component={withAuth(PortfolioForm)}/>
                     <Route path="/myportfolio" component={withAuth(PortfolioPage)}/>
-                    <Route path="/myaccount" component={withAuth(ProfilePage)}/>
                     <Route exact path="/notifications" component={withAuth(NotificationsPage)}/>
                 </Switch>
             </React.Fragment>

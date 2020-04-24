@@ -50,9 +50,7 @@ class CommentsPage extends Component{
 				    <h5 className="mt-0">{comment.author.name}</h5>
 				    <p>
 				    	<small className="text-muted">
-							<Moment format="DD/MM/YYYY">
-                 				{comment.createdAt}
-             				</Moment>             			
+							<Moment fromNow>{comment.createdAt}</Moment>           			
              			</small>
 					</p>
 				    <p>{comment.text}</p>

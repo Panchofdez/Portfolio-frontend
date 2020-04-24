@@ -8,12 +8,12 @@ import withPortfolioCheck from '../hocs/withPortfolioCheck';
 import CollectionForm from '../containers/CollectionForm';
 import VideosForm from '../containers/VideosForm';
 import ContactInfoForm from '../containers/ContactInfoForm';
+import SkillsForm from '../containers/SkillsForm';
 
 
 
 const PortfolioForm =(props)=>{
 	let {path} = useRouteMatch();
-	console.log(path);
 	return(
 		<div className='container'>
 			<Switch>				
@@ -30,15 +30,22 @@ const PortfolioForm =(props)=>{
 				<Route exact path={`${path}/work`}>
 					<WorkForm {...props} path={path}/>
 				</Route>
-				<Route path='/myportfolio/edit/videos/:id'>
+				<Route exact path={`${path}/skills`}>
+					<SkillsForm {...props}/>
+				</Route>
+				<Route exact path={`${path}/contact`}>
+					<ContactInfoForm {...props}/>
+				</Route>
+				<Route path={`${path}/videos/:id`}>
 					<VideosForm {...props}/>
 				</Route>
-				<Route path='/myportfolio/edit/collections/:id'>
+				<Route path={`${path}/collections/:id`}>
 					<CollectionForm {...props}/>
 				</Route>
-				<Route path='/myportfolio/edit/timeline/:id'>
+				<Route path={`${path}/timeline/:id`}>
 					<TimelineForm {...props}/>
 				</Route>
+
 				<Route path={path} component={withPortfolioCheck(ProfileForm)}/>
 				
 

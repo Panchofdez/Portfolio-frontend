@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import PhotosPage from './PhotosPage';
 import VideosPage from './VideosPage';
 import Carousel from './Carousel';
 import {Link, useRouteMatch} from 'react-router-dom';

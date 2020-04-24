@@ -12,7 +12,6 @@ const AboutPage = ({portfolio, history}) =>{
 		)
 	})
 	let match = useRouteMatch();
-	console.log(match);
 	return (
 		<React.Fragment>
 			<div className="p-3 border-bottom">
@@ -38,7 +37,9 @@ const AboutPage = ({portfolio, history}) =>{
 					<h2 className="mt-3 mb-4">Skills/Services</h2>
 					{match.path ==='/myportfolio/about' && (
 						<div>
-							<Link className="btn button mt-3" to="/myportfolio/edit/skills"><i className="fas fa-pen"></i></Link>
+							<Link className="btn button mt-3" to={{pathname:"/myportfolio/edit/skills", state:{portfolio}}}>
+								<i className="fas fa-pen"></i>
+							</Link>
 						</div>
 					)}
 				</div>
@@ -57,7 +58,7 @@ const AboutPage = ({portfolio, history}) =>{
 						<h2 className="mt-3 mb-4">Contact</h2>
 						{match.path ==='/myportfolio/about' && (
 							<div>
-								<Link className="btn button mt-3" to="/myportfolio/edit/contact">
+								<Link className="btn button mt-3" to={{pathname:"/myportfolio/edit/contact", state:{portfolio}}}>
 									<i className="fas fa-pen"></i>
 								</Link>
 							</div>
@@ -66,8 +67,8 @@ const AboutPage = ({portfolio, history}) =>{
 				
 				{email ? <p className="my-4"><i className="fas fa-envelope mr-4 ml-2 about-icons"></i>{email}</p>: null}
 				{phone ? <p className="my-4"><i className="fas fa-phone-alt mr-4 ml-2 about-icons"></i>{phone}</p>: null}
-				{facebook ? <p className="my-2"><a href={facebook} className="fa fa-facebook mr-3"></a>{facebook}</p>: null}
-				{instagram ? <p className="my-2"><a href={instagram} className="fa fa-instagram mr-3"></a>{instagram}</p>: null}
+				{facebook ? <p className="my-2"><a href={`https://www.facebook.com/${facebook}`} rel="noopener noreferrer" target="_blank" className="fa fa-facebook mr-3"></a>{facebook}</p>: null}
+				{instagram ? <p className="my-2"><a href={`https://www.instagram.com/${instagram}`} rel="noopener noreferrer" target="_blank" className="fa fa-instagram mr-3"></a>{instagram}</p>: null}
 			</div>		
 		</React.Fragment>
 	)

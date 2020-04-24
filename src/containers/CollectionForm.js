@@ -11,7 +11,7 @@ class CollectionForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			title:this.props.location.state?this.props.location.state.collection.title: "",
+			title:this.props.location.state ?this.props.location.state.collection.title: "",
 			description:this.props.location.state? this.props.location.state.collection.description:"",
 			id:1,
 			photo:null,
@@ -152,7 +152,7 @@ class CollectionForm extends Component{
 								{showPhoto ?(
 									<div className="justify-content-center row my-3">
 										<div className="col-12" >
-											<img src={showPhoto} className="img-fluid rounded carousel-photo" style={{width:'100%'}} />
+											<img src={showPhoto} className="img-fluid rounded carousel-photo" style={{width:'100%'}} alt="" />
 										</div>
 									</div>
 								):null}

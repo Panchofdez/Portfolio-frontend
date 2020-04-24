@@ -9,7 +9,7 @@ import axios from 'axios';
 // 	}
 // }
 
-const url='http://localhost:3000';
+const url='https://portfolio-app-pf.herokuapp.com/';
 
 export const apiCall = axios.create({
   baseURL: url

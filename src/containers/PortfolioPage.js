@@ -4,7 +4,6 @@ import {Switch, Route, withRouter, Redirect} from 'react-router-dom';
 import AboutPage from '../components/AboutPage';
 import CommentsPage from './CommentsPage';
 import TimelinePage from './TimelinePage';
-import ProfilePage from '../components/ProfilePage';
 import WorkPage from '../components/WorkPage';
 import RecommendationsPage from '../components/RecommendationsPage';
 import PortfolioHeader from '../components/PortfolioHeader';
@@ -35,18 +34,6 @@ class PortfolioPage extends Component{
 	componentWillUnmount(){
 		this.props.clearPortfolio();
 	}
-	// componentDidUpdate(prevProps , prevState){
-		
-	// 	if(prevProps.location.pathname !== this.props.location.pathname){
-	// 		console.log('update');
-	// 		if(this.props.location.pathname.split("/")[1]==='myportfolio'){
-	// 			this.fetchMyPortfolio();
-	// 		}else{
-	// 			this.fetchPortfolio();
-	// 		}
-	// 	}
-		
-	// };
 	fetchMyPortfolio= async()=>{
 		try{
 			await this.props.getMyPortfolio();

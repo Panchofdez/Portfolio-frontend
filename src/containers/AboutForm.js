@@ -8,10 +8,10 @@ class AboutForm extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			about: this.props.location.state.portfolio ? this.props.location.state.portfolio.about : 'Your Bio',
-			location: this.props.location.state.portfolio ? this.props.location.state.portfolio.location : "City,Country",
-			birthday: this.props.location.state.portfolio?this.props.location.state.portfolio.birthday : "Your Birthday",
-			type:this.props.location.state.portfolio? this.props.location.state.portfolio.type :"What do you do?",
+			about: this.props.location.state.portfolio.about ? this.props.location.state.portfolio.about : 'Your Bio',
+			location: this.props.location.state.portfolio.location ? this.props.location.state.portfolio.location : "City,Country",
+			birthday: this.props.location.state.portfolio.birthday ?this.props.location.state.portfolio.birthday : "Your Birthday",
+			type:this.props.location.state.portfolio.type ? this.props.location.state.portfolio.type :"What do you do?",
 			loading:false
 		}
 		
@@ -73,7 +73,7 @@ class AboutForm extends Component{
 								onChange={this.handleChange}
 								name="type"
 								type="text"
-								onFocus={!portfolio ? this.clearText :undefined}
+								onFocus={!portfolio.type ? this.clearText :undefined}
 							/>
 							<label htmlFor="location">Location *</label>
 						 	<input
@@ -83,7 +83,7 @@ class AboutForm extends Component{
 								className="form-control mb-3"
 								type="text"
 								id="location"
-								onFocus={!portfolio ? this.clearText : undefined}
+								onFocus={!portfolio.location ? this.clearText : undefined}
 							/>
 							
 							<label htmlFor="statement">Birthday (optional)</label>
@@ -95,7 +95,7 @@ class AboutForm extends Component{
 								onChange={this.handleChange}
 								name="birthday"
 								type="text"
-								onFocus={!portfolio ? this.clearText: undefined}
+								onFocus={!portfolio.birthday ? this.clearText: undefined}
 
 							/>							
 							<label htmlFor="about">Bio</label>
@@ -106,7 +106,7 @@ class AboutForm extends Component{
 								value={about} 
 								onChange={this.handleChange}
 								name="about"
-								onFocus={!portfolio ? this.clearText: undefined}
+								onFocus={!portfolio.about ? this.clearText: undefined}
 							/>
 							<button className="btn button form-control mt-3" type="submit" >Save Changes</button>
 							

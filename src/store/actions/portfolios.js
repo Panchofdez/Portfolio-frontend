@@ -260,9 +260,7 @@ export const editTimelinePost = (post, id)=>{
 export const deleteTimelinePost = (id)=>{
 	return async dispatch=>{
 		try{
-			console.log(id);
 			const response = await apiCall.delete(`/api/myportfolio/timeline/${id}`);
-			console.log(response.data);
 			dispatch(showPortfolio(response.data));
 		}catch(err){
 			dispatch(addError(err.response.data.error));
@@ -296,3 +294,15 @@ export const editContactInfo = (info)=>{
 	}
 }
 
+
+export const addSkills = (skills) =>{
+	return async dispatch=>{
+		try{
+			const response = await apiCall.post('/api/myportfolio/skills', skills);
+			dispatch(showPortfolio(response.data));
+		}catch(err){
+			dispatch(addError(err.response.data.error));
+			throw Error(err);
+		}
+	}
+}

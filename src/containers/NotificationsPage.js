@@ -47,9 +47,7 @@ class NotificationsPage extends Component{
 		if(this.state.notifications.length>0){
 			notifications = this.state.notifications.map((n)=>{
 				let newImage = fixImage(n.profileImage);
-				console.log(n.profileImage)
-				console.log(newImage);
-				
+				console.log(n);
 				return(
 					<div key={n._id} className="card col-md-12 p-0 mb-3">
 						<div className="row no-gutters">
