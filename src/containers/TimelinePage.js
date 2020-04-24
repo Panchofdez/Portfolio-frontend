@@ -29,7 +29,7 @@ const TimelinePage = (props)=>{
 			     {post.text}
 			    </p>
 			    {match.url==='/myportfolio/timeline' && (
-					<div className="float-right">
+					<div className="float-right mt-3">
 						<Link 
 							className="btn button-outline btn-sm mr-3" 
 							to={{

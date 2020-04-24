@@ -13,7 +13,7 @@ const Carousel = ({collection, deleteCollectionPhoto, addErrorMessage, history})
 		let newImage = fixImage(photo.image);
 		return (
 			<div key={photo._id} className={index===0 ? "carousel-item active" : "carousel-item"}  >
-				<img src={newImage} className="d-block w-100 img-fluid rounded-top carousel-photo"  alt="..."/>
+				<img src={newImage} className="d-block w-100 img-fluid rounded-top carousel-photo" style={{width:'100%'}} alt="..."/>
 				{match.path ==='/myportfolio/work' && (
 					<div className="carousel-caption d-block">
 			        	<button 

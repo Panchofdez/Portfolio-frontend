@@ -13,7 +13,7 @@ const VideosPage = ({videos, deleteVideo, history, url})=>{
     console.log(url)
 	const videosArr =videos.map(video=>{		
 		return (
-			<div key={video._id} className="row">	
+			<div key={video._id} className="row mt-4">	
 				<div className="iframe-container">
 					<iframe className="rounded" title={video._id} width="560" height="315" src={`https://www.youtube.com/embed/${video.link}?rel=0`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 				</div>
@@ -22,7 +22,7 @@ const VideosPage = ({videos, deleteVideo, history, url})=>{
 					<h3>{video.title}</h3>
 					<p>{video.description}</p>
 					{url==='/myportfolio/work' && (
-						<div className="float-right">
+						<div className="float-right mt-3">
 							<Link 
 								className="btn button-outline btn-sm mr-3" 
 								to={{

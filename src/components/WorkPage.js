@@ -24,7 +24,7 @@ const  WorkPage = (props)=>{
 					<h4>{collection.title}</h4>
 					<p>{collection.description}</p>
 					{match.url==='/myportfolio/work' && (
-						<div className="float-right">
+						<div className="float-right mt-3">
 							<Link 
 								className="btn button-outline btn-sm mr-3" 
 								to={{
