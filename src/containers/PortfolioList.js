@@ -77,7 +77,7 @@ class PortfolioList extends Component{
 							/>
 							{portfolios.length===0 ? (
 								<div className="text-center" id="no-matches">
-									<h5 className="mt-5">Sorry no matches were found, please try again</h5>					
+									<h5 className="mt-5">Sorry no matches were found...</h5>					
 								</div>
 							):(
 								<div>
