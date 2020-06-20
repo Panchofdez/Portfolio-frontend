@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PortfolioCard from '../components/PortfolioCard';
 import {connect} from 'react-redux';
-import {fetchPortfolios,searchPortfolios} from '../store/actions/portfolios';
+import {fetchPortfolios} from '../store/actions/portfolios';
 import Loading from '../components/Loading';
 
 
@@ -26,16 +26,6 @@ class PortfolioList extends Component{
 	};
 	handleChange=(e)=>{
 		this.setState({[e.target.name]:e.target.value});
-	};
-	handleSearch=async(e)=>{
-		e.preventDefault();
-		try{
-			await this.props.searchPortfolios(this.state.search);
-			this.setState({search:"Find A Portfolio"});
-		}catch(err){
-			console.log(err);
-			return;
-		}
 	};
 	filterPortfolios = (portfoliosArr, searchTerm)=>{
 		const term = searchTerm.trim().toLowerCase();
@@ -96,7 +86,7 @@ class PortfolioList extends Component{
 							)}
 						</div>
 						<div className="col-lg-4 col-md-3">
-							<div className="card " style={{color:'black'}} >
+							<div className="card w-100" style={{color:'black', overflow:'hidden'}} >
 								<div className="card-header" style={{fontWeight:'bold'}}>
 									Popular Categories
 								</div>
@@ -192,27 +182,4 @@ function mapStateToProps(state){
 	}
 }
 
-export default connect(mapStateToProps,{searchPortfolios,fetchPortfolios})(PortfolioList);
-
-
-// <div id="home-header" className="container-fluid">
-// 					<div className="row justify-content-center">
-// 						<div className="col-md-8 text-center mt-5">
-// 							<h1 style={{color:'#00ad8e', fontWeight:'bold'}}> Discover our community</h1>
-// 							<form onSubmit={this.handleSearch}>
-// 								<div className="input-group my-5">
-// 									<input 
-// 										type="text" 
-// 										name="search"
-// 										value={this.state.search} 
-// 										onChange={this.handleChange} 
-// 										className="form-control" 
-// 										aria-label="searchBar" />
-// 									<div className="input-group-append">
-// 										<button className="input-group-text btn btn-outline-dark" id="search-btn" type="submit">Search</button>
-// 									</div>
-// 								</div>
-// 							</form>
-// 						</div>
-// 					</div>
-// 				</div>
+export default connect(mapStateToProps,{fetchPortfolios})(PortfolioList);
