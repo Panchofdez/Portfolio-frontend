@@ -35,7 +35,7 @@ const HomePage = (props)=>{
 				<div className="row container justify-content-center align-items-center m-auto">
 					<div className="col-md-10 col-12  my-5">
 						<h5 className="px-4 mt-3" style={{lineHeight:2}}>
-							<span className="mr-2" id="homepage-text">For creative professionals</span> that can't rely on a regular resume and don't have the time, money or resources to make their own website.
+							For creative professionals that can't rely on a regular resume and don't have the time, money or resources to make their own website.
 							We make it easy to create and share your own visual resume/portfolio
 						</h5>	
 					</div>

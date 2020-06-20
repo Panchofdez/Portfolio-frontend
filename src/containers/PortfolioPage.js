@@ -78,9 +78,9 @@ class PortfolioPage extends Component{
 		}else{
 			return (
 				<div className="pb-5">
-					<div className="container p-0 ">
+					<div className="container">
 						<div 
-							className="row justify-content-start align-items-end mx-sm-3 mx-0 rounded-bottom header-image"
+							className="row justify-content-start align-items-end mx-0 rounded-bottom header-image"
 							style={{
 								background: style,
 								

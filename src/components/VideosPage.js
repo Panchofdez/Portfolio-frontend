@@ -55,7 +55,7 @@ const VideosPage = ({videos, deleteVideo, history, url})=>{
 		)
 	})
 	return (
-		<div className="container my-5">
+		<div className="my-5 px-3">
 			{videosArr}
 		</div>
 

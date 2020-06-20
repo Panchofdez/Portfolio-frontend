@@ -40,18 +40,20 @@ class RecommendationsPage extends Component{
 			return(
 				<div key={u._id} className="card col-lg-6 p-0 endorse-cards">
 					<div className="row no-gutters">
-						<div className="col-sm-3 col-2">
+						<div className="col-md-4 col-3">
 							<img src={newImage} className="card-img user-card-img img-fluid" alt="" style={{overflow:'hidden', height:'100%', width : '100%'}}/>
 						</div>
-						<div className="col-sm-9 col-10">
-							<div className="card-body">
+						<div className="col-md-8 col-9">
+							<div className="card-body d-flex flex-lg-column flex-row justify-content-lg-center justify-content-between align-items-start">
+
+								<h5 className="card-title endorse-name mt-1 ml-2">{u.name}</h5>
 								<button 
-									className="btn btn-outline-dark btn-inline float-right mx-2 stretched-link"
+									className="btn btn-outline-dark btn-inline mx-2 stretched-link"
 									onClick={()=>this.props.history.push(`/portfolios/${u.portfolio}`)}
 								>
 									<small>View Portfolio</small>
 								</button>
-								<h5 className="card-title endorse-name mt-1">{u.name}</h5>
+								
 							</div>
 						</div>
 					</div>					
@@ -63,18 +65,19 @@ class RecommendationsPage extends Component{
 			return(
 				<div key={u._id} className="card col-lg-6 p-0 endorse-cards">
 					<div className="row no-gutters">
-						<div className="col-sm-3 col-2">
+						<div className="col-md-4 col-3">
 							<img src={fixedImage} className="card-img user-card-img img-fluid" alt="" style={{overflow:'hidden', height:'100%', width : '100%'}}/>
 						</div>
-						<div className="col-sm-9 col-10">
-							<div className="card-body">
+						<div className="col-md-8 col-9">
+							<div className="card-body d-flex flex-lg-column flex-row justify-content-lg-center justify-content-between align-items-start">
+								<h5 className="card-title endorse-name mt-1 ml-2">{u.name}</h5>
 								<button 
 									className="btn btn-outline-dark btn-inline float-right mx-2 stretched-link"
 									onClick={()=>this.props.history.push(`/portfolios/${u.portfolio}`)}
 								>
 									<small>View Portfolio</small>
 								</button>
-								<h5 className="card-title endorse-name mt-1">{u.name}</h5>
+								
 							</div>
 						</div>
 					</div>					
@@ -114,22 +117,18 @@ class RecommendationsPage extends Component{
 				</ul>
 				<div className="tab-content" id="pills-tabContent">
 					<div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-						<div className="card border border-white bg-transparent  p-0">
-							<div className="card-body px-3 py-0">
+						
 								<div className="row p-3">
 									{recommendationCards}
 								</div>
-							</div>
-						</div>
+							
 					</div>
 					<div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-						<div className="card border border-white bg-transparent  p-0">
-							<div className="card-body px-3 py-0">
+						
 								<div className="row  p-3">
 									{recommendingCards}
 								</div>
-							</div>
-						</div>
+	
 					</div>
 					
 				</div>
