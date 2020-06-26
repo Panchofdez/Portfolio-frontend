@@ -79,6 +79,10 @@ html {
     min-height: 150px;
     max-height: 150px;
   }
+  .form-btns{
+    height: 35px;
+  }
+
   
 }
 @media screen and (min-width: 560px) {
@@ -159,6 +163,10 @@ html {
     min-height: 150px;
     max-height: 150px;
   }
+  .form-btns{
+    height: 40px;
+  }
+
 }
 
 @media screen and (min-width: 800px) {
@@ -240,6 +248,10 @@ html {
     min-height: 200px;
     max-height: 200px;
   }
+  .form-btns{
+    height: 42px;
+  }
+
 
 }
 
@@ -323,6 +335,9 @@ html {
   .portfolio-card-img{
     min-height: 200px;
     max-height: 200px;
+  }
+  .form-btns{
+    height: 44px;
   }
 
 
@@ -572,4 +587,16 @@ img{
     padding-top:10px;
     padding-bottom: 10px;
     padding-left: 20px;
+}
+
+
+.fb-button{
+  background-color:#3b5998 ;
+  color:white;
+  border-width:0px;
+  padding-left: 0px;
+  padding-right:15px;
+  border-radius:5px;
+  overflow: hidden;
+  width:100%;
 }

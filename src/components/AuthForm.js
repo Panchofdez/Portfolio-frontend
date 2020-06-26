@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {authenticateUser} from '../store/actions/auth';
+import {authenticateUser, fbLogin} from '../store/actions/auth';
 import {toast } from 'react-toastify';
+import FacebookLogin from 'react-facebook-login';
 
 
 
@@ -35,16 +36,26 @@ class AuthForm extends Component{
 		}catch(err){
 			return;
 		}
-		
-		
 	};
+	responseFacebook = async(response)=>{
+		try{
+			await this.props.fbLogin(response.accessToken, response.userID);
+			if(this.props.match.url ==='/signup'){
+				this.notify();	
+			}	
+			this.props.history.push('/portfolios');
+
+		}catch(err){
+			return;
+		}
+	}
 	render(){
 
 		const {email,password,name} = this.state;
 		const {type, buttonText} = this.props;
 		return(
 			<div className="row justify-content-center w-100 m-0 auth-container">
-				<div className="col-md-4 col-10 mt-5">
+				<div className="col-lg-4 col-sm-6 col-10 mt-5">
 					<form onSubmit={this.handleSubmit}>
 						{this.props.type==="signup" &&( 
 							<div className="form-group">
@@ -86,7 +97,18 @@ class AuthForm extends Component{
 								className="form-control"
 							/>
 						</div>
-						<button type="submit" className="btn button btn-block mt-4 mb-3" >{buttonText}</button>
+						<button type="submit" className="btn button form-btns btn-block mt-4 mb-3" >{buttonText}</button>
+
+						<div className="d-flex justify-content-center mb-3">
+							<text style={{fontWeight:'bold', color:'#00ad8e'}}>Or</text>
+						</div>
+						 <FacebookLogin
+						    appId="1547475692098707"
+						    autoLoad={false}
+						    callback={this.responseFacebook}
+						    cssClass="fb-button form-btns"
+						    icon="fa-facebook"
+						  />
 					</form>
 					{type==="signup" && (
 						<Link to="/signin" className="nav-link pl-0" style={{fontWeight:'bold'}}>Already have an account? Sign in instead</Link>
@@ -109,4 +131,4 @@ function mapStateToProps(state){
   	}
  }
 
-export default connect(mapStateToProps,{authenticateUser})(AuthForm);
+export default connect(mapStateToProps,{authenticateUser, fbLogin})(AuthForm);

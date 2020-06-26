@@ -13,7 +13,22 @@ export const setAuthorizationToken = (token)=>{
 	setTokenHeader(token);
 }
 
-
+export const fbLogin = (accessToken, userId)=>{
+	return async dispatch =>{
+		try{
+			const response = await apiCall.post(`/api/facebooklogin`, {accessToken, userId});
+			const {token,...user} = response.data;
+			localStorage.setItem('jwtToken', token);			
+			setAuthorizationToken(token);
+			dispatch(setCurrentUser(user));
+			dispatch(clearErrorMessage());
+		}catch(err){
+			dispatch(addErrorMessage(err.response.data.error));
+			throw new Error(err);
+		}
+		
+	}
+}
 
 export const authenticateUser = (type,formData) =>{
 	return async dispatch =>{

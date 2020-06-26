@@ -51,12 +51,9 @@ class PortfolioList extends Component{
 		if(!portfolios){
 			return (<Loading/>);
 		}
-		console.log(this.state.category);
 		if(this.state.category){
-			console.log('Arrived');
 			portfolios = this.filterByCategory(portfolios, this.state.category);
 		}
-		console.log(portfolios);
 		const portfoliosList = this.filterPortfolios(portfolios, this.state.search).map(p=>(
 			<PortfolioCard {...p} key={p._id} history={this.props.history}/>
 		));

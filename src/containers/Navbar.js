@@ -76,7 +76,7 @@ class Navbar extends Component{
 				<nav className="navbar navbar-expand-md navbar-light bg-white">
 					<div className="container ">
 						<div className="navbar-header">
-							<Link to="/" className="navbar-brand ml-2">Portfolio</Link>
+							<Link to="/" className="navbar-brand ml-2">Visualy</Link>
 						</div>
 						<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 							<span className="navbar-toggler-icon"></span>
