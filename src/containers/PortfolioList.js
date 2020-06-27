@@ -89,7 +89,7 @@ class PortfolioList extends Component{
 				<div className="container">
 				
 					<div className="row mt-4 justify-content-center">
-						<div className="col-lg-8  col-md-9 flex-column">
+						<div className="col-lg-8  col-md-9 flex-column order-2 order-md-1">
 							<input 
 								type="text" 
 								name="search"
@@ -109,79 +109,79 @@ class PortfolioList extends Component{
 								</div>
 							)}
 						</div>
-						<div className="col-lg-4 col-md-3">
-							<div className="card w-100" style={{color:'black', overflow:'hidden'}} >
-								<div className="card-header" style={{fontWeight:'bold'}}>
+						<div className="col-lg-4 col-md-3 order-1 order-md-2">
+							<div className="card w-100 mb-4" style={{color:'black', overflow:'hidden'}} >
+								<div className="card-header d-none d-md-block" style={{fontWeight:'bold'}}>
 									Popular Categories
 								</div>
-								<ul className="nav nav-pills flex-column" id="categories" role="tablist">
-									<li className="nav-item border-bottom" onClick={()=>{
+								<ul className="nav nav-pills flex-row flex-md-column" id="categories" role="tablist">
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:null})
 										}}
 									>
 										<a className="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="All" aria-selected="true">All</a>
 									</li>
-									<li className="nav-item border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['architect', 'home']})
 										}}
 									>
 										<a className="nav-link" id="architecture-tab" data-toggle="tab" href="#architecture" role="tab" aria-controls="Architecture" aria-selected="true">Architecture</a>
 									</li>
-									<li className="nav-item border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['art']})
 										}}
 									>
 										<a className="nav-link " id="art-tab" data-toggle="tab" href="#art" role="tab" aria-controls="Art" aria-selected="true">Art</a>
 									</li>		
-									<li className="nav-item border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['business', 'manager', 'accountant', 'analyst', 'consultant']})
 										}}
 									>
 										<a className="nav-link" id="business-tab" data-toggle="tab" href="#business" role="tab" aria-controls="Business" aria-selected="true">Business</a>
 									</li>
-									<li className="nav-item border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['dance']})
 										}}
 									>
 										<a className="nav-link" id="dance-tab" data-toggle="tab" href="#dance" role="tab" aria-controls="Dance" aria-selected="true">Dance</a>
 									</li>
-									<li className="nav-item border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['design']})
 										}}
 									>
 										<a className="nav-link" id="design-tab" data-toggle="tab" href="#design" role="tab" aria-controls="Design" aria-selected="true">Design</a>
 									</li>
-									<li className="nav-item border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['engineer']})
 										}}
 									>
 										<a className="nav-link" id="engineering-tab" data-toggle="tab" href="#engineering" role="tab" aria-controls="Engineering" aria-selected="true">Engineering</a>
 									</li>
-									<li className="nav-item border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['fashion', 'model']})
 										}}
 									>
 										<a className="nav-link" id="fashion-tab" data-toggle="tab" href="#fashion" role="tab" aria-controls="Fashion" aria-selected="true">Fashion</a>
 									</li>
-									<li className="nav-item border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['photo']})
 										}}
 									>
 										<a className="nav-link" id="photography-tab" data-toggle="tab" href="#photography" role="tab" aria-controls="Photography" aria-selected="true">Photography</a>
 									</li>
-									<li className="nav-item border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['software', 'develop', 'program']})
 										}}
 									>
 										<a className="nav-link" id="software-tab" data-toggle="tab" href="#software" role="tab" aria-controls="Software" aria-selected="true">Software/Programming</a>
 									</li>
-									<li className="nav-item border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['sport', 'athlete', 'coach', 'player']})
 										}}
 									>
 										<a className="nav-link" id="sport-tab" data-toggle="tab" href="#sport" role="tab" aria-controls="Sport" aria-selected="true">Sports</a>
 									</li>
-									<li className="nav-item border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['edit', 'write']})
 										}}
 									>

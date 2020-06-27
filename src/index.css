@@ -82,7 +82,14 @@ html {
   .form-btns{
     height: 35px;
   }
-
+  #categories .nav-item .nav-link:not(.active) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #categories .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   
 }
 @media screen and (min-width: 560px) {
@@ -166,6 +173,15 @@ html {
   .form-btns{
     height: 40px;
   }
+  #categories .nav-item .nav-link:not(.active) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #categories .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
 
 }
 
@@ -251,6 +267,15 @@ html {
   .form-btns{
     height: 42px;
   }
+  #categories .nav-item .nav-link:not(.active) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  #categories .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
 
 
 }
@@ -339,6 +364,15 @@ html {
   .form-btns{
     height: 44px;
   }
+  #categories .nav-item .nav-link:not(.active) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  #categories .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
 
 
 }
@@ -516,7 +550,9 @@ h3:hover .service-btn{
     background-color:#00ad8e;
     color:white;
     font-weight:550;
-    padding-left: 5;
+    padding-left: 20px;
+    padding-top:10px;
+    padding-bottom: 10px;
 
 }
 
@@ -578,7 +614,6 @@ img{
     color:#000;
     padding-top:10px;
     padding-bottom: 10px;
-    padding-left: 20px;
 }
 
 #categories .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
@@ -587,7 +622,6 @@ img{
     font-weight:550;
     padding-top:10px;
     padding-bottom: 10px;
-    padding-left: 20px;
 }
 
 

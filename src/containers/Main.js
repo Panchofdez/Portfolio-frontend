@@ -9,7 +9,6 @@ import PortfolioForm from '../components/PortfolioForm';
 import PortfolioPage from './PortfolioPage'
 import NotificationsPage from '../containers/NotificationsPage';
 import withAuth from '../hocs/withAuth';
-import withPortfolioCheck from '../hocs/withPortfolioCheck';
 import {clearErrorMessage} from '../store/actions/errors';
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
