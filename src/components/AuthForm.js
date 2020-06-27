@@ -99,8 +99,8 @@ class AuthForm extends Component{
 						</div>
 						<button type="submit" className="btn button form-btns btn-block mt-4 mb-3" >{buttonText}</button>
 
-						<div className="d-flex justify-content-center mb-3">
-							<text style={{fontWeight:'bold', color:'#00ad8e'}}>Or</text>
+						<div className="d-flex justify-content-center">
+							<p style={{fontWeight:'bold', color:'#00ad8e'}}>Or</p>
 						</div>
 						 <FacebookLogin
 						    appId="1547475692098707"
