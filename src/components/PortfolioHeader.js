@@ -14,8 +14,8 @@ const PortfolioHeader = ({portfolio, recommending, setRecommendationState, recom
 	
 	return(			
 		<div>
-			<div className="d-flex justify-content-between border-bottom mb-2 p-3">
-				<h1>{portfolio.name}</h1>
+			<div className="d-flex justify-content-between align-items-center border-bottom mb-2 p-3">
+				<h1 className="mr-2">{portfolio.name}</h1>
 				{(match.path==='/portfolios/:id' && recommending) &&(
 					<div>
 						<button 
@@ -57,7 +57,7 @@ const PortfolioHeader = ({portfolio, recommending, setRecommendationState, recom
 					</div>
 				)}
 				{match.path==='/myportfolio' &&(
-					<div>
+					<div className="d-flex flex-row">
 						<a className="btn button mx-2" data-toggle="modal" data-target="#shareModal">Share</a> 
 						<Link className="btn button"  to={{pathname:'/myportfolio/edit/profile', state:{portfolio}}}><i className="fas fa-pen"></i></Link>
 					</div>

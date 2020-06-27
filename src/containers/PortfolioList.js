@@ -115,17 +115,17 @@ class PortfolioList extends Component{
 									Popular Categories
 								</div>
 								<ul className="nav nav-pills flex-row flex-md-column" id="categories" role="tablist">
-									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
+									<li className="nav-item flex-grow-2 border-bottom " onClick={()=>{
 											this.setState({category:null})
 										}}
 									>
-										<a className="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="All" aria-selected="true">All</a>
+										<a className="nav-link active align-self-center" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="All" aria-selected="true">All</a>
 									</li>
 									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['architect', 'home']})
 										}}
 									>
-										<a className="nav-link" id="architecture-tab" data-toggle="tab" href="#architecture" role="tab" aria-controls="Architecture" aria-selected="true">Architecture</a>
+										<a className="nav-link align-self-center" id="architecture-tab" data-toggle="tab" href="#architecture" role="tab" aria-controls="Architecture" aria-selected="true">Architecture</a>
 									</li>
 									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['art']})
@@ -173,7 +173,7 @@ class PortfolioList extends Component{
 											this.setState({category:['software', 'develop', 'program']})
 										}}
 									>
-										<a className="nav-link" id="software-tab" data-toggle="tab" href="#software" role="tab" aria-controls="Software" aria-selected="true">Software/Programming</a>
+										<a className="nav-link" id="software-tab" data-toggle="tab" href="#software" role="tab" aria-controls="Software" aria-selected="true">Software</a>
 									</li>
 									<li className="nav-item flex-grow-1 border-bottom" onClick={()=>{
 											this.setState({category:['sport', 'athlete', 'coach', 'player']})

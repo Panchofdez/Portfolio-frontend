@@ -1,7 +1,7 @@
 html {
   font-size: 12px;
 }
-@media screen and (min-width: 320px) {
+@media screen and (max-width:500px) {
   html {
     font-size: 12px;
   }
@@ -55,7 +55,7 @@ html {
     max-height:100px;
   }
   .carousel-photo{
-    height:300px
+    height:250px
   }
    #comment-profile-pic{
     height:50px; 
@@ -83,16 +83,16 @@ html {
     height: 35px;
   }
   #categories .nav-item .nav-link:not(.active) {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right:5px;
   }
   #categories .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
   
 }
-@media screen and (min-width: 560px) {
+@media screen and (min-width: 500px) {
   html {
     font-size: 14px;
   }
