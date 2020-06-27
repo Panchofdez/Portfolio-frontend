@@ -24,15 +24,42 @@ class PortfolioList extends Component{
 			return;
 		}
 	};
+	sortLogic = (searchArr, portfolio)=>{
+		let count = 0; 
+		for (let word of searchArr){
+			word=word.toLowerCase();
+			if(word!== '' && (portfolio.name.toLowerCase().indexOf(word) !== -1 || portfolio.type.toLowerCase().indexOf(word)!== -1 || portfolio.location.toLowerCase().indexOf(word)!== -1)){
+				count+=1
+			}
+		}
+		return count;
+	};
 	handleChange=(e)=>{
 		this.setState({[e.target.name]:e.target.value});
 	};
 	filterPortfolios = (portfoliosArr, searchTerm)=>{
-		const term = searchTerm.trim().toLowerCase();
-		if(term ===""){
-			return portfoliosArr
+		const term = searchTerm.toLowerCase();
+		const rankedPortfolios = portfoliosArr.sort((a,b)=>{
+			return b.recommendations.length - a.recommendations.length;
+		})
+		if(term.trim() ===""){
+			return rankedPortfolios;
 		}else{
-			return portfoliosArr.filter((portfolio)=>portfolio.name.toLowerCase().indexOf(term) !== -1 || portfolio.type.toLowerCase().indexOf(term)!== -1 || portfolio.location.toLowerCase().indexOf(term)!== -1)
+			const searchArr = term.split(' ');
+			const matches =  rankedPortfolios.filter((portfolio)=>{
+				for (let word of searchArr){
+					word=word.toLowerCase();
+					if(word!== '' && (portfolio.name.toLowerCase().indexOf(word) !== -1 || portfolio.type.toLowerCase().indexOf(word)!== -1 || portfolio.location.toLowerCase().indexOf(word)!== -1)){
+						return true;
+					}
+				}
+				return false;
+			})
+			return matches.sort((a,b)=>{
+				const a_count = this.sortLogic(searchArr, a);
+				const b_count = this.sortLogic(searchArr, b)
+				return b_count-a_count;
+			})
 		}
 	};
 	filterByCategory = (portfoliosArr, categoryArr)=>{

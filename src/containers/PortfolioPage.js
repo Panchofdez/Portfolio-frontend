@@ -91,7 +91,7 @@ class PortfolioPage extends Component{
 					</div>
 					<div className="container">
 						<div className="row mx-sm-0 mx-0">
-							<div className="col-md-3 p-0 pt-3 pr-3 pl-md-0 pl-3">
+							<div className="col-md-3 p-0 pt-3 pr-0 pr-md-3 pl-0">
 								<div className="row d-flex">
 									<div id="profile-pic" className="col-md-12 col-4">
 										<img src={profilePic} alt="" className="rounded" style={{overflow:'hidden', height:'100%', width : '100%'}}/>
