@@ -115,7 +115,7 @@ class PortfolioList extends Component{
 									Popular Categories
 								</div>
 								<ul className="nav nav-pills flex-row flex-md-column" id="categories" role="tablist">
-									<li className="nav-item flex-grow-2 border-bottom " onClick={()=>{
+									<li className="nav-item flex-grow-1 border-bottom " onClick={()=>{
 											this.setState({category:null})
 										}}
 									>

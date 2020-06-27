@@ -55,7 +55,7 @@ html {
     max-height:100px;
   }
   .carousel-photo{
-    height:250px
+    height:275px
   }
    #comment-profile-pic{
     height:50px; 
@@ -551,6 +551,7 @@ h3:hover .service-btn{
     color:white;
     font-weight:550;
     padding-left: 20px;
+    padding-right: 20px;
     padding-top:10px;
     padding-bottom: 10px;
 
