@@ -1,411 +1,418 @@
 html {
   font-size: 12px;
 }
-@media screen and (max-width:500px) {
+@media screen and (max-width: 500px) {
   html {
     font-size: 12px;
   }
-  .portfolio-name{
-    font-size:14px;
+  .portfolio-name {
+    font-size: 14px;
     font-weight: bold;
   }
-   .myportfolio-profile-pic{
-    height:25px;
-    width:30px;
+  .myportfolio-profile-pic {
+    height: 25px;
+    width: 30px;
   }
-  #card-container{
-    max-height:300px;
+  #card-container {
+    max-height: 300px;
   }
   .fa {
     font-size: 16px;
     padding: 6px;
     width: 30px;
   }
-  .notification{
-    width:200px;
+  .notification {
+    width: 200px;
   }
   .notification p {
-    font-size:0.75rem;
+    font-size: 0.75rem;
   }
-  .notification-container{
-    height:50px;
+  .notification-container {
+    height: 50px;
   }
-  .endorse-cards{
+  .endorse-cards {
     max-height: 72px;
   }
-  .user-card-img{
+  .user-card-img {
     object-fit: cover;
-    height:100%;
+    height: 100%;
     max-height: 70px;
   }
-  .endorse-name{
-    font-size:14px;
+  .endorse-name {
+    font-size: 14px;
   }
-  .pill-link{
+  .pill-link {
     font-size: 15px;
   }
-  .header-image{
-    height:140px
+  .header-image {
+    height: 150px;
   }
-  #profile-pic{
-    max-height:140px;
-    padding-right:0px;
+  .profile-pic {
+    height: 75px;
+    width: 75px;
   }
-  #comment-profile-pic{
-    max-height:100px;
+  #comment-profile-pic {
+    max-height: 100px;
   }
-  .carousel-photo{
-    height:275px
+  .carousel-photo {
+    height: 275px;
   }
-   #comment-profile-pic{
-    height:50px; 
-    width:50px;
+  #comment-profile-pic {
+    height: 50px;
+    width: 50px;
   }
-  .about-icons{
-     color:#00ad8e; 
-     font-size:18px;
+  .about-icons {
+    color: #00ad8e;
+    font-size: 18px;
   }
-  .homepage-icons{
-    color:#00ad8e;
+  .homepage-icons {
+    color: #00ad8e;
     font-size: 35px;
   }
-  .portfolio-card-text{
-    font-size:10px;
+  .portfolio-card-text {
+    font-size: 10px;
   }
-  .portfolio-card{
-    height:152px;
+  .portfolio-card {
+    height: 152px;
   }
-  .portfolio-card-img{
+  .portfolio-card-img {
     min-height: 150px;
     max-height: 150px;
   }
-  .form-btns{
+  .form-btns {
     height: 35px;
   }
   #categories .nav-item .nav-link:not(.active) {
     padding-left: 5px;
-    padding-right:5px;
+    padding-right: 5px;
   }
-  #categories .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
+  #categories .nav-link.active,
+  .nav-pills .nav-link.active:hover,
+  .nav-pills .nav-link.active:focus {
     padding-left: 5px;
     padding-right: 5px;
   }
-  
 }
 @media screen and (min-width: 500px) {
   html {
     font-size: 14px;
   }
-  .portfolio-name{
-    font-size:16px;
+  .portfolio-name {
+    font-size: 16px;
     font-weight: bold;
   }
-   .myportfolio-profile-pic{
-    height:30px;
-    width:35px;
+  .myportfolio-profile-pic {
+    height: 30px;
+    width: 35px;
   }
-  #card-container{
-    max-height:250px;
+  #card-container {
+    max-height: 250px;
   }
   .fa {
     font-size: 18px;
     padding: 8px;
     width: 35px;
   }
-  .notification{
-    width:350px;
+  .notification {
+    width: 350px;
   }
   .notification p {
-    font-size:0.80rem;
+    font-size: 0.8rem;
   }
-  .notification-container{
-    height:55px;
-  }  
-  .endorse-cards{
+  .notification-container {
+    height: 55px;
+  }
+  .endorse-cards {
     max-height: 82px;
   }
-  .user-card-img{
+  .user-card-img {
     object-fit: cover;
-    height:100%;
+    height: 100%;
     max-height: 80px;
   }
-  .endorse-name{
-    font-size:14px;
+  .endorse-name {
+    font-size: 14px;
   }
-  .pill-link{
+  .pill-link {
     font-size: 17px;
   }
-  .header-image{
-    height:160px
+  .header-image {
+    height: 200px;
   }
-  #profile-pic{
-    max-height:160px;
-    padding-right: 0px;
+  .profile-pic {
+    height: 100px;
+    width: 100px;
   }
-  #comment-profile-pic{
-    max-height:180px;
+  #comment-profile-pic {
+    max-height: 180px;
   }
-  .carousel-photo{
-    height:350px
+  .carousel-photo {
+    height: 350px;
   }
-   #comment-profile-pic{
-    height:65px;
-    width:65px
+  #comment-profile-pic {
+    height: 65px;
+    width: 65px;
   }
-  .about-icons{
-     color:#00ad8e; 
-     font-size:20px;
+  .about-icons {
+    color: #00ad8e;
+    font-size: 20px;
   }
-  .homepage-icons{
-    color:#00ad8e;
+  .homepage-icons {
+    color: #00ad8e;
     font-size: 40px;
   }
-  .portfolio-card-text{
-    font-size:10px;
+  .portfolio-card-text {
+    font-size: 10px;
   }
-  .portfolio-card{
-    height:152px;
+  .portfolio-card {
+    height: 152px;
   }
-  .portfolio-card-img{
+  .portfolio-card-img {
     min-height: 150px;
     max-height: 150px;
   }
-  .form-btns{
+  .form-btns {
     height: 40px;
   }
   #categories .nav-item .nav-link:not(.active) {
     padding-left: 10px;
     padding-right: 10px;
   }
-  #categories .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
+  #categories .nav-link.active,
+  .nav-pills .nav-link.active:hover,
+  .nav-pills .nav-link.active:focus {
     padding-left: 10px;
     padding-right: 10px;
   }
-  
-
 }
 
 @media screen and (min-width: 800px) {
   html {
     font-size: 16px;
   }
-  .portfolio-name{
-    font-size:18px;
+  .portfolio-name {
+    font-size: 18px;
     font-weight: bold;
   }
-  .myportfolio-profile-pic{
-    height:35px;
-    width:40px;
+  .myportfolio-profile-pic {
+    height: 35px;
+    width: 40px;
   }
-  #card-container{
-    max-height:350px;
+  #card-container {
+    max-height: 350px;
   }
   .fa {
     font-size: 20px;
     padding: 10px;
     width: 40px;
   }
-  .notification{
-    width:350px;
-    height:60px;
+  .notification {
+    width: 350px;
+    height: 60px;
   }
   .notification p {
-    font-size:0.85rem;
+    font-size: 0.85rem;
   }
-  .notification-container{
-    height:60px;
+  .notification-container {
+    height: 60px;
   }
-  .endorse-cards{
+  .endorse-cards {
     max-height: 102px;
   }
-  .user-card-img{
+  .user-card-img {
     object-fit: cover;
-    height:100%;
+    height: 100%;
     max-height: 100px;
   }
-  .endorse-name{
-    font-size:14px;
+  .endorse-name {
+    font-size: 14px;
   }
-  .pill-link{
+  .pill-link {
     font-size: 19px;
   }
-  .header-image{
-    height:200px
+  .header-image {
+    height: 250px;
   }
-  #profile-pic{
-     max-height:180px;
-     padding-right: 15px;
+  .profile-pic {
+    height: 125px;
+    width: 125px;
   }
-  #comment-profile-pic{
-    max-height:160px;
+  #comment-profile-pic {
+    max-height: 160px;
   }
-  .carousel-photo{
-    height:400px
+  .carousel-photo {
+    height: 400px;
   }
-   #comment-profile-pic{
-    height:70px;
-    width:70px;
+  #comment-profile-pic {
+    height: 70px;
+    width: 70px;
   }
-  .about-icons{
-     color:#00ad8e; 
-     font-size:22px;
+  .about-icons {
+    color: #00ad8e;
+    font-size: 22px;
   }
-  .homepage-icons{
-    color:#00ad8e;
+  .homepage-icons {
+    color: #00ad8e;
     font-size: 45px;
   }
-  .portfolio-card-text{
-    font-size:12px;
+  .portfolio-card-text {
+    font-size: 12px;
   }
-  .portfolio-card{
-    height:202px;
+  .portfolio-card {
+    height: 202px;
   }
-  .portfolio-card-img{
+  .portfolio-card-img {
     min-height: 200px;
     max-height: 200px;
   }
-  .form-btns{
+  .form-btns {
     height: 42px;
   }
   #categories .nav-item .nav-link:not(.active) {
     padding-left: 20px;
     padding-right: 20px;
   }
-  #categories .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
+  #categories .nav-link.active,
+  .nav-pills .nav-link.active:hover,
+  .nav-pills .nav-link.active:focus {
     padding-left: 20px;
     padding-right: 20px;
   }
-  
-
-
 }
 
 @media screen and (min-width: 1000px) {
   html {
     font-size: 16px;
   }
-  .portfolio-name{
-    font-size:18px;
+  .portfolio-name {
+    font-size: 18px;
     font-weight: bold;
   }
-  .myportfolio-profile-pic{
-    height:35px;
-    width:40px;
+  .myportfolio-profile-pic {
+    height: 35px;
+    width: 40px;
   }
-  #card-container{
-    max-height:350px;
+  #card-container {
+    max-height: 350px;
   }
   .fa {
     font-size: 20px;
     padding: 10px;
     width: 40px;
   }
-  .notification{
-    width:475px;
-    height:60px;
+  .notification {
+    width: 475px;
+    height: 60px;
   }
   .notification p {
-    font-size:0.85rem;
+    font-size: 0.85rem;
   }
-  .notification-container{
-    height:60px;
+  .notification-container {
+    height: 60px;
   }
-  .endorse-cards{
+  .endorse-cards {
     min-height: 117px;
-    max-height: 117px
+    max-height: 117px;
   }
-  .user-card-img{
+  .user-card-img {
     object-fit: cover;
-    height:100%;
+    height: 100%;
     max-height: 115px;
   }
   .endorse-name {
-    font-size:18px;
+    font-size: 18px;
   }
-  .pill-link{
+  .pill-link {
     font-size: 20px;
   }
-  .header-image{
-    height:220px;
+  .header-image {
+    height: 275px;
   }
-  #profile-pic{
-     max-height:220px;
-     padding-right: 15px;
+  .profile-pic {
+    height: 150px;
+    width: 150px;
   }
-  #comment-profile-pic{
-    height:75px;
-    width:75px;
+  #comment-profile-pic {
+    height: 75px;
+    width: 75px;
   }
-  .carousel-photo{
-    height:425px
+  .carousel-photo {
+    height: 425px;
   }
-  .about-icons{
-     color:#00ad8e; 
-     font-size:25px;
+  .about-icons {
+    color: #00ad8e;
+    font-size: 25px;
   }
-  .homepage-icons{
-    color:#00ad8e;
+  .homepage-icons {
+    color: #00ad8e;
     font-size: 50px;
   }
-  .container{
-    padding-left: 100px;
-    padding-right:100px;
+
+  .portfolio-card-text {
+    font-size: 14px;
   }
-  .portfolio-card-text{
-    font-size:14px;
+  .portfolio-card {
+    height: 202px;
   }
-  .portfolio-card{
-    height:202px;
-  }
-  .portfolio-card-img{
+  .portfolio-card-img {
     min-height: 200px;
     max-height: 200px;
   }
-  .form-btns{
+  .form-btns {
     height: 44px;
   }
   #categories .nav-item .nav-link:not(.active) {
     padding-left: 20px;
     padding-right: 20px;
   }
-  #categories .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
+  #categories .nav-link.active,
+  .nav-pills .nav-link.active:hover,
+  .nav-pills .nav-link.active:focus {
     padding-left: 20px;
     padding-right: 20px;
   }
-  
-
-
+  .headerText {
+    padding-left: 10vh;
+  }
 }
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
 }
 body {
-  font-family: 'Hind Vadodara', sans-serif;
+  font-family: "Hind Vadodara", sans-serif;
 }
-.App{
+.App {
   min-height: 100vh;
-  background-color: #161716;
-  width:100%;
-  color:white;
-
+  background-color: white;
+  width: 100%;
+  color: #161716;
 }
-.navbar{
+
+.container-fluid {
+  width: 100%;
+}
+.navbar {
   background: transparent;
 }
 
-.landing{
+.landing {
   min-height: 90vh;
   min-width: 100%;
-  margin:0;
-  padding:0;
-  background: url('/canyon2.jpg') center center / cover no-repeat;
-  display:flex;
+  margin: 0;
+  padding: 0;
+  background: url("/ballerina.jpg") center center / cover no-repeat;
+  display: flex;
   align-items: center;
-  
- 
+}
+
+a,
+a:active,
+a:hover {
+  color: #161716;
 }
 
 .form-signin {
@@ -414,63 +421,67 @@ body {
   padding: 15px;
   margin: 0 auto;
 }
-
-.card-body{
-  color:black;
+.elevated {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  border-radius: 8px !important;
 }
 
-.auth-container{
+.card-body {
+  color: black;
+}
+
+.auth-container {
   min-height: 100vh;
   min-width: 100%;
-  margin:0;
-  padding:0;
-  background: url('/canyon2.jpg') center center / cover no-repeat;
-
+  margin: 0;
+  padding: 0;
+  background: url("/ballerina.jpg") center center / cover no-repeat;
 }
 
-
-#portfolio-nav .nav-link{
-  color:white;
+#portfolio-nav .nav-link {
+  color: white;
 }
 
-.iframe-container{
+.iframe-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; 
+  padding-bottom: 56.25%;
   height: 0;
 }
-.iframe-container iframe{
+.iframe-container iframe {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
 
-
-
 .loading-icon {
-  border: 5px solid #fff; 
+  border: 5px solid #fff;
   border-top: 5px solid #00ad8e;
   border-radius: 50%;
   width: 100px;
   height: 100px;
   animation: spin 2s linear infinite;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-#home-header{
-  background: url('/pattern2.jpeg') center center / cover no-repeat;
+#home-header {
+  background: url("/pattern2.jpeg") center center / cover no-repeat;
 }
 
-#loading-container{
-  width:200px;
-  height:200px;
+#loading-container {
+  width: 200px;
+  height: 200px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -478,30 +489,29 @@ body {
   margin-left: -100px;
 }
 
-p{
-  word-wrap:break-word;
+p {
+  word-wrap: break-word;
 }
 
-#no-matches{
-  width:400px;
-  height:400px;
-  margin:0 auto;
+#no-matches {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
 }
 
-.modal{
-  color:black;
+.modal {
+  color: black;
 }
 
-.photo-container img{
-  width:100%;
+.photo-container img {
+  width: 100%;
 }
 
-
-.service-btn{
+.service-btn {
   opacity: 0;
 }
 
-h3:hover .service-btn{
+h3:hover .service-btn {
   opacity: 100;
 }
 
@@ -513,7 +523,7 @@ h3:hover .service-btn{
 }
 
 .fa:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 .fa-instagram {
   background: #125688;
@@ -521,118 +531,112 @@ h3:hover .service-btn{
 }
 
 .fa-facebook {
-  background: #3B5998;
+  background: #3b5998;
   color: white;
 }
 
-
-.notification p{
-  word-wrap: break-word;  
+.notification p {
+  word-wrap: break-word;
 }
 
-
-.dropdown-item:hover div{
-   cursor:pointer;
+.dropdown-item:hover div {
+  cursor: pointer;
 }
-
 
 .nav-pills .nav-item .nav-link:not(.active) {
-    background-color: transparent;
-    color:#00ad8e ;
-   
+  background-color: transparent;
+  color: #00ad8e;
 }
-.nav-pills , .nav-link:not(.active) {
-    background-color: transparent;
-    color:#00ad8e ;
-   
+.nav-pills,
+.nav-link:not(.active) {
+  background-color: transparent;
+  color: #00ad8e;
 }
-.nav-pills .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
-    background-color:#00ad8e;
-    color:white;
-    font-weight:550;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top:10px;
-    padding-bottom: 10px;
+.nav-pills .nav-link.active,
+.nav-pills .nav-link.active:hover,
+.nav-pills .nav-link.active:focus {
+  background-color: #00ad8e;
+  color: white;
+  font-weight: 550;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
-}
-
-.signup-btn{
+.signup-btn {
   font-weight: bold;
 }
 
-.title{
+.title {
   font-weight: bold;
 }
 
-#comments{
+#comments {
   display: flex;
   flex-direction: column-reverse;
 }
 
-img{
-  object-fit:cover;
+img {
+  object-fit: cover;
 }
 
-
-
-
-.button{
-  background-color:#00ad8e;
-  color:white;
+.button {
+  background-color: #00ad8e;
+  color: white;
 }
-
 
 .navbar-light .navbar-brand {
-  color:#00ad8e;
+  color: #161716;
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color:#00ad8e;
+  color: #161716;
 }
 
-.photo{
+.photo {
   max-height: 500px;
 }
 
 .nav-tabs .nav-item {
-  flex:1;
+  flex: 1;
 }
 
-.button-outline{
-  background-color:transparent;
+.button-outline {
+  background-color: transparent;
+  color: #00ad8e !important;
+  border-color: #00ad8e;
+}
+
+#homepage-text {
+  font-size: 1.35em;
   color: #00ad8e;
-  border-color:#00ad8e;
-}
-
-#homepage-text{
-    font-size:1.35em;
-    color:#00ad8e
 }
 
 #categories .nav-item .nav-link:not(.active) {
-    background-color: transparent;
-    color:#000;
-    padding-top:10px;
-    padding-bottom: 10px;
+  background-color: transparent;
+  color: #000;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-#categories .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
-    background-color:#00ad8e;
-    color:white;
-    font-weight:550;
-    padding-top:10px;
-    padding-bottom: 10px;
+#categories .nav-link.active,
+.nav-pills .nav-link.active:hover,
+.nav-pills .nav-link.active:focus {
+  background-color: #00ad8e;
+  color: white;
+  font-weight: 550;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-
-.fb-button{
-  background-color:#3b5998 ;
-  color:white;
-  border-width:0px;
+.fb-button {
+  background-color: #3b5998;
+  color: white;
+  border-width: 0px;
   padding-left: 0px;
-  padding-right:15px;
-  border-radius:5px;
+  padding-right: 15px;
+  border-radius: 5px;
   overflow: hidden;
-  width:100%;
+  width: 100%;
 }
