@@ -8,7 +8,6 @@ const PortfolioHeader = ({
   setRecommendationState,
   recommend,
   unRecommend,
-  location,
 }) => {
   const notifySuccess = (message) => {
     toast.success(message);

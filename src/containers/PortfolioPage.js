@@ -5,7 +5,6 @@ import AboutPage from "../components/AboutPage";
 import CommentsPage from "./CommentsPage";
 import TimelinePage from "./TimelinePage";
 import WorkPage from "../components/WorkPage";
-import RecommendationsPage from "../components/RecommendationsPage";
 import RecommendationsSection from "../components/RecommendationsSection";
 import PortfolioHeader from "../components/PortfolioHeader";
 import Loading from "../components/Loading";
@@ -36,6 +35,7 @@ class PortfolioPage extends Component {
     }
   }
   componentWillUnmount() {
+    console.log("unmount");
     this.props.clearPortfolio();
   }
   fetchMyPortfolio = async () => {
@@ -58,9 +58,12 @@ class PortfolioPage extends Component {
     }
   };
   checkRecommendation = () => {
-    const isRecommending = this.props.portfolio.recommendations.find(
-      (id) => id === this.props.user.userId
-    );
+    const isRecommending = this.props.portfolio.recommendations.find((user) => {
+      console.log(user);
+      console.log(this.props.user.userId);
+      return user._id === this.props.user.userId;
+    });
+    console.log(isRecommending);
     if (isRecommending) {
       this.setState({ recommending: true });
     } else {
@@ -125,7 +128,6 @@ class PortfolioPage extends Component {
                     setRecommendationState={this.setRecommendationState}
                     recommend={recommend}
                     unRecommend={unRecommend}
-                    location={location}
                   />
                 </div>
               </div>
@@ -140,7 +142,7 @@ class PortfolioPage extends Component {
           <div className="container">
             <div className="row mx-sm-0 mx-0">
               <div className="col-md-3 p-0 pt-3 pr-0 pr-md-3 pl-0">
-                <RecommendationsSection id={portfolio._id} />
+                <RecommendationsSection />
               </div>
               <div className="col-md-9 mt-3 p-0 pl-md-3 pl-0">
                 <Switch>
@@ -166,13 +168,6 @@ class PortfolioPage extends Component {
                       {...this.props}
                     />
                   </Route>
-                  <Route exact path={`${match.url}/recommendations`}>
-                    <RecommendationsPage
-                      addErrorMessage={addErrorMessage}
-                      id={portfolio._id}
-                      {...this.props}
-                    />
-                  </Route>
                   <Route path={match.url}>
                     <Redirect to={`${match.url}/about`} />
                   </Route>
@@ -185,12 +180,12 @@ class PortfolioPage extends Component {
     }
   }
 }
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     portfolio: state.showPortfolio.portfolio,
     user: state.currentUser.user,
   };
-}
+};
 
 export default withRouter(
   connect(mapStateToProps, {

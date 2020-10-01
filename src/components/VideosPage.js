@@ -26,7 +26,7 @@ const VideosPage = ({ videos, deleteVideo, history, url }) => {
         </div>
 
         <div
-          className="p-5 col-12 rounded-bottom mb-5 "
+          className="p-5 col-12 rounded-bottom"
           style={{ backgroundColor: "#fff", color: "#161716" }}
         >
           <h4>{video.title}</h4>

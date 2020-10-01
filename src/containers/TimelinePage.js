@@ -3,11 +3,6 @@ import { connect } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import { deleteTimelinePost } from "../store/actions/portfolios";
 import { toast } from "react-toastify";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
 
 const TimelinePage = (props) => {
   useEffect(() => {
@@ -17,51 +12,60 @@ const TimelinePage = (props) => {
   const notifyDelete = (msg) => {
     toast.warning(msg, { autoClose: 2000 });
   };
-  const timelinePosts = props.timeline.map((post) => {
+  const timelinePosts = props.timeline.map((post, i) => {
     return (
-      <VerticalTimelineElement
-        key={post._id}
-        className="vertical-timeline-element--work .vertical-timeline.vertical-timeline-custom-line"
-        date={post.date}
-        contentStyle={{ color: "#161716", borderTop: "5px solid  #00ad8e" }}
-        iconStyle={{
-          background: "#fff",
-          color: "#000",
-          borderColor: "black",
-          width: "25px",
-          height: "25px",
-          left: "6px",
+      <div
+        key={i}
+        className=""
+        style={{
+          borderLeft: "5px solid #161716",
+          paddingLeft: 50,
+          paddingBottom: 50,
         }}
       >
-        <h3 className="vertical-timeline-element-title">{post.title}</h3>
-        <p>{post.text}</p>
-        {match.url === "/myportfolio/timeline" && (
-          <div className="float-right mt-3">
-            <Link
-              className="btn button-outline btn-sm mr-3"
-              to={{
-                pathname: `/myportfolio/edit/timeline/${post._id}`,
-                state: { post },
-              }}
-            >
-              <i className="fas fa-pen"></i>
-            </Link>
-            <button
-              className="btn btn-outline-danger btn-sm"
-              onClick={async () => {
-                try {
-                  await props.deleteTimelinePost(post._id);
-                  notifyDelete("Deleted From Timeline");
-                } catch (err) {
-                  return;
-                }
-              }}
-            >
-              <i className="fas fa-trash"></i>
-            </button>
-          </div>
-        )}
-      </VerticalTimelineElement>
+        <div className="card p-3 elevated">
+          <h3 className="">{post.title}</h3>
+          <p style={{ fontStyle: "italic" }}>{post.date}</p>
+          <p>{post.text}</p>
+          {match.url === "/myportfolio/timeline" && (
+            <div className="float-right mt-3">
+              <Link
+                className="btn button-outline btn-sm mr-3"
+                to={{
+                  pathname: `/myportfolio/edit/timeline/${post._id}`,
+                  state: { post },
+                }}
+              >
+                <i className="fas fa-pen"></i>
+              </Link>
+              <button
+                className="btn btn-outline-danger btn-sm"
+                onClick={async () => {
+                  try {
+                    await props.deleteTimelinePost(post._id);
+                    notifyDelete("Deleted From Timeline");
+                  } catch (err) {
+                    return;
+                  }
+                }}
+              >
+                <i className="fas fa-trash"></i>
+              </button>
+            </div>
+          )}
+          <div
+            style={{
+              width: "25px",
+              height: "25px",
+              position: "absolute",
+              top: -1,
+              left: -66,
+              backgroundColor: "#161716",
+              borderRadius: 25,
+            }}
+          ></div>
+        </div>
+      </div>
     );
   });
 
@@ -72,16 +76,17 @@ const TimelinePage = (props) => {
           <h2 className="mt-3">Timeline</h2>
           {match.path === "/myportfolio/timeline" && (
             <div>
-              <Link className="btn button mt-3" to="/myportfolio/edit/timeline">
+              <Link
+                className="btn button-outline mt-3"
+                to="/myportfolio/edit/timeline"
+              >
                 <i className="fas fa-pen"></i>
               </Link>
             </div>
           )}
         </div>
       </div>
-      {timelinePosts.length > 0 && (
-        <VerticalTimeline layout="1-column">{timelinePosts}</VerticalTimeline>
-      )}
+      {timelinePosts.length > 0 && timelinePosts}
     </div>
   );
 };

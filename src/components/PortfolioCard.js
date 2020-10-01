@@ -25,7 +25,11 @@ const PortfolioCard = ({
             src={newImage}
             className="card-img img-fluid portfolio-card-img"
             alt="..."
-            style={{ overflow: "hidden" }}
+            style={{
+              overflow: "hidden",
+              borderTopLeftRadius: 8,
+              borderBottomLeftRadius: 8,
+            }}
           />
         </div>
         <div className="col-8">

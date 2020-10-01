@@ -14,11 +14,7 @@ import fixImage from "../services/imageOrientation";
 
 class Navbar extends Component {
   componentDidMount() {
-    if (
-      this.props.location.pathname !== "/" &&
-      this.props.location.pathname !== "/signup" &&
-      this.props.location.pathname !== "/signin"
-    ) {
+    if (Object.keys(this.props.currentUser).length !== 0) {
       this.fetchCurrentUser();
     }
   }
@@ -115,6 +111,11 @@ class Navbar extends Component {
             <div className="collapse navbar-collapse" id="navbarNav">
               {!isAuthenticated ? (
                 <ul className="navbar-nav justify-content-end ml-auto">
+                  <li className="nav-item mx-3">
+                    <Link to="/portfolios" className="nav-link">
+                      Home
+                    </Link>
+                  </li>
                   <li className="nav-item mx-3">
                     <Link to="/signup" className="nav-link">
                       Sign Up

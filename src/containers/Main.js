@@ -47,7 +47,7 @@ class Main extends Component {
             )}
           />
           <Route exact path="/" render={(props) => <Homepage {...props} />} />
-          <Route exact path="/portfolios" component={withAuth(PortfolioList)} />
+          <Route exact path="/portfolios" component={PortfolioList} />
           <Route path="/portfolios/:id" component={PortfolioPage} />
           <Route
             path="/myportfolio/create"

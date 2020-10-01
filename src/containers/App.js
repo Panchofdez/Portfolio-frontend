@@ -1,14 +1,12 @@
-import React from 'react';
-import {Provider} from 'react-redux';
-import {BrowserRouter as Router} from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
-import {setAuthorizationToken, setCurrentUser} from '../store/actions/auth';
-import configureStore from '../store';
-import Main from './Main';
-
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import { setAuthorizationToken, setCurrentUser } from "../store/actions/auth";
+import configureStore from "../store";
+import Main from "./Main";
 
 const store = configureStore();
-
 
 if (localStorage.jwtToken) {
   setAuthorizationToken(localStorage.jwtToken);
@@ -20,18 +18,16 @@ if (localStorage.jwtToken) {
   }
 }
 
-const App = props => {
+const App = (props) => {
   return (
     <Provider store={store}>
       <Router>
         <div className="App">
-          <Main/>
+          <Main />
         </div>
       </Router>
     </Provider>
   );
-}
-
-
+};
 
 export default App;

@@ -38,7 +38,7 @@ const WorkPage = (props) => {
           history={history}
         />
         <div
-          className="p-5 col-12 rounded-bottom mb-5"
+          className="p-5 col-12 rounded-bottom"
           style={{ backgroundColor: "#fdfdfd", color: "#161716" }}
         >
           <h4>{collection.title}</h4>

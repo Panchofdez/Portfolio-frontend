@@ -108,7 +108,7 @@ class TimelineForm extends Component {
                 value={title}
                 onChange={this.handleChange}
                 name="title"
-                className="form-control"
+                className="form-control mb-3"
               />
 
               <label htmlFor="date">Date</label>
@@ -116,12 +116,12 @@ class TimelineForm extends Component {
                 value={date}
                 onChange={this.handleChange}
                 name="date"
-                className="form-control"
+                className="form-control mb-3"
               />
 
               <label htmlFor="text">Description</label>
               <textarea
-                className="form-control"
+                className="form-control mb-3"
                 rows="3"
                 value={text}
                 onChange={this.handleChange}

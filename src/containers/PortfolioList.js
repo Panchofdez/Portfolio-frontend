@@ -98,22 +98,26 @@ class PortfolioList extends Component {
     return (
       <div className="pb-5">
         <div
-          className="row container-fluid d-flex flex-column justify-content-center align-items-center p-0 m-0"
+          className="container-fluid  p-0 m-0 d-flex align-items-center"
           style={{ backgroundColor: "black", height: "250px" }}
         >
-          <div className="col-lg-6 d-flex flex-column justify-content-center">
-            <h1 className="mb-3" style={{ color: "white" }}>
-              Discover Our Community
-            </h1>
-            <input
-              type="text"
-              name="search"
-              value={this.state.search}
-              onChange={this.handleChange}
-              className="form-control mb-4"
-              aria-label="searchBar"
-              placeholder="Search"
-            />
+          <div className="container">
+            <div className="row ">
+              <div className="col-lg-8 d-flex flex-column justify-content-center">
+                <h1 className="mb-3" style={{ color: "white" }}>
+                  Discover Our Community
+                </h1>
+                <input
+                  type="text"
+                  name="search"
+                  value={this.state.search}
+                  onChange={this.handleChange}
+                  className="form-control mb-4"
+                  aria-label="searchBar"
+                  placeholder="Search"
+                />
+              </div>
+            </div>
           </div>
         </div>
         <div className="container">
