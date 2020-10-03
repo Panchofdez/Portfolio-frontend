@@ -50,7 +50,7 @@ class NotificationsPage extends Component {
         console.log(n);
         return (
           <div key={n._id} className="card col-md-12 p-0 mb-3 elevated">
-            <div className="row no-gutters">
+            <div className="row no-gutters" style={{ height: "125px" }}>
               <div className="col-2" style={{ maxHeight: "125px" }}>
                 <img
                   src={newImage}

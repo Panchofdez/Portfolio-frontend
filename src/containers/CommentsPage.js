@@ -13,9 +13,6 @@ class CommentsPage extends Component {
       text: "Give your testimonial or referral here",
     };
   }
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
   handleChange = (e) => {
     this.setState({ text: e.target.value });
   };

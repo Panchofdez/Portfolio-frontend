@@ -10,7 +10,7 @@ const WorkForm = (props) => {
   return (
     <div className="pb-5">
       <div className="row justify-content-center mt-5">
-        <div className="col-md-8 col-10">
+        <div className="col-md-8 col-12">
           <h2 className="my-3">
             Showcase your work or projects through collections of photos and
             videos
@@ -18,7 +18,7 @@ const WorkForm = (props) => {
           <ul className="nav nav-pills mt-5" id="pills-tab" role="tablist">
             <li className="nav-item">
               <a
-                className="nav-link active pill-link"
+                className="nav-link active pill-link p-2 "
                 id="pills-collections-tab"
                 data-toggle="pill"
                 href="#pills-collections"
@@ -31,7 +31,7 @@ const WorkForm = (props) => {
             </li>
             <li className="nav-item">
               <a
-                className="nav-link pill-link"
+                className="nav-link pill-link p-2"
                 id="pills-videos-tab"
                 data-toggle="pill"
                 href="#pills-videos"
@@ -66,7 +66,7 @@ const WorkForm = (props) => {
       </div>
 
       <div className="row justify-content-center mt-5">
-        <div className="col-md-8 col-10">
+        <div className="col-md-8 col-12">
           <button
             className="btn button form-control"
             onClick={() => props.history.push("/myportfolio/work")}

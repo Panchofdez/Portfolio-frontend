@@ -45,6 +45,7 @@ class PortfolioPage extends Component {
         this.props.history.push("/myportfolio/create");
       }
     } catch (err) {
+      // this.props.history.push("/myportfolio/create");
       return;
     }
   };
@@ -59,8 +60,6 @@ class PortfolioPage extends Component {
   };
   checkRecommendation = () => {
     const isRecommending = this.props.portfolio.recommendations.find((user) => {
-      console.log(user);
-      console.log(this.props.user.userId);
       return user._id === this.props.user.userId;
     });
     console.log(isRecommending);
@@ -74,14 +73,7 @@ class PortfolioPage extends Component {
     this.setState({ recommending: !this.state.recommending });
   };
   render() {
-    const {
-      portfolio,
-      recommend,
-      unRecommend,
-      addErrorMessage,
-      match,
-      location,
-    } = this.props;
+    const { portfolio, recommend, unRecommend, match, location } = this.props;
     let style = {};
     let profilePic = "";
     if (portfolio) {
@@ -108,7 +100,7 @@ class PortfolioPage extends Component {
           </div>
           <div className="container-fluid" style={{ backgroundColor: "black" }}>
             <div className="container">
-              <div className="row py-4">
+              <div className="row pt-4">
                 <div className="col-3 pt-3">
                   <div>
                     <img
@@ -141,10 +133,10 @@ class PortfolioPage extends Component {
           </div>
           <div className="container">
             <div className="row mx-sm-0 mx-0">
-              <div className="col-md-3 p-0 pt-3 pr-0 pr-md-3 pl-0">
-                <RecommendationsSection />
+              <div className="col-md-3 p-0 pt-3 pl-3 pl-md-0 pr-0 pr-md-3 pl-0 order-2 order-md-1">
+                <RecommendationsSection portfolio={portfolio} />
               </div>
-              <div className="col-md-9 mt-3 p-0 pl-md-3 pl-0">
+              <div className="col-md-9 mt-3 p-0 pl-md-3 pl-0 order-1 order-md-2">
                 <Switch>
                   <Route exact path={`${match.path}/about`}>
                     <AboutPage portfolio={portfolio} {...this.props} />
@@ -197,25 +189,3 @@ export default withRouter(
     addErrorMessage,
   })(PortfolioPage)
 );
-
-// <Switch>
-// <Route exact path='/myportfolio/edit/profile'>
-// 	<ProfileForm {...this.props} portfolio={portfolio}/>
-// </Route>
-// <Route exact path='/myportfolio/edit/contactinfo'>
-// 	<ContactInfoForm portfolio={portfolio} {...this.props}/>
-// </Route>
-// <Route exact path='/myportfolio/edit/about'>
-// 	<AboutForm
-// 		{...this.props}
-// 		portfolio={portfolio}
-// 	/>
-// </Route>
-// <Route exact path='/myportfolio/edit/timeline'>
-// 	<TimelineForm {...this.props}/>
-// </Route>
-// <Route exact path='/myportfolio/edit/work'>
-// 	<WorkForm {...this.props}/>
-// </Route>
-
-// </Switch>

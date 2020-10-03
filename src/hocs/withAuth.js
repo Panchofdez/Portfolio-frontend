@@ -8,12 +8,8 @@ export default function withAuth(WrappedComponent) {
         this.props.history.push("/");
       }
     }
-    componentDidUpdate() {
-      if (this.props.isAuthenticated === false) {
-        this.props.history.push("/");
-      }
-    }
     render() {
+      console.log("arrived");
       return <WrappedComponent {...this.props} />;
     }
   }

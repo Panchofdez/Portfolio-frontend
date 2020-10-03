@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import VideosPage from "./VideosPage";
 import Carousel from "./Carousel";
@@ -12,9 +12,6 @@ import { addErrorMessage } from "../store/actions/errors";
 import { toast } from "react-toastify";
 
 const WorkPage = (props) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   const notifyDelete = (msg) => {
     toast.warning(msg, { autoClose: 2000 });
   };
@@ -74,7 +71,7 @@ const WorkPage = (props) => {
     );
   });
   return (
-    <div className="p-3">
+    <div className="p-0 p-sm-3">
       <div className="d-flex flex-row justify-content-between">
         <h2 className="mt-3">Work</h2>
         {match.path === "/myportfolio/work" && (

@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import fixImage from "../services/imageOrientation";
 
-class RecommendationsSection extends Component {
-  render() {
-    //checks if array is empty because you can;t use a spread operator with null values
-    //then makes a copy of the state because state needs to be immutable
-    const recommendations = this.props.portfolio.recommendations
-      ? [...this.props.portfolio.recommendations]
-      : [];
-    const recommending = this.props.portfolio.recommending
-      ? [...this.props.portfolio.recommending]
-      : [];
+const RecommendationsSection = ({ portfolio }) => {
+  //checks if array is empty because you can;t use a spread operator with null values
+  //then makes a copy of the state because state needs to be immutable
+  const recommendations = portfolio.recommendations
+    ? [...portfolio.recommendations]
+    : [];
+  const recommending = portfolio.recommending
+    ? [...portfolio.recommending]
+    : [];
+
+  if (portfolio) {
     return (
       <>
         <div className="my-5">
@@ -88,8 +88,8 @@ class RecommendationsSection extends Component {
               </div>
               <div className="modal-body">
                 <ul className="list-unstyled">
-                  {this.props.portfolio.recommendations.length > 0 &&
-                    this.props.portfolio.recommendations.map((u, i) => {
+                  {portfolio.recommendations.length > 0 &&
+                    portfolio.recommendations.map((u, i) => {
                       let newImage = fixImage(u.profileImage);
                       return (
                         <li key={i} className="media mb-2">
@@ -125,8 +125,8 @@ class RecommendationsSection extends Component {
               </div>
               <div className="modal-body">
                 <ul className="list-unstyled">
-                  {this.props.portfolio.recommending.length > 0 &&
-                    this.props.portfolio.recommending.map((u, i) => {
+                  {portfolio.recommending.length > 0 &&
+                    portfolio.recommending.map((u, i) => {
                       let fixedImage = fixImage(u.profileImage);
                       return (
                         <li className="media mb-2" key={i}>
@@ -154,11 +154,6 @@ class RecommendationsSection extends Component {
       </>
     );
   }
-}
-const mapStateToProps = (state) => {
-  return {
-    portfolio: state.showPortfolio.portfolio,
-  };
 };
 
-export default connect(mapStateToProps, {})(RecommendationsSection);
+export default RecommendationsSection;

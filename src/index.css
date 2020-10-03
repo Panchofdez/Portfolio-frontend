@@ -55,7 +55,7 @@ html {
     max-height: 100px;
   }
   .carousel-photo {
-    height: 275px;
+    height: 250px;
   }
   #comment-profile-pic {
     height: 50px;
@@ -91,6 +91,9 @@ html {
   .nav-pills .nav-link.active:focus {
     padding-left: 5px;
     padding-right: 5px;
+  }
+  .discover {
+    height: 150px;
   }
 }
 @media screen and (min-width: 500px) {
@@ -183,6 +186,9 @@ html {
   .nav-pills .nav-link.active:focus {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .discover {
+    height: 175px;
   }
 }
 
@@ -277,6 +283,9 @@ html {
   .nav-pills .nav-link.active:focus {
     padding-left: 20px;
     padding-right: 20px;
+  }
+  .discover {
+    height: 200px;
   }
 }
 
@@ -373,6 +382,9 @@ html {
   }
   .headerText {
     padding-left: 10vh;
+  }
+  .discover {
+    height: 220px;
   }
 }
 body,

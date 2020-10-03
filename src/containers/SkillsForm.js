@@ -48,7 +48,7 @@ class SkillsForm extends Component {
     });
     return (
       <div className="row justify-content-center mt-5">
-        <div className="col-md-8 col-10">
+        <div className="col-md-8 col-12">
           <h2 className="my-3">Add a list of your skills and services</h2>
           <form onSubmit={this.handleAdd}>
             <div className="form-group">

@@ -98,14 +98,14 @@ class PortfolioList extends Component {
     return (
       <div className="pb-5">
         <div
-          className="container-fluid  p-0 m-0 d-flex align-items-center"
-          style={{ backgroundColor: "black", height: "250px" }}
+          className="container-fluid  p-0 m-0 d-flex align-items-center discover"
+          style={{ backgroundColor: "black" }}
         >
           <div className="container">
             <div className="row ">
               <div className="col-lg-8 d-flex flex-column justify-content-center">
                 <h1 className="mb-3" style={{ color: "white" }}>
-                  Discover Our Community
+                  Discover .
                 </h1>
                 <input
                   type="text"

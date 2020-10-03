@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 
 const AboutPage = ({ portfolio, history }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   const {
     about,
     location,

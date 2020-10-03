@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import { deleteTimelinePost } from "../store/actions/portfolios";
 import { toast } from "react-toastify";
 
 const TimelinePage = (props) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   let match = useRouteMatch();
   const notifyDelete = (msg) => {
     toast.warning(msg, { autoClose: 2000 });
@@ -16,7 +13,7 @@ const TimelinePage = (props) => {
     return (
       <div
         key={i}
-        className=""
+        className="timeline-card"
         style={{
           borderLeft: "5px solid #161716",
           paddingLeft: 50,
@@ -70,7 +67,7 @@ const TimelinePage = (props) => {
   });
 
   return (
-    <div>
+    <div className="pl-3 pl-md-0">
       <div className="p-3">
         <div className="d-flex flex-row justify-content-between">
           <h2 className="mt-3">Timeline</h2>

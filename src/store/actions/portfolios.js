@@ -49,7 +49,6 @@ export const getPortfolio = (id) => {
   return async (dispatch) => {
     try {
       const response = await apiCall.get(`/api/portfolios/${id}`);
-      console.log("RESPONSE", response.data);
       dispatch(showPortfolio(response.data));
     } catch (err) {
       dispatch(addError(err.response.data.error));

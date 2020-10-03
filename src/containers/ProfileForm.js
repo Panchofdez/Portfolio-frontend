@@ -162,7 +162,7 @@ class ProfileForm extends Component {
       return (
         <form encType="multipart/form-data" onSubmit={this.handleSubmit}>
           <div className="row justify-content-center mt-5 pb-5">
-            <div className="col-md-8 col-10">
+            <div className="col-md-8 col-12">
               {portfolio ? (
                 <h2>Lets make it easier for people to find you</h2>
               ) : (
