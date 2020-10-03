@@ -15,6 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
 
+const myPortfolio = withAuth(PortfolioPage);
+
 class Main extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.location !== this.props.location && this.props.error) {
@@ -54,7 +56,7 @@ class Main extends Component {
             component={withAuth(PortfolioForm)}
           />
           <Route path="/myportfolio/edit" component={withAuth(PortfolioForm)} />
-          <Route path="/myportfolio" component={withAuth(PortfolioPage)} />
+          <Route path="/myportfolio" component={myPortfolio} />
           <Route
             exact
             path="/notifications"

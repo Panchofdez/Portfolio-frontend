@@ -14,14 +14,14 @@ const PortfolioNav = () => {
           className="navbar-toggler ml-auto"
           type="button"
           data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
+          data-target="#portfolioNav"
+          aria-controls="portfolioNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className="collapse navbar-collapse" id="portfolioNav">
           <ul className="navbar-nav ml-auto" style={{ flex: 1 }}>
             <li className="nav-item" style={{ flex: 1 }}>
               <Link

@@ -9,7 +9,6 @@ export default function withAuth(WrappedComponent) {
       }
     }
     render() {
-      console.log("arrived");
       return <WrappedComponent {...this.props} />;
     }
   }

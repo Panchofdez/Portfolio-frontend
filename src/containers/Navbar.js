@@ -94,7 +94,7 @@ class Navbar extends Component {
           <div className="container ">
             <div className="navbar-header">
               <Link to="/" className="navbar-brand ml-2">
-                Visualy
+                Portfolio
               </Link>
             </div>
             <button

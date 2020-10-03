@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Background from "../images/ballerina2.jpg";
+import PortfolioScreenshot from "../images/PortfolioScreenshot.png";
+import WorkPageScreenshot from "../images/WorkPageScreenshot2.png";
 
 const HomePage = (props) => {
   return (
     <React.Fragment>
-      <div className="row display-flex flex-row">
+      <div className="row display-flex flex-row w-100 m-0 p-0">
         <div
           className="col-md-6 display-flex flex-column justify-content-center pt-0 pt-md-5"
           style={{
@@ -73,10 +75,26 @@ const HomePage = (props) => {
         </div>
       </div>
 
-      <div className="container-fluid w-100" style={{ minHeight: "250px" }}>
-        <div className="row container justify-content-center align-items-center m-auto w-100">
-          <div className="col-md-10 col-12  my-5">
-            <h5 className="px-sm-4 mt-3" style={{ lineHeight: 2 }}>
+      <div
+        className="container-fluid w-100 justify-content-center"
+        style={{ minHeight: "250px" }}
+      >
+        <div className="row w-100 m-0">
+          <div className="col-md-6 col-12 p-3 mt-5 d-flex justify-content-center">
+            <img
+              src={WorkPageScreenshot}
+              style={{ minHeight: "500px", width: "100" }}
+              className="img-fluid elevated"
+            />
+          </div>
+          <div className="col-md-6 col-12  my-5 d-flex align-items-center flex-column justify-content-center">
+            <div className="px-sm-4 w-100">
+              <h1 className="display-4 ">For</h1>
+              <h1 className="display-4 ">Creative</h1>
+              <h1 className="display-4 ">Professionals</h1>
+            </div>
+
+            <h5 className="px-sm-4 mt-3 lead" style={{ lineHeight: 2 }}>
               For creative professionals that can't rely on a regular resume and
               don't have the time, money or resources to make their own website.
               We make it easy to create and share your own visual

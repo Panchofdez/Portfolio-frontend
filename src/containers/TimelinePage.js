@@ -16,7 +16,7 @@ const TimelinePage = (props) => {
         className="timeline-card"
         style={{
           borderLeft: "5px solid #161716",
-          paddingLeft: 50,
+          paddingLeft: 25,
           paddingBottom: 50,
         }}
       >
@@ -56,7 +56,7 @@ const TimelinePage = (props) => {
               height: "25px",
               position: "absolute",
               top: -1,
-              left: -66,
+              left: -41,
               backgroundColor: "#161716",
               borderRadius: 25,
             }}
