@@ -93,8 +93,12 @@ class Navbar extends Component {
         <nav className="navbar navbar-expand-md navbar-light bg-white">
           <div className="container ">
             <div className="navbar-header">
-              <Link to="/" className="navbar-brand ml-2">
-                Portfolio
+              <Link
+                to="/"
+                className="navbar-brand ml-2"
+                style={{ color: "#00ad8e" }}
+              >
+                Profolio
               </Link>
             </div>
             <button
