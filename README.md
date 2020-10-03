@@ -4,3 +4,6 @@
 * Allows users to upload images, add youtube videos, add events to their career timeline, receive and give recommendations/referrals
 
 [Website] (https://portfolio-app-frontend-pf.herokuapp.com/)
+
+
+![] (/src/images/PortfolioScreenshot.png)
