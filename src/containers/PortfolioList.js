@@ -3,11 +3,13 @@ import PortfolioCard from "../components/PortfolioCard";
 import { connect } from "react-redux";
 import { fetchPortfolios } from "../store/actions/portfolios";
 import Loading from "../components/Loading";
+import Background from "../images/canyon2.jpg";
 
 class PortfolioList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       search: "",
       category: null,
     };
@@ -18,6 +20,7 @@ class PortfolioList extends Component {
   async getPortfolios() {
     try {
       await this.props.fetchPortfolios();
+      this.setState({ loading: false });
     } catch (err) {
       console.log(err);
       return;
@@ -83,7 +86,7 @@ class PortfolioList extends Component {
   };
   render() {
     let { portfolios } = this.props;
-    if (!portfolios) {
+    if (!portfolios || this.state.loading) {
       return <Loading />;
     }
     if (this.state.category) {
@@ -99,7 +102,12 @@ class PortfolioList extends Component {
       <div className="pb-5">
         <div
           className="container-fluid  p-0 m-0 d-flex align-items-center discover"
-          style={{ backgroundColor: "black" }}
+          style={{
+            backgroundImage: `url(${Background})`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
         >
           <div className="container">
             <div className="row ">

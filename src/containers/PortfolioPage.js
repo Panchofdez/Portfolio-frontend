@@ -45,7 +45,6 @@ class PortfolioPage extends Component {
         this.props.history.push("/myportfolio/create");
       }
     } catch (err) {
-      // this.props.history.push("/myportfolio/create");
       return;
     }
   };
@@ -73,7 +72,7 @@ class PortfolioPage extends Component {
     this.setState({ recommending: !this.state.recommending });
   };
   render() {
-    const { portfolio, recommend, unRecommend, match, location } = this.props;
+    const { portfolio, recommend, unRecommend, match } = this.props;
     let style = {};
     let profilePic = "";
     if (portfolio) {

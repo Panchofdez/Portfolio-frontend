@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Background from "../images/ballerina2.jpg";
-import PortfolioScreenshot from "../images/PortfolioScreenshot.png";
-import WorkPageScreenshot from "../images/WorkPageScreenshot2.png";
+import Art from "../images/art.jpg";
 
 const HomePage = (props) => {
   return (
@@ -53,7 +52,7 @@ const HomePage = (props) => {
           minHeight: "250px",
         }}
       >
-        <div className="row px-5 m-auto mb-md-0 w-100">
+        <div className="row px-5 m-auto mb-md-0 pt-3 pb-4 w-100">
           <div className="col-md-4 my-md-5 my-4  text-center">
             <i className="fas fa-camera mx-2 homepage-icons"></i>
             <h5 className="mt-3">
@@ -76,30 +75,38 @@ const HomePage = (props) => {
       </div>
 
       <div
-        className="container-fluid w-100 justify-content-center"
+        className="container-fluid w-100 p-0 m-0 justify-content-center"
         style={{ minHeight: "250px" }}
       >
         <div className="row w-100 m-0">
-          <div className="col-md-6 col-12 p-3 mt-5 d-flex justify-content-center">
+          <div className="col-md-6 col-12 p-0 m-0 d-flex justify-content-center">
             <img
-              src={WorkPageScreenshot}
-              style={{ minHeight: "500px", width: "100" }}
-              className="img-fluid elevated"
+              alt="art"
+              src={Art}
+              style={{
+                maxHeight: "500px",
+                width: "100%",
+                height: "100%",
+                flex: 1,
+              }}
+              className="img-fluid "
             />
           </div>
-          <div className="col-md-6 col-12  my-5 d-flex align-items-center flex-column justify-content-center">
+          <div className="col-md-6 col-12  py-5 d-flex align-items-center flex-column justify-content-center">
             <div className="px-sm-4 w-100">
-              <h1 className="display-4 ">For</h1>
-              <h1 className="display-4 ">Creative</h1>
-              <h1 className="display-4 ">Professionals</h1>
+              <h1 style={{ fontSize: 40, fontWeight: "bold" }}>For</h1>
+              <h1 style={{ fontSize: 40, fontWeight: "bold" }}>Creative</h1>
+              <h1 style={{ fontSize: 40, fontWeight: "bold" }}>
+                Professionals
+              </h1>
             </div>
 
-            <h5 className="px-sm-4 mt-3 lead" style={{ lineHeight: 2 }}>
+            <h6 className="px-sm-4 mt-3 lead" style={{ lineHeight: 1.75 }}>
               For creative professionals that can't rely on a regular resume and
               don't have the time, money or resources to make their own website.
               We make it easy to create and share your own visual
               resume/portfolio
-            </h5>
+            </h6>
           </div>
         </div>
       </div>
