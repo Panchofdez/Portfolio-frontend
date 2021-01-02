@@ -6,4 +6,5 @@
 [Website] (https://portfolio-app-frontend-pf.herokuapp.com/)
 
 
-![] (/src/images/PortfolioScreenshot.png)
+![](src/images/PortfolioScreenshot.png)
+![](src/images/WorkPageScreenshot.png)
