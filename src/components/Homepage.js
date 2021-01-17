@@ -8,7 +8,7 @@ const HomePage = (props) => {
     <React.Fragment>
       <div className="row display-flex flex-row w-100 m-0 p-0">
         <div
-          className="col-md-6 display-flex flex-column justify-content-center pt-0 pt-md-5"
+          className="col-sm-6 display-flex flex-column justify-content-center pt-0 pt-md-5"
           style={{
             backgroundColor: "black",
             paddingLeft: "5vw",
@@ -24,7 +24,7 @@ const HomePage = (props) => {
                   A quick and easy way to showcase yourself and your work
                 </h2>
                 <Link
-                  className="btn  mt-3 mb-5 mx-2 signup-btn button-outline "
+                  className="btn  mt-3 mx-md-2 signup-btn button-outline "
                   to="/signup"
                 >
                   Get Started
@@ -34,7 +34,7 @@ const HomePage = (props) => {
           </div>
         </div>
         <div
-          className="col-md-6 d-sm-none d-none d-md-block"
+          className="col-sm-6 d-md-block"
           style={{
             height: "500px",
             backgroundImage: `url(${Background})`,
