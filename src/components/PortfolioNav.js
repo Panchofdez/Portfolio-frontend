@@ -7,9 +7,9 @@ const PortfolioNav = () => {
   return (
     <nav
       className="navbar navbar-expand-md navbar-dark p-0"
-      style={{ background: "black" }}
+      style={{ background: "#161716", zIndex: 3 }}
     >
-      <div className="container">
+      <div className="container-md">
         <button
           className="navbar-toggler ml-auto"
           type="button"
@@ -80,36 +80,3 @@ const PortfolioNav = () => {
 };
 
 export default PortfolioNav;
-
-/* <div className="nav flex-column nav-pills mt-md-3 mt-0" id="v-pills-tab">
-	<Link 
-		
-		id="v-pills-about-tab" 
-		to={`${match.url}/about`} 
-	>About
-	</Link>
-	<Link 
-		
-		id="v-pills-work-tab"  
-		to={`${match.url}/work`} 
-	>Work
-	</Link>
-	<Link 
-		className={location.pathname ===`${match.url}/timeline`? "nav-link active": "nav-link"}
-		id="v-pills-timeline-tab" 
-		to={`${match.url}/timeline`}
-	>Timeline
-	</Link>
-	<Link 
-		className={location.pathname ===`${match.url}/comments`? "nav-link active": "nav-link"}
-		id="v-pills-comments-tab" 
-		to={`${match.url}/comments`} 
-	>Comments
-	</Link>
-	<Link 
-		className={location.pathname ===`${match.url}/recommendations`? "nav-link active": "nav-link"}
-		id="v-pills-recommendations-tab"
-		to={`${match.url}/recommendations`}
-	>Recommendations
-	</Link>
-</div> */

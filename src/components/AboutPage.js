@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import fixImage from "../services/imageOrientation";
 
 const AboutPage = ({ portfolio, history }) => {
   const {
@@ -24,6 +25,7 @@ const AboutPage = ({ portfolio, history }) => {
     );
   });
   let match = useRouteMatch();
+
   return (
     <React.Fragment>
       <div className="p-3">

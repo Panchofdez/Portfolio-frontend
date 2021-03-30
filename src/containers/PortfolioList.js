@@ -3,7 +3,6 @@ import PortfolioCard from "../components/PortfolioCard";
 import { connect } from "react-redux";
 import { fetchPortfolios } from "../store/actions/portfolios";
 import Loading from "../components/Loading";
-import Background from "../images/canyon2.jpg";
 
 class PortfolioList extends Component {
   constructor(props) {
@@ -99,28 +98,34 @@ class PortfolioList extends Component {
       <PortfolioCard {...p} key={p._id} history={this.props.history} />
     ));
     return (
-      <div className="pb-5">
+      <div className="pb-5" style={{ backgroundColor: "#F2F8F6" }}>
         <div
-          className="container-fluid  p-0 m-0 d-flex align-items-center discover"
+          className="container-fluid p-0 m-0 d-flex align-items-center"
           style={{
-            backgroundImage: `url(${Background})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
+            backgroundColor: "#161716",
+            zIndex: 3,
           }}
         >
-          <div className="container">
+          <div className="container mt-3">
             <div className="row ">
               <div className="col-lg-8 d-flex flex-column justify-content-center">
-                <h1 className="mb-3" style={{ color: "white" }}>
-                  Discover .
+                <h1
+                  className="mt-5 mb-md-3 mb-0 homeTitle"
+                  style={{
+                    color: "#FFF",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Discover the community.
                 </h1>
+
                 <input
+                  style={{ position: "relative", zIndex: 5 }}
                   type="text"
                   name="search"
                   value={this.state.search}
                   onChange={this.handleChange}
-                  className="form-control mb-4"
+                  className="form-control mb-4 searchBar"
                   aria-label="searchBar"
                   placeholder="Search"
                 />
@@ -128,9 +133,9 @@ class PortfolioList extends Component {
             </div>
           </div>
         </div>
-        <div className="container">
+        <div className="container mt-5">
           <div className="row mt-4 justify-content-center">
-            <div className="col-lg-8  col-md-9 flex-column order-2 order-md-1">
+            <div className="col-md-8   flex-column order-2 order-md-1 h-100">
               {portfolios.length === 0 ? (
                 <div className="text-center" id="no-matches">
                   <h5 className="mt-5">Sorry no matches were found...</h5>
@@ -139,7 +144,10 @@ class PortfolioList extends Component {
                 <div>{portfoliosList}</div>
               )}
             </div>
-            <div className="col-lg-4 col-md-3 order-1 order-md-2">
+            <div
+              className="col-md-4 order-1 order-md-2"
+              style={{ position: "sticky" }}
+            >
               <div
                 className="card w-100 mb-4 elevated"
                 style={{ color: "black", overflow: "hidden" }}
@@ -212,32 +220,6 @@ class PortfolioList extends Component {
                   <li
                     className="nav-item flex-grow-1 border-bottom"
                     onClick={() => {
-                      this.setState({
-                        category: [
-                          "business",
-                          "manager",
-                          "accountant",
-                          "analyst",
-                          "consultant",
-                        ],
-                      });
-                    }}
-                  >
-                    <a
-                      className="nav-link text-sm-left text-center"
-                      id="business-tab"
-                      data-toggle="tab"
-                      href="#business"
-                      role="tab"
-                      aria-controls="Business"
-                      aria-selected="true"
-                    >
-                      Business
-                    </a>
-                  </li>
-                  <li
-                    className="nav-item flex-grow-1 border-bottom"
-                    onClick={() => {
                       this.setState({ category: ["dance"] });
                     }}
                   >
@@ -251,42 +233,6 @@ class PortfolioList extends Component {
                       aria-selected="true"
                     >
                       Dance
-                    </a>
-                  </li>
-                  <li
-                    className="nav-item flex-grow-1 border-bottom"
-                    onClick={() => {
-                      this.setState({ category: ["design"] });
-                    }}
-                  >
-                    <a
-                      className="nav-link text-sm-left text-center"
-                      id="design-tab"
-                      data-toggle="tab"
-                      href="#design"
-                      role="tab"
-                      aria-controls="Design"
-                      aria-selected="true"
-                    >
-                      Design
-                    </a>
-                  </li>
-                  <li
-                    className="nav-item flex-grow-1 border-bottom"
-                    onClick={() => {
-                      this.setState({ category: ["engineer"] });
-                    }}
-                  >
-                    <a
-                      className="nav-link text-sm-left text-center"
-                      id="engineering-tab"
-                      data-toggle="tab"
-                      href="#engineering"
-                      role="tab"
-                      aria-controls="Engineering"
-                      aria-selected="true"
-                    >
-                      Engineering
                     </a>
                   </li>
                   <li
@@ -307,6 +253,30 @@ class PortfolioList extends Component {
                       Fashion
                     </a>
                   </li>
+                  <li
+                    className="nav-item flex-grow-1 border-bottom"
+                    onClick={() => {
+                      this.setState({ category: ["graphic"] });
+                    }}
+                  >
+                    <a
+                      className="nav-link text-sm-left text-center"
+                      id="design-tab"
+                      data-toggle="tab"
+                      href="#design"
+                      role="tab"
+                      aria-controls="Design"
+                      aria-selected="true"
+                    >
+                      Graphic Design
+                    </a>
+                  </li>
+                  <li
+                    className="nav-item flex-grow-1 border-bottom"
+                    onClick={() => {
+                      this.setState({ category: ["engineer"] });
+                    }}
+                  ></li>
                   <li
                     className="nav-item flex-grow-1 border-bottom"
                     onClick={() => {
@@ -368,19 +338,19 @@ class PortfolioList extends Component {
                   <li
                     className="nav-item flex-grow-1 border-bottom"
                     onClick={() => {
-                      this.setState({ category: ["edit", "write"] });
+                      this.setState({ category: ["ui", "ux"] });
                     }}
                   >
                     <a
                       className="nav-link text-sm-left text-center"
-                      id="writing-tab"
+                      id="design-tab"
                       data-toggle="tab"
-                      href="#writing"
+                      href="#design"
                       role="tab"
-                      aria-controls="Writing"
+                      aria-controls="Design"
                       aria-selected="true"
                     >
-                      Writing/Editing
+                      UI/UX Design
                     </a>
                   </li>
                 </ul>

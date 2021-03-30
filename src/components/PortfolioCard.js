@@ -53,7 +53,7 @@ const PortfolioCard = ({
                 to={`/portfolios/${_id}`}
                 className="stretched-link "
                 href="#"
-                style={{ color: "#00ad8e" }}
+                style={{ color: "#75A99B" }}
               >
                 View Portfolio
               </Link>
@@ -61,14 +61,14 @@ const PortfolioCard = ({
                 <span className="mr-4">
                   <i
                     className="fa fa-thumbs-up"
-                    style={{ color: "#00ad8e" }}
+                    style={{ color: "#75A99B" }}
                   ></i>
                   {recommendations.length}
                 </span>
                 <span>
                   <i
                     className="fas fa-comment-alt mr-3"
-                    style={{ color: "#00ad8e" }}
+                    style={{ color: "#75A99B" }}
                   ></i>
                   {comments.length}
                 </span>

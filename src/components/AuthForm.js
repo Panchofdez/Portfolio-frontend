@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { authenticateUser, fbLogin } from "../store/actions/auth";
 import { toast } from "react-toastify";
 import FacebookLogin from "react-facebook-login";
-
+import Background from "../images/lightbulb-background.jpg";
 class AuthForm extends Component {
   constructor(props) {
     super(props);
@@ -50,8 +50,19 @@ class AuthForm extends Component {
     const { email, password, name } = this.state;
     const { type, buttonText } = this.props;
     return (
-      <div className="row justify-content-center w-100 m-0 auth-container">
-        <div className="col-lg-4 col-sm-6 col-10 mt-5">
+      <div
+        className="row justify-content-center w-100 m-0 auth-container"
+        style={{
+          backgroundImage: `url(${Background})`,
+          backgroundPosition: "center ",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div
+          className="col-lg-4 col-sm-6 col-10 my-5 py-5 px-4 elevated"
+          style={{ backgroundColor: "white" }}
+        >
           <form onSubmit={this.handleSubmit}>
             {this.props.type === "signup" && (
               <div className="form-group">
@@ -63,7 +74,7 @@ class AuthForm extends Component {
                   onChange={this.handleChange}
                   type="text"
                   name="name"
-                  className="form-control"
+                  className="form-control elevated"
                 />
               </div>
             )}
@@ -101,7 +112,7 @@ class AuthForm extends Component {
             </button>
 
             <div className="d-flex justify-content-center">
-              <p style={{ fontWeight: "bold", color: "#00ad8e" }}>Or</p>
+              <p style={{ fontWeight: "bold", color: "#161716" }}>Or</p>
             </div>
             <FacebookLogin
               appId="1547475692098707"
@@ -114,8 +125,8 @@ class AuthForm extends Component {
           {type === "signup" && (
             <Link
               to="/signin"
-              className="nav-link pl-0"
-              style={{ fontWeight: "bold" }}
+              className="nav-link pt-3 l-0 text-center"
+              style={{ fontWeight: "bold", color: "#75a99b" }}
             >
               Already have an account? Sign in instead
             </Link>
@@ -123,8 +134,8 @@ class AuthForm extends Component {
           {type === "signin" && (
             <Link
               to="/signup"
-              className="nav-link pl-0"
-              style={{ fontWeight: "bold" }}
+              className="nav-link pt-3 pl-0 text-center "
+              style={{ fontWeight: "bold", color: "#75a99b" }}
             >
               Don't have an account? Sign up!
             </Link>

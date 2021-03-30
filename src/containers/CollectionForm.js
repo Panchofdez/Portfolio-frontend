@@ -110,7 +110,7 @@ class CollectionForm extends Component {
       );
     } else {
       return (
-        <div className="row justify-content-center mt-5">
+        <div className="row justify-content-center my-5 ">
           <div className="col-md-8 col-12">
             {this.props.collection ? (
               <h3>Edit Your Collection</h3>

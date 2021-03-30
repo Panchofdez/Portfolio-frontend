@@ -95,7 +95,7 @@ class TimelineForm extends Component {
       post = this.props.location.state.post;
     }
     return (
-      <div className="row justify-content-center mt-5">
+      <div className="row justify-content-center my-5">
         <div className="col-md-8 col-12">
           <h2 className="my-3">
             Add achievements, events, education and past jobs to your career

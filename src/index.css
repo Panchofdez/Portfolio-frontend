@@ -5,13 +5,17 @@ html {
   html {
     font-size: 12px;
   }
-  .portfolio-name {
-    font-size: 14px;
-    font-weight: bold;
+  .searchBar {
+    top: 35px;
   }
-  .myportfolio-profile-pic {
-    height: 25px;
-    width: 30px;
+  .portfolioName {
+    font-size: 40px;
+  }
+  .homeTitle {
+    font-size: 40px;
+  }
+  .homeSection {
+    height: 400px;
   }
   #card-container {
     max-height: 300px;
@@ -47,10 +51,6 @@ html {
   .header-image {
     height: 150px;
   }
-  .profile-pic {
-    height: 75px;
-    width: 75px;
-  }
   #comment-profile-pic {
     max-height: 100px;
   }
@@ -62,11 +62,11 @@ html {
     width: 50px;
   }
   .about-icons {
-    color: #00ad8e;
+    color: #75a99b;
     font-size: 18px;
   }
   .homepage-icons {
-    color: #00ad8e;
+    color: #75a99b;
     font-size: 35px;
   }
   .portfolio-card-text {
@@ -92,21 +92,22 @@ html {
     padding-left: 5px;
     padding-right: 5px;
   }
-  .discover {
-    height: 150px;
-  }
 }
 @media screen and (min-width: 500px) {
   html {
     font-size: 14px;
   }
-  .portfolio-name {
-    font-size: 16px;
-    font-weight: bold;
+  .portfolioName {
+    font-size: 45px;
   }
-  .myportfolio-profile-pic {
-    height: 30px;
-    width: 35px;
+  .searchBar {
+    top: 40px;
+  }
+  .homeTitle {
+    font-size: 45px;
+  }
+  .homeSection {
+    height: 400px;
   }
   #card-container {
     max-height: 250px;
@@ -142,10 +143,6 @@ html {
   .header-image {
     height: 200px;
   }
-  .profile-pic {
-    height: 100px;
-    width: 100px;
-  }
   #comment-profile-pic {
     max-height: 180px;
   }
@@ -157,11 +154,11 @@ html {
     width: 65px;
   }
   .about-icons {
-    color: #00ad8e;
+    color: #75a99b;
     font-size: 20px;
   }
   .homepage-icons {
-    color: #00ad8e;
+    color: #75a99b;
     font-size: 40px;
   }
   .portfolio-card-text {
@@ -187,22 +184,23 @@ html {
     padding-left: 10px;
     padding-right: 10px;
   }
-  .discover {
-    height: 175px;
-  }
 }
 
 @media screen and (min-width: 800px) {
   html {
     font-size: 16px;
   }
-  .portfolio-name {
-    font-size: 18px;
-    font-weight: bold;
+  .portfolioName {
+    font-size: 45px;
   }
-  .myportfolio-profile-pic {
-    height: 35px;
-    width: 40px;
+  .searchBar {
+    top: 40px;
+  }
+  .homeSection {
+    height: 400px;
+  }
+  .homeTitle {
+    font-size: 50px;
   }
   #card-container {
     max-height: 350px;
@@ -239,10 +237,6 @@ html {
   .header-image {
     height: 250px;
   }
-  .profile-pic {
-    height: 125px;
-    width: 125px;
-  }
   #comment-profile-pic {
     max-height: 160px;
   }
@@ -254,11 +248,11 @@ html {
     width: 70px;
   }
   .about-icons {
-    color: #00ad8e;
+    color: #75a99b;
     font-size: 22px;
   }
   .homepage-icons {
-    color: #00ad8e;
+    color: #75a99b;
     font-size: 45px;
   }
   .portfolio-card-text {
@@ -284,22 +278,23 @@ html {
     padding-left: 20px;
     padding-right: 20px;
   }
-  .discover {
-    height: 200px;
-  }
 }
 
 @media screen and (min-width: 1000px) {
   html {
     font-size: 16px;
   }
-  .portfolio-name {
-    font-size: 18px;
-    font-weight: bold;
+  .portfolioName {
+    font-size: 45px;
   }
-  .myportfolio-profile-pic {
-    height: 35px;
-    width: 40px;
+  .searchBar {
+    top: 40px;
+  }
+  .homeSection {
+    height: 500px;
+  }
+  .homeTitle {
+    font-size: 50px;
   }
   #card-container {
     max-height: 350px;
@@ -337,10 +332,6 @@ html {
   .header-image {
     height: 275px;
   }
-  .profile-pic {
-    height: 150px;
-    width: 150px;
-  }
   #comment-profile-pic {
     height: 75px;
     width: 75px;
@@ -349,11 +340,11 @@ html {
     height: 425px;
   }
   .about-icons {
-    color: #00ad8e;
+    color: #75a99b;
     font-size: 25px;
   }
   .homepage-icons {
-    color: #00ad8e;
+    color: #75a99b;
     font-size: 50px;
   }
 
@@ -383,8 +374,11 @@ html {
   .headerText {
     padding-left: 10vh;
   }
-  .discover {
-    height: 220px;
+}
+
+@media screen and (min-width: 1500px) {
+  .homeTitle {
+    font-size: 60px;
   }
 }
 body,
@@ -395,7 +389,7 @@ html {
   height: 100%;
 }
 body {
-  font-family: "Hind Vadodara", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .App {
   min-height: 100vh;
@@ -443,7 +437,7 @@ a:hover {
 }
 
 .auth-container {
-  min-height: 100vh;
+  flex: 1;
   min-width: 100%;
   margin: 0;
   padding: 0;
@@ -469,7 +463,7 @@ a:hover {
 
 .loading-icon {
   border: 5px solid #fff;
-  border-top: 5px solid #00ad8e;
+  border-top: 5px solid #75a99b;
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -556,17 +550,17 @@ h3:hover .service-btn {
 
 .nav-pills .nav-item .nav-link:not(.active) {
   background-color: transparent;
-  color: #00ad8e;
+  color: #75a99b;
 }
 .nav-pills,
 .nav-link:not(.active) {
   background-color: transparent;
-  color: #00ad8e;
+  color: #75a99b;
 }
 .nav-pills .nav-link.active,
 .nav-pills .nav-link.active:hover,
 .nav-pills .nav-link.active:focus {
-  background-color: #00ad8e;
+  background-color: #75a99b;
   color: white;
   font-weight: 550;
   padding-left: 20px;
@@ -593,8 +587,9 @@ img {
 }
 
 .button {
-  background-color: #00ad8e;
+  background-color: #75a99b;
   color: white;
+  z-index: 2;
 }
 
 .navbar-light .navbar-brand {
@@ -614,9 +609,10 @@ img {
 }
 
 .button-outline {
-  background-color: transparent;
-  color: #00ad8e !important;
-  border-color: #00ad8e;
+  background-color: white;
+  color: #75a99b !important;
+  border-color: #75a99b;
+  z-index: 2;
 }
 
 .button-outline:hover {
@@ -625,7 +621,7 @@ img {
 
 #homepage-text {
   font-size: 1.35em;
-  color: #00ad8e;
+  color: #75a99b;
 }
 
 #categories .nav-item .nav-link:not(.active) {
@@ -638,7 +634,7 @@ img {
 #categories .nav-link.active,
 .nav-pills .nav-link.active:hover,
 .nav-pills .nav-link.active:focus {
-  background-color: #00ad8e;
+  background-color: #75a99b;
   color: white;
   font-weight: 550;
   padding-top: 10px;
@@ -663,4 +659,28 @@ textarea,
 .btn {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24) !important;
   border-radius: 8px !important;
+}
+
+.profile-pic {
+  height: 125px;
+  width: 125px;
+}
+
+@media (min-width: 1400px) {
+  .container {
+    min-width: 1400px;
+  }
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    0 100px 80px rgba(0, 0, 0, 0.07);
+}
+
+.text-muted {
+  color: #fffeef !important;
 }

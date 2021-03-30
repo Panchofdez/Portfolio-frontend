@@ -8,6 +8,7 @@ import PortfolioList from "./PortfolioList";
 import PortfolioForm from "../components/PortfolioForm";
 import PortfolioPage from "./PortfolioPage";
 import NotificationsPage from "../containers/NotificationsPage";
+import Footer from "../components/Footer";
 import withAuth from "../hocs/withAuth";
 import { clearErrorMessage } from "../store/actions/errors";
 import { toast } from "react-toastify";
@@ -31,7 +32,7 @@ class Main extends Component {
   };
   render() {
     return (
-      <React.Fragment>
+      <div className="d-flex h-100 flex-column" style={{ minHeight: "100vh" }}>
         <Navbar {...this.props} />
         <Switch>
           <Route
@@ -63,7 +64,8 @@ class Main extends Component {
             component={withAuth(NotificationsPage)}
           />
         </Switch>
-      </React.Fragment>
+        <Footer />
+      </div>
     );
   }
 }

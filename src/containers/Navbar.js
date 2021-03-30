@@ -90,15 +90,18 @@ class Navbar extends Component {
 
     return (
       <React.Fragment>
-        <nav className="navbar navbar-expand-md navbar-light bg-white">
-          <div className="container ">
+        <nav
+          className="navbar navbar-expand-md navbar-dark "
+          style={{ zIndex: 5, backgroundColor: "#161716" }}
+        >
+          <div className="container">
             <div className="navbar-header">
               <Link
                 to="/"
                 className="navbar-brand ml-2"
-                style={{ color: "#00ad8e" }}
+                style={{ color: "#FFF", fontWeight: "bold" }}
               >
-                Profolio
+                Portfolio
               </Link>
             </div>
             <button
@@ -117,7 +120,7 @@ class Navbar extends Component {
                 <ul className="navbar-nav justify-content-end ml-auto">
                   <li className="nav-item mx-3">
                     <Link to="/portfolios" className="nav-link">
-                      Home
+                      Discover
                     </Link>
                   </li>
                   <li className="nav-item mx-3">
@@ -135,7 +138,7 @@ class Navbar extends Component {
                 <ul className="navbar-nav justify-content-end ml-auto">
                   <li className="nav-item mx-3">
                     <Link to="/portfolios" className="nav-link">
-                      Home
+                      Discover
                     </Link>
                   </li>
                   <li className="nav-item dropdown mx-3">
