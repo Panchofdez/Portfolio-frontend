@@ -89,7 +89,7 @@ class NotificationsPage extends Component {
       });
     }
     return (
-      <div className="container mt-5 pb-5">
+      <div className="container mt-5 pb-5 flex-grow-1">
         <div className="row justify-content-center">
           <div className="col-md-8">
             <h2 className="my-3">Your Notifications</h2>

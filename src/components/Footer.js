@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer class="py-5" style={{ backgroundColor: "#568a7c" }}>
-      <div class="row container ml-5 ">
+      <div class="row container ml-3 ml-md-5 ">
         <div class="col-0 col-lg-2"></div>
         <div class="col-12 col-sm-4 col-md">
           <p style={{ color: "white" }} class="d-block mb-3 text-muted">

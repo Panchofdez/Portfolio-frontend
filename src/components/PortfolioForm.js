@@ -13,7 +13,7 @@ import SkillsForm from "../containers/SkillsForm";
 const PortfolioForm = (props) => {
   let { path } = useRouteMatch();
   return (
-    <div className="container">
+    <div className="container flex-grow-1">
       <Switch>
         <Route exact path={`${path}/about`}>
           <AboutForm {...props} />

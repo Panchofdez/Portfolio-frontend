@@ -31,7 +31,7 @@ const HomePage = (props) => {
                 <h1
                   className="homeTitle mb-1"
                   style={{
-                    fontWeight: "bold",
+                    fontWeight: 900,
                     color: "#161716",
                   }}
                 >
@@ -39,19 +39,21 @@ const HomePage = (props) => {
                 </h1>
                 <h1
                   className="homeTitle mb-1"
-                  style={{ fontWeight: "bold", color: "#161716" }}
+                  style={{ fontWeight: 900, color: "#161716" }}
                 >
                   Creative
                 </h1>
                 <h1
                   className="homeTitle mb-1"
-                  style={{ fontWeight: "bold", color: "#161716" }}
+                  style={{ fontWeight: 900, color: "#161716" }}
                 >
                   Professionals
                 </h1>
               </div>
               <div className="col-12 col-md-8 pl-5 ">
-                <h4 style={{ color: "#161716", lineHeight: 1.5 }}>
+                <h4
+                  style={{ color: "#161716", lineHeight: 1.5, fontWeight: 500 }}
+                >
                   A quick and easy way to showcase yourself and your work
                 </h4>
                 <Link
@@ -74,13 +76,19 @@ const HomePage = (props) => {
       >
         <div className="row px-5 m-auto py-5 mt-5 w-100">
           <div className="col-md-4 my-md-5 my-4  text-center">
-            <img src={Camera} style={{ height: 175, width: 175 }} />
+            <img
+              src={Camera}
+              style={{ height: 175, width: 175, fontWeight: 500 }}
+            />
             <h5 className="mt-3 mx-xl-5">
               Showcase your work through collections of photos and videos
             </h5>
           </div>
           <div className="col-md-4 my-md-5 my-4 text-center ">
-            <img src={Trophy} style={{ height: 175, width: 175 }} />
+            <img
+              src={Trophy}
+              style={{ height: 175, width: 175, fontWeight: 500 }}
+            />
             <h5 className="mt-3 mx-xl-5">
               Add events and achievements to your career timeline
             </h5>
@@ -99,6 +107,7 @@ const HomePage = (props) => {
           style={{
             lineHeight: 1.75,
             fontSize: 45,
+            fontWeight: 900,
           }}
         >
           Join the Community
@@ -137,13 +146,13 @@ const HomePage = (props) => {
         className="container-fluid row w-100 p-0 py-5 m-0 justify-content-center"
         style={{ minHeight: "250px", backgroundColor: "#212121" }}
       >
-        <div className="col-md-6 col-xl-4 my-5 py-5">
+        <div className="col-md-6 my-5 py-5 ml-3 ml-sm-0">
           <h2
             style={{
               fontSize: 26,
               color: "white",
               lineHeight: "50px",
-              fontWeight: 500,
+              fontWeight: 900,
             }}
           >
             Can't rely on a regular resume and don't have the time, money or
@@ -155,7 +164,7 @@ const HomePage = (props) => {
               fontSize: 26,
               color: "#75a99b",
               lineHeight: "50px",
-              fontWeight: 500,
+              fontWeight: 900,
             }}
           >
             We make it easy to create and share your own visual

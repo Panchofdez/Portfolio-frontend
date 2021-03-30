@@ -131,11 +131,7 @@ class PortfolioPage extends Component {
           </div>
           <div className="row mx-sm-0 mx-0 p-0 flex-grow-1">
             <div
-              className="col-0 col-md-1 "
-              style={{ backgroundColor: "#F2F8F6" }}
-            ></div>
-            <div
-              className="col-md-3 col-xl-2 pt-5 pr-5 order-2 order-md-1"
+              className="col-md-3 pt-5 pr-md-5 pr-lg-5 pl-5 pl-lg-5 order-2 order-md-1"
               style={{ backgroundColor: "#F2F8F6" }}
             >
               <RecommendationsSection
@@ -147,7 +143,7 @@ class PortfolioPage extends Component {
               />
             </div>
 
-            <div className="col-md-8 col-xl-9 order-1 order-md-2 flex-grow-1">
+            <div className="col-md-9 order-1 order-md-2 flex-grow-1">
               <div className="row flex-grow-1">
                 <div className="col-12 container-fluid p-0">
                   {portfolio && portfolio.headerImage && pageType === "about" && (
@@ -161,7 +157,8 @@ class PortfolioPage extends Component {
                   )}
                 </div>
               </div>
-              <div className="col-12 col-xl-9 p-3 pl-xl-5 mr-0 pb-5">
+
+              <div className="col-12 col-xl-10 p-3 pl-xl-5 mr-0 pb-5">
                 <Switch>
                   <Route exact path={`${match.path}/about`}>
                     <AboutPage portfolio={portfolio} {...this.props} />
